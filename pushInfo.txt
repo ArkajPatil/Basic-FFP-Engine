@@ -1,3 +1,11 @@
 
+
+2. separate the Window Creation Code
+   -> main.c is main file of the engine where code WinMain is present 
+   -> Window.c is the file for Window creation and toggling Fullscreen handling
+   -> resource.h is header to maintain only resource definitions
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 1. create basic window with fullscreen toggle
 

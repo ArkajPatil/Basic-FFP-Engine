@@ -1,10 +1,12 @@
-del Window.obj Window.exe
+cls
 
-cl.exe /c /EHsc Window.c
+del main.obj Window.obj main.exe
+
+cl.exe /c /EHsc main.c Window.c
 
 rc.exe Window.rc
 
-link.exe Window.obj Window.res User32.lib GDI32.lib /SUBSYSTEM:WINDOWS
+link.exe main.obj Window.obj Window.res User32.lib GDI32.lib /SUBSYSTEM:WINDOWS
 
-Window.exe
+main.exe
 

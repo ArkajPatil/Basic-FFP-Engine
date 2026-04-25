@@ -1,23 +1,14 @@
 // win32 headers
-#include <windows.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "Window.h"
-// MACROS
-#define WIN_WIDTH 800
-#define WIN_HEIGHT 600
+#include "resource.h"
 
 // global functions declarations
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM); // HWND->HANDLE->UINT->Unsigned int
 
-// global variable decalrations
-BOOL gbFullScreen = FALSE;
-HWND ghwnd = NULL;
-DWORD dwStyle;
-WINDOWPLACEMENT wpPrev;
-
-// file I/O varialbes
 char gszLogFileName[] = "Log.txt";
 FILE *gpFile = NULL;
 
@@ -27,8 +18,17 @@ BOOL gbActiveWindow = FALSE;
 // Exit key press related
 BOOL gbEscapeKeyIsPressed = FALSE;
 
+// global variable decalrations
+BOOL gbFullScreen = FALSE;
+DWORD dwStyle;
+WINDOWPLACEMENT wpPrev;
+
+HWND ghwnd;
+
+TCHAR szAppName[] = TEXT("RTR6");
+
 // Entry point function
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLine, int iCmdShow)
+void createWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLine, int iCmdShow, HWND hwnd)
 {
     // local functions declarations
     int initialize(void);
@@ -43,12 +43,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLi
     int screenCenterX = (screenWidth - WIN_WIDTH) / 2;
     int screenCenterY = (screenHeight - WIN_HEIGHT) / 2;
 
-    // Variable declarations
+    // varaibles declarations
+    ghwnd = hwnd;
     WNDCLASSEX wndclass;
-    HWND hwnd;
-    MSG msg;
-    TCHAR szAppName[] = TEXT("RTR6");
-    BOOL bDone = FALSE;
 
     // create log file
     gpFile = fopen(gszLogFileName, "w");
@@ -80,154 +77,29 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLi
     RegisterClassEx(&wndclass);
 
     // Create window
-    hwnd = CreateWindowEx(WS_EX_APPWINDOW,
-                          szAppName,
-                          TEXT("Arkaj Patil"),
-                          WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN | WS_CLIPSIBLINGS | WS_VISIBLE,
-                          screenCenterX,
-                          screenCenterY,
-                          WIN_WIDTH,
-                          WIN_HEIGHT,
-                          NULL,
-                          NULL,
-                          hInstance,
-                          NULL);
-    ghwnd = hwnd;
+    ghwnd = CreateWindowEx(WS_EX_APPWINDOW,
+                           szAppName,
+                           TEXT("Arkaj Patil"),
+                           WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN | WS_CLIPSIBLINGS | WS_VISIBLE,
+                           screenCenterX,
+                           screenCenterY,
+                           WIN_WIDTH,
+                           WIN_HEIGHT,
+                           NULL,
+                           NULL,
+                           hInstance,
+                           NULL);
+    // ghwnd = hwnd;
 
     // Show window
-    ShowWindow(hwnd, iCmdShow);
+    ShowWindow(ghwnd, iCmdShow);
 
     // Paint background of windoW
-    UpdateWindow(hwnd);
-
-    // initialize
-    int result = initialize();
-    if (result != 0)
-    {
-        fprintf(gpFile, "Initialize() function failed.\n");
-        DestroyWindow(hwnd);
-        hwnd = NULL;
-    }
-    else
-    {
-        fprintf(gpFile, "Initialize() function completed successfully.\n");
-    }
+    UpdateWindow(ghwnd);
 
     // set this window as foreground and active window
-    SetForegroundWindow(hwnd);
-    SetFocus(hwnd);
-
-    // Game Loop
-    while (bDone == FALSE)
-    {
-        if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
-        {
-            if (msg.message == WM_QUIT)
-            {
-                bDone = TRUE;
-            }
-            else
-            {
-                TranslateMessage(&msg);
-                DispatchMessage(&msg);
-            }
-        }
-        else
-        {
-            if (gbActiveWindow == TRUE)
-            {
-                if (gbEscapeKeyIsPressed == TRUE)
-                {
-                    bDone = TRUE;
-                }
-                // render
-                display();
-
-                // update
-                update();
-            }
-        }
-    }
-    // uninitialize
-    uninitialize();
-
-    return ((int)msg.wParam);
-}
-
-// CAllback function
-LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
-{
-    // functions declarations
-    void toggleFullScreen(void);
-    void resize(int, int);
-    void uninitialize(void);
-
-    // code
-    switch (iMsg)
-    {
-    case WM_CREATE:
-        ZeroMemory((void *)&wpPrev, sizeof(WINDOWPLACEMENT));
-        wpPrev.length = sizeof(WINDOWPLACEMENT);
-        break;
-
-    case WM_SETFOCUS:
-        gbActiveWindow = TRUE;
-        break;
-
-    case WM_KILLFOCUS:
-        gbActiveWindow = FALSE;
-        break;
-
-    case WM_SIZE:
-        resize(LOWORD(lParam), HIWORD(lParam));
-        break;
-
-    case WM_KEYDOWN:
-        switch (wParam)
-        {
-        case VK_ESCAPE:
-            gbEscapeKeyIsPressed = TRUE;
-            break;
-
-        default:
-            break;
-        }
-        break;
-
-    case WM_CHAR:
-        switch (wParam)
-        {
-        case 'F':
-        case 'f':
-            if (gbFullScreen == FALSE)
-            {
-                toggleFullScreen();
-                gbFullScreen = TRUE;
-            }
-            else
-            {
-                toggleFullScreen();
-                gbFullScreen = FALSE;
-            }
-            break;
-
-        default:
-            break;
-        }
-        break;
-
-    case WM_CLOSE:
-        uninitialize();
-        break;
-
-    case WM_DESTROY:
-        PostQuitMessage(0);
-        break;
-    default:
-        break;
-    }
-
-    return (DefWindowProc(hwnd, iMsg, wParam, lParam));
+    SetForegroundWindow(ghwnd);
+    SetFocus(ghwnd);
 }
 
 void toggleFullScreen(void)
