@@ -1,0 +1,3 @@
+
+1. create basic window with fullscreen toggle
+
