@@ -5,12 +5,10 @@
 
 #include "Window.h"
 #include "resource.h"
+#include "utils/logging_system/logger.h"
 
 // global functions declarations
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM); // HWND->HANDLE->UINT->Unsigned int
-
-char gszLogFileName[] = "Log.txt";
-FILE *gpFile = NULL;
 
 // active window related variable
 BOOL gbActiveWindow = FALSE;
@@ -25,7 +23,7 @@ WINDOWPLACEMENT wpPrev;
 
 HWND ghwnd;
 
-TCHAR szAppName[] = TEXT("RTR6");
+TCHAR szAppName[] = TEXT("Arkaj Patil");
 
 // Entry point function
 void createWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLine, int iCmdShow, HWND hwnd)
@@ -46,18 +44,6 @@ void createWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLin
     // varaibles declarations
     ghwnd = hwnd;
     WNDCLASSEX wndclass;
-
-    // create log file
-    gpFile = fopen(gszLogFileName, "w");
-    if (gpFile == NULL)
-    {
-        MessageBox(NULL, "Log File creation failed.", "File I/O error", MB_OK);
-        exit(0);
-    }
-    else
-    {
-        fprintf(gpFile, "Program Started Successfully\n");
-    }
 
     // window class initialization
     wndclass.cbSize = sizeof(WNDCLASSEX);
@@ -140,16 +126,6 @@ int initialize(void)
 }
 
 void resize(int width, int height)
-{
-    // code
-}
-
-void display(void)
-{
-    // code
-}
-
-void update(void)
 {
     // code
 }

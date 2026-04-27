@@ -1,5 +1,6 @@
 #include <windows.h>
 #include "windows/Window.h"
+#include "utils/logging_system/logger.h"
 
 // global functions declarations
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM); // HWND->HANDLE->UINT->Unsigned int
@@ -11,8 +12,21 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLi
     MSG msg;
     HWND hwnd = NULL;
     
+    // create log file
+    gpFile = fopen("logs/Log File.txt", "w");
+    if (gpFile == NULL)
+    {
+        MessageBox(NULL, "Log File creation failed.", "File I/O error", MB_OK);
+        exit(0);
+    }
+    else
+    {
+        writeLog("Program Started Successfully");
+    }
+
     // creating window
     createWindow(hInstance, hPrevInstance, lpszCmdLine, iCmdShow, hwnd);
+    writeLog("Window creation done Successfully");
     
    // Game Loop
     while (bDone == FALSE)
@@ -45,7 +59,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLi
             }
         }
     }
-    // // uninitialize
+    // uninitialize
     // uninitialize();
 
     return ((int)msg.wParam);
@@ -85,6 +99,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
         {
         case VK_ESCAPE:
             gbEscapeKeyIsPressed = TRUE;
+            writeLog(">>>>>EXITING<<<<< Escape Key pressed");
             break;
 
         default:
@@ -119,6 +134,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
         break;
 
     case WM_DESTROY:
+        writeLog(">>>>> EXITING <<<<< WM_DESTROY trigerred.");
         PostQuitMessage(0);
         break;
     default:

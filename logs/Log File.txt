@@ -1,0 +1,3 @@
+[2026-04-27 12:02:38] Program Started Successfully
+[2026-04-27 12:02:38] Window creation done Successfully
+[2026-04-27 12:02:40] >>>>>EXITING<<<<< Escape Key pressed

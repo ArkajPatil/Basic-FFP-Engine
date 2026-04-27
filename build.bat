@@ -9,6 +9,7 @@ echo ==============================
 
 :: creating build folder
 if not exist build mkdir build
+if not exist logs mkdir logs
 
 echo.
 echo --- Cleaning Old Build Files ---
@@ -21,7 +22,8 @@ echo --- Compiling Source Files ---
 echo.
 cl.exe /c /EHsc /Isrc /Iresources /Fobuild\ ^
 src/core/main.c ^
-src/windows/Window.c
+src/windows/Window.c ^
+src/utils/logging_system/logger.c
 
 echo.
 echo --- Compiling Resource Files ---
@@ -34,6 +36,7 @@ echo.
 link.exe ^
 build/main.obj ^
 build/Window.obj ^
+build/logger.obj ^
 src/windows/Window.res ^
 User32.lib GDI32.lib /SUBSYSTEM:WINDOWS
 
