@@ -1,5 +1,5 @@
 #include <windows.h>
-#include "Window.h"
+#include "windows/Window.h"
 
 // global functions declarations
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM); // HWND->HANDLE->UINT->Unsigned int
