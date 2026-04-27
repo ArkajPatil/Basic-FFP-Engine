@@ -1,9 +1,15 @@
+4. add formatting in build.bat file 
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 3. add OOP like multi-folder structure to code
    - src folder contains main code file folders (core, windows, rendering)
    - core folder is for engine, main.c is here.
    - windows folder is for window related code
    - rendering is for OpenGL code
    - build.bat present in the root directory
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 2. separate the Window Creation Code
    -> main.c is main file of the engine where code WinMain is present 

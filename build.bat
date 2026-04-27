@@ -1,12 +1,48 @@
+echo off
+
 cls
 
-del main.obj Window.obj main.exe
+echo.
+echo ==============================
+echo Building Basic FFP Engine...
+echo ==============================
 
-cl.exe /c /EHsc /Isrc /Iresources src/core/main.c src/windows/Window.c
+:: creating build folder
+if not exist build mkdir build
 
+echo.
+echo --- Cleaning Old Build Files ---
+if exist build\*.obj del build\*.obj
+if exist build\*.exe del build\*.exe
+if exist main.exe del main.exe
+
+echo.
+echo --- Compiling Source Files ---
+echo.
+cl.exe /c /EHsc /Isrc /Iresources /Fobuild\ ^
+src/core/main.c ^
+src/windows/Window.c
+
+echo.
+echo --- Compiling Resource Files ---
+echo.
 rc.exe /Isrc /Iresources src/windows/Window.rc
 
-link.exe main.obj Window.obj src/windows/Window.res User32.lib GDI32.lib /SUBSYSTEM:WINDOWS
+echo.
+echo --- Linking Executable ---
+echo.
+link.exe ^
+build/main.obj ^
+build/Window.obj ^
+src/windows/Window.res ^
+User32.lib GDI32.lib /SUBSYSTEM:WINDOWS
 
+echo.
+echo --- Running Application ---
+echo.
 main.exe
 
+echo ==============================
+echo Build Finished!
+echo ==============================
+echo.
