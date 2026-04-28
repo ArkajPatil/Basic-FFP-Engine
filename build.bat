@@ -23,7 +23,9 @@ echo.
 cl.exe /c /EHsc /Isrc /Iresources /Fobuild\ ^
 src/core/main.c ^
 src/windows/Window.c ^
-src/utils/logging_system/logger.c
+src/utils/logging_system/logger.c ^
+src/rendering/OpenGLSetup.c ^
+src/rendering/renderLoop.c
 
 echo.
 echo --- Compiling Resource Files ---
@@ -37,6 +39,8 @@ link.exe ^
 build/main.obj ^
 build/Window.obj ^
 build/logger.obj ^
+build/OpenGLSetup.obj ^
+build/renderLoop.obj ^
 src/windows/Window.res ^
 User32.lib GDI32.lib /SUBSYSTEM:WINDOWS
 

@@ -1,17 +1,22 @@
 #include <windows.h>
 #include "windows/Window.h"
 #include "utils/logging_system/logger.h"
+#include "rendering/OpenGLSetup.h"
+#include "rendering/renderLoop.h"
 
 // global functions declarations
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM); // HWND->HANDLE->UINT->Unsigned int
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLine, int iCmdShow)
 {
+    // functions declarations
+    void uninitialize(void);
+
     // varaibles declarations
     BOOL bDone = FALSE;
     MSG msg;
     HWND hwnd = NULL;
-    
+
     // create log file
     gpFile = fopen("logs/Log File.txt", "w");
     if (gpFile == NULL)
@@ -27,8 +32,21 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLi
     // creating window
     createWindow(hInstance, hPrevInstance, lpszCmdLine, iCmdShow, hwnd);
     writeLog("Window creation done Successfully");
-    
-   // Game Loop
+
+    // initializing OpenGL context
+    int result = initialize();
+    if (result != 0)
+    {
+        writeLog(">>>>> ERROR <<<<< ::: initialize () failed");
+        DestroyWindow(hwnd);
+        hwnd = NULL;
+    }
+    else
+    {
+        writeLog("initialize() completed successfully, OpenGL setup is done.\n");
+    }
+
+    // Game Loop
     while (bDone == FALSE)
     {
         if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
@@ -51,20 +69,19 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLi
                 {
                     bDone = TRUE;
                 }
-                // // render
-                // display();
 
-                // // update
-                // update();
+                // rendering loop
+                display();
+                // update
+                update();
             }
         }
     }
-    // uninitialize
-    // uninitialize();
+    // uninitialize and cleanups
+    uninitialize();
 
     return ((int)msg.wParam);
 }
-
 
 // CAllback function
 LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
@@ -142,5 +159,12 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
     }
 
     return (DefWindowProc(hwnd, iMsg, wParam, lParam));
+}
+
+void uninitialize(void)
+{
+    cleanupWindow();
+    cleanupOpenGL();
+    cleanupLogger();
 }
 

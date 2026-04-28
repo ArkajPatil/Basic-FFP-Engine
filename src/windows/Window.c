@@ -119,24 +119,13 @@ void toggleFullScreen(void)
     }
 }
 
-int initialize(void)
+void cleanupWindow(void)
 {
     // code
-    return (0);
-}
-
-void resize(int width, int height)
-{
-    // code
-}
-
-void uninitialize(void)
-{
-    // code
-    // close the log file
-    if (gpFile)
+    // if user is exiting in full screen then restore fullscreen to normal
+    if (gbFullScreen == TRUE)
     {
-        fprintf(gpFile, "Program terminated successfully.\n");
-        fclose(gpFile);
+        toggleFullScreen();
+        gbFullScreen = FALSE;
     }
 }

@@ -1,3 +1,10 @@
+6. add OpenGL context
+   - created OpenGLSetup.c & renderLoop.c inside src/rendering
+   - OpenGLSetup.c contains : initialize(), printGLInfo(), resize(), cleanupOpenGL().
+   - renderLoop.c contains : display() and update().
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
 5. add logging system
    - now you can add logs anywhere by using writelog() function 
    - add "utils/logging_system/logger.h" into file to use writelog()

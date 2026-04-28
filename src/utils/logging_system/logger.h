@@ -1,11 +1,13 @@
 #ifndef LOGGER_H
 #define LOGGER_H
 
-#include<stdio.h>
-// global file pointer
-extern FILE *gpFile;
+#include <stdio.h>
 
-// functions declarations
+// global log file pointer
+extern FILE *gpFile ;
+
+// functions
 void writeLog(const char *format, ...);
+void cleanupLogger(void);
 
 #endif

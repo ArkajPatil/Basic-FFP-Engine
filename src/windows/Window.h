@@ -15,9 +15,11 @@ extern BOOL gbEscapeKeyIsPressed;
 
 // Window-related globals (FIXED)
 extern WNDCLASSEX wndclass;
+extern HWND ghwnd;
 
 // Function declarations
 void createWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLine, int iCmdShow, HWND hnwd);
 void toggleFullScreen(void);
+void cleanupWindow(void);
 
 #endif
