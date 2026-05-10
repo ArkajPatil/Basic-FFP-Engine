@@ -1,3 +1,12 @@
+7. add model management and scene linked list logic
+   - created models.c & linkedlist.c inside src/scene
+   - models files(.h and .c) contains : createModel(), drawModel(), destroyModel()
+   - linkedlist file contains : structures :-> node and scene 
+                              : functions :-> initScene(), insertNode(), deleteNode(), renderAllNodes(), selectNextNode(), selectPreviousNode()
+   - node strcut is actual nodes inside linkedlist.
+   - Scene struct is for holding head node, tail node and selectedNode.
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
 6. add OpenGL context
    - created OpenGLSetup.c & renderLoop.c inside src/rendering
    - OpenGLSetup.c contains : initialize(), printGLInfo(), resize(), cleanupOpenGL().

@@ -24,8 +24,11 @@ cl.exe /c /EHsc /Isrc /Iresources /Fobuild\ ^
 src/core/main.c ^
 src/windows/Window.c ^
 src/utils/logging_system/logger.c ^
+src/utils/my_math_library/myMath.c ^
 src/rendering/OpenGLSetup.c ^
-src/rendering/renderLoop.c
+src/rendering/renderLoop.c ^
+src/scene/models.c ^
+src/scene/linkedlist.c
 
 echo.
 echo --- Compiling Resource Files ---
@@ -38,10 +41,13 @@ echo.
 link.exe ^
 build/main.obj ^
 build/Window.obj ^
+src/windows/Window.res ^
 build/logger.obj ^
+build/myMath.obj ^
 build/OpenGLSetup.obj ^
 build/renderLoop.obj ^
-src/windows/Window.res ^
+build/models.obj ^
+build/linkedlist.obj ^
 User32.lib GDI32.lib /SUBSYSTEM:WINDOWS
 
 echo.
