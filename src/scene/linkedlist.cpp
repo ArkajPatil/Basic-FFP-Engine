@@ -4,7 +4,7 @@ Scene *scene;
 
 void initScene(void)
 {     
-    scene = malloc(sizeof(Scene));
+    scene = (Scene *)malloc(sizeof(Scene));
     if(scene == NULL)
     {
         writeLog(">>>>> FATAL <<<<< :: Scene allocation failed.");
@@ -146,9 +146,9 @@ void renderAllNodes(void)
         if(temp == scene->selectedNode)
         {
             Model *model = scene->selectedNode->currentModel;
-            model->transform.scale = (vec3){1.5f, 1.5f, 1.5f};
+            model->transform.scale = vec3{1.5f, 1.5f, 1.5f};
             drawModel(model);
-            model->transform.scale = (vec3){1.0f, 1.0f, 1.0f};
+            model->transform.scale = vec3{1.0f, 1.0f, 1.0f};
         }
         else 
         {

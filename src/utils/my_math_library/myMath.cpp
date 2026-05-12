@@ -3,7 +3,7 @@
 // functions body
 vec3 scale(vec3 v, float s)
 {
-    return (vec3){
+    return vec3{
         v.x * s,
         v.y * s,
         v.z * s
@@ -47,7 +47,7 @@ vec3 normalize(vec3 vec)
     float len = magnitudeOfVec3(vec);
     if(len == 0.0f) 
     {
-        return (vec3){0.0f, 0.0f, 0.0f};
+        return vec3{0.0f, 0.0f, 0.0f};
     }
 
     vec3 result;

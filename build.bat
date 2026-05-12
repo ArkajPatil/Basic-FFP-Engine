@@ -21,16 +21,17 @@ echo.
 echo --- Compiling Source Files ---
 echo.
 cl.exe /c /EHsc /Isrc /Iresources /Fobuild\ ^
-src/core/main.c ^
-src/windows/Window.c ^
-src/utils/logging_system/logger.c ^
-src/utils/my_math_library/myMath.c ^
-src/rendering/OpenGLSetup.c ^
-src/rendering/renderLoop.c ^
-src/scene/models.c ^
-src/scene/linkedlist.c ^
-src/scene/basic_models_data/basicModelsData.c ^
-src/inputs/inputs.c
+src/core/main.cpp ^
+src/windows/Window.cpp ^
+src/utils/logging_system/logger.cpp ^
+src/utils/my_math_library/myMath.cpp ^
+src/rendering/OpenGLSetup.cpp ^
+src/rendering/renderLoop.cpp ^
+src/scene/models.cpp ^
+src/scene/linkedlist.cpp ^
+src/scene/basic_models_data/basicModelsData.cpp ^
+src/inputs/inputs.cpp
+
 
 echo.
 echo --- Compiling Resource Files ---

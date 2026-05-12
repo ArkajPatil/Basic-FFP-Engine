@@ -1,3 +1,9 @@
+9. refactor: convert all .c files to .cpp
+   - Switch source files to C++ to enable integration with Dear ImGui and 
+     utilize C++ classes for further development.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
 8. implement basic scene management system
    - render four models: triangle, square, pyramid, and cube
    - add runtime model selection support using left and right arrow keys

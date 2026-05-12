@@ -16,6 +16,8 @@ GLfloat angleCube =  0.0f;
 
 void display(void)
 {
+    void modelSelection(void);  // from inputs.h
+
     // code
     //  clear OpenGL buffers
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

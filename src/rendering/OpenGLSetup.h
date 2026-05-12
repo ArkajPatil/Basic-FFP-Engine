@@ -8,10 +8,10 @@
 extern HDC ghdc;
 
 // models declarations
-Model *triangle1;
-Model *square1;
-Model *pyramid1;
-Model *cube1;
+extern Model *triangle1;
+extern Model *square1;
+extern Model *pyramid1;
+extern Model *cube1;
 
 // functions declarations
 int initialize(void);

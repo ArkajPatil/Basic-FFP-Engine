@@ -22,7 +22,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLi
     gpFile = fopen("logs/Log File.txt", "w");
     if (gpFile == NULL)
     {
-        MessageBox(NULL, "Log File creation failed.", "File I/O error", MB_OK);
+        MessageBox(NULL, TEXT("Log File creation failed."), TEXT("File I/O error"), MB_OK);
         exit(0);
     }
     else
@@ -174,4 +174,3 @@ void uninitialize(void)
     cleanupOpenGL();
     cleanupLogger();
 }
-
