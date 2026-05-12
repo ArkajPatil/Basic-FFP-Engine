@@ -3,6 +3,7 @@
 #include "utils/logging_system/logger.h"
 #include "rendering/OpenGLSetup.h"
 #include "rendering/renderLoop.h"
+#include "inputs/inputs.h"
 
 // global functions declarations
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM); // HWND->HANDLE->UINT->Unsigned int
@@ -112,6 +113,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
         break;
 
     case WM_KEYDOWN:
+        keys[wParam] = true;
         switch (wParam)
         {
         case VK_ESCAPE:
@@ -122,6 +124,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
         default:
             break;
         }
+        break;
+
+    case WM_KEYUP:
+        keys[wParam] = false;
         break;
 
     case WM_CHAR:
@@ -154,6 +160,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
         writeLog(">>>>> EXITING <<<<< WM_DESTROY trigerred.");
         PostQuitMessage(0);
         break;
+
     default:
         break;
     }

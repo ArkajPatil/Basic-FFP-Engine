@@ -1,10 +1,18 @@
+8. implement basic scene management system
+   - render four models: triangle, square, pyramid, and cube
+   - add runtime model selection support using left and right arrow keys
+   - add global keys[] array in inputs/inputs.h for input handling
+ 
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
 7. add model management and scene linked list logic
    - created models.c & linkedlist.c inside src/scene
    - models files(.h and .c) contains : createModel(), drawModel(), destroyModel()
    - linkedlist file contains : structures :-> node and scene 
                               : functions :-> initScene(), insertNode(), deleteNode(), renderAllNodes(), selectNextNode(), selectPreviousNode()
-   - node strcut is actual nodes inside linkedlist.
+   - node struct is actual nodes inside linkedlist.
    - Scene struct is for holding head node, tail node and selectedNode.
+
 -----------------------------------------------------------------------------------------------------------------------------------------------
 
 6. add OpenGL context

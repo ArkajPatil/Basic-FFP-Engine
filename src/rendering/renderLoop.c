@@ -1,6 +1,8 @@
 #include "renderLoop.h"
 #include "OpenGLSetup.h"
 #include "utils/logging_system/logger.h"
+#include "scene/linkedlist.h"
+#include "inputs/inputs.h"
 
 // win32 headers
 #include <windows.h>
@@ -21,87 +23,17 @@ void display(void)
     // set matrix to model view mode
     glMatrixMode(GL_MODELVIEW);
 
+    // function inside inputs, for selection of current model
+    modelSelection();
+
     // set it to identity matrix
     glLoadIdentity();
 
     // Translate cube backward
-    glTranslatef(0.0f, 0.0f, -8.0f);
+    glTranslatef(0.0f, 0.0f, -2.0f);
 
-    // Rotate Cube
-    glRotatef(angleCube, 1.0f, 0.0f, 0.0f);
-    glRotatef(angleCube, 0.0f, 1.0f, 0.0f);
-    glRotatef(angleCube, 0.0f, 0.0f, 1.0f);
-
-    // Cube drwing code
-    glBegin(GL_QUADS);
-
-    // front face --------------------------------------
-    glColor3f(1.0f, 0.0f, 0.0f);
-    // right top
-    glVertex3f(1.0f, 1.0f, 1.0f);
-    // left top
-    glVertex3f(-1.0f, 1.0f, 1.0f);
-    // left bottom
-    glVertex3f(-1.0f, -1.0f, 1.0f);
-    // right bottom
-    glVertex3f(1.0f, -1.0f, 1.0f);
-
-    // right face ----------------------------------------
-    glColor3f(0.0f, 1.0f, 0.0f);
-    // right top
-    glVertex3f(1.0f, 1.0f, -1.0f);
-    // left top
-    glVertex3f(1.0f, 1.0f, 1.0f);
-    // left bottom
-    glVertex3f(1.0f, -1.0f, 1.0f);
-    // right bottom
-    glVertex3f(1.0f, -1.0f, -1.0f);
-
-    // back face --------------------------------------
-    glColor3f(0.0f, 0.0f, 1.0f);
-    // right top
-    glVertex3f(-1.0f, 1.0f, -1.0f);
-    // left top
-    glVertex3f(1.0f, 1.0f, -1.0f);
-    // left bottom
-    glVertex3f(1.0f, -1.0f, -1.0f);
-    // right bottom
-    glVertex3f(-1.0f, -1.0f, -1.0f);
-
-    // left face --------------------------------------------
-    glColor3f(0.0f, 1.0f, 1.0f);
-    // right top
-    glVertex3f(-1.0f, 1.0f, 1.0f);
-    // left top
-    glVertex3f(-1.0f, 1.0f, -1.0f);
-    // left bottom
-    glVertex3f(-1.0f, -1.0f, -1.0f);
-    // right bottom
-    glVertex3f(-1.0f, -1.0f, 1.0f);
-
-    // top face ()you are watching from front ---------------------
-    glColor3f(1.0f, 0.0f, 1.0f);
-    // right top
-    glVertex3f(1.0f, 1.0f, -1.0f);
-    // left top
-    glVertex3f(-1.0f, 1.0f, -1.0f);
-    // left bottom
-    glVertex3f(-1.0f, 1.0f, 1.0f);
-    // right bottom
-    glVertex3f(1.0f, 1.0f, 1.0f);
-
-    // bottom face ()you are watching from front -------------------
-    glColor3f(1.0f, 1.0f, 0.0f);
-    // right top
-    glVertex3f(1.0f, -1.0f, -1.0f);
-    // left top
-    glVertex3f(-1.0f, -1.0f, -1.0f);
-    // left bottom
-    glVertex3f(-1.0f, -1.0f, 1.0f);
-    // right bottom
-    glVertex3f(1.0f, -1.0f, 1.0f);
-    
-    glEnd();
+    // renderNode(scene->selectedNode);
+    renderAllNodes();
 
     // swap the buffers
     SwapBuffers(ghdc);

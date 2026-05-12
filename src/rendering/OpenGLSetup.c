@@ -1,6 +1,9 @@
 #include "OpenGLSetup.h"
 #include "utils/logging_system/logger.h"
 #include "windows/Window.h"
+#include "scene/linkedlist.h"
+#include "scene/basic_models_data/basicModelsData.h"
+
 
 // OpenGL related header file
 #include <gl/GL.h>
@@ -24,6 +27,7 @@ int initialize(void)
     // function declaration
     void printGLInfo(void);
     void resize(int, int);
+    void modelsCreation(void);
 
     // variables declarations
     PIXELFORMATDESCRIPTOR pfd;
@@ -100,6 +104,9 @@ int initialize(void)
     // warm up resize
     resize(WIN_WIDTH, WIN_HEIGHT);
 
+    // gen models and link them to linked list
+    modelsCreation();
+
     return (0);
 }
 
@@ -147,6 +154,10 @@ void cleanupOpenGL(void)
 {
     // function declarations
     void toggleFullScreen(void);
+    void destroyModels(void);
+
+    // destroying nodes of linkedlist
+    destroyModels();
 
     // code
     // make hdc as current context by realizing rendering context as current context
@@ -168,5 +179,95 @@ void cleanupOpenGL(void)
         ReleaseDC(ghwnd, ghdc);
         ghdc = NULL;
     }
+}
+
+void modelsCreation(void)
+{
+    triangle1 = createModel(
+        "triangle1",                            // name
+        (vec3){-4.0f, 2.25f, -10.0f},           // translate
+        // (vec3){0.0f, 0.0f, -3.0f},           // translate
+        (vec3){0.0f, 0.0f, 0.0f},               // rotate
+        (vec3){1.0f, 1.0f, 1.0f},               // scale
+        GL_TRIANGLES,                           // drawMode
+        3,                                      // vertexCount
+        trianglePosition,                       // position
+        triangleColor,                          // per vertex colors
+        NULL /*(GLfloat[]){0.0f, 0.0f, 0.0f}*/, // uniform color
+        NULL,                                   // texcoords
+        NULL                                    // normals
+    );
+
+    square1 = createModel(
+        "square1",                     // name
+        (vec3){4.0f, 2.25f, -10.0f},   // translate
+        (vec3){0.0f, 0.0f, 0.0f},      // rotate
+        (vec3){1.0f, 1.0f, 1.0f},      // scale
+        GL_QUADS,                      // drawMode
+        4,                             // vertexCount
+        squarePosition,                // position
+        NULL,                          // per vertex colors
+        (GLfloat[]){0.7f, 0.3f, 0.6f}, // uniform color
+        NULL,                          // texcoords
+        NULL                           // normals
+    );
+
+    pyramid1 = createModel(
+        "pyramid1",                    // name
+        (vec3){-4.0f, -1.5f, -10.0f},  // translate
+        (vec3){0.0f, 0.0f, 0.0f},      // rotate
+        (vec3){1.0f, 1.0f, 1.0f},      // scale
+        GL_TRIANGLES,                  // drawMode
+        12,                            // vertexCount
+        pyramidPosition,               // position
+        NULL,                          // per vertex colors
+        (GLfloat[]){0.6f, 0.5f, 0.1f}, // uniform color
+        NULL,                          // texcoords
+        NULL                           // normals
+    );
+
+    cube1 = createModel(
+        "cube1",                       // name
+        (vec3){4.0f, -1.5f, -10.0f},   // translate
+        (vec3){0.0f, 0.0f, 0.0f},      // rotate
+        (vec3){1.0f, 1.0f, 1.0f},      // scale
+        GL_QUADS,                      // drawMode
+        24,                            // vertexCount
+        cubePosition,                  // position
+        NULL,                          // per vertex colors
+        (GLfloat[]){0.2f, 0.4f, 0.6f}, // uniform color
+        NULL,                          // texcoords
+        NULL                           // normals
+    );
+
+    initScene();
+    insertNode(triangle1);
+    insertNode(square1);
+    insertNode(pyramid1);
+    insertNode(cube1);
+}
+
+void destroyModels(void)
+{
+    void destroyModel(Model *model);
+
+    // destroying nodes of linkedlist
+    if(triangle1)
+    {
+        deleteNode(triangle1); 
+    }
+    if(square1)
+    {
+        deleteNode(square1); 
+    }
+    if(cube1)
+    {
+        deleteNode(cube1); 
+    }
+    if(pyramid1)
+    {
+        deleteNode(pyramid1); 
+    }
+
 }
 

@@ -28,7 +28,9 @@ src/utils/my_math_library/myMath.c ^
 src/rendering/OpenGLSetup.c ^
 src/rendering/renderLoop.c ^
 src/scene/models.c ^
-src/scene/linkedlist.c
+src/scene/linkedlist.c ^
+src/scene/basic_models_data/basicModelsData.c ^
+src/inputs/inputs.c
 
 echo.
 echo --- Compiling Resource Files ---
@@ -48,6 +50,8 @@ build/OpenGLSetup.obj ^
 build/renderLoop.obj ^
 build/models.obj ^
 build/linkedlist.obj ^
+build/basicModelsData.obj ^
+build/inputs.obj ^
 User32.lib GDI32.lib /SUBSYSTEM:WINDOWS
 
 echo.

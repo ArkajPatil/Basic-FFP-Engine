@@ -1,12 +1,28 @@
-[2026-05-10 12:07:01] Program Started Successfully
-[2026-05-10 12:07:01] Window creation done Successfully
+[2026-05-12 15:12:51] Program Started Successfully
+[2026-05-12 15:12:51] Window creation done Successfully
 OpenGL Information :
 ********************
 OpenGL Vendor : NVIDIA Corporation
 OpenGL Renderer : NVIDIA GeForce GTX 1050/PCIe/SSE2
 OpenGL Version : 4.6.0 NVIDIA 576.02
 ********************
-[2026-05-10 12:07:01] initialize() completed successfully, OpenGL setup is done.
+[2026-05-12 15:12:51] Model: triangle1 was created.
+[2026-05-12 15:12:51] Model: square1 was created.
+[2026-05-12 15:12:51] Model: pyramid1 was created.
+[2026-05-12 15:12:51] Model: cube1 was created.
+[2026-05-12 15:12:51] Model: triangle1 has been inserted as head node.
+[2026-05-12 15:12:51] Model: square1 has been appended to the linked list.
+[2026-05-12 15:12:51] Model: pyramid1 has been appended to the linked list.
+[2026-05-12 15:12:51] Model: cube1 has been appended to the linked list.
+[2026-05-12 15:12:51] initialize() completed successfully, OpenGL setup is done.
 
-[2026-05-10 12:07:12] >>>>>EXITING<<<<< Escape Key pressed
+[2026-05-12 15:12:59] >>>>>EXITING<<<<< Escape Key pressed
+[2026-05-12 15:12:59] Model: triangle1 was destroyed.
+[2026-05-12 15:12:59] Node of Model: triangle1 has been deleted successfully.
+[2026-05-12 15:12:59] Model: square1 was destroyed.
+[2026-05-12 15:12:59] Node of Model: square1 has been deleted successfully.
+[2026-05-12 15:12:59] Model: cube1 was destroyed.
+[2026-05-12 15:12:59] Node of Model: cube1 has been deleted successfully.
+[2026-05-12 15:12:59] Model: pyramid1 was destroyed.
+[2026-05-12 15:12:59] Node of Model: pyramid1 has been deleted successfully.
 Program terminated successfully
