@@ -15,6 +15,19 @@
 |       |      |
 |       |      +---> main.c
 |       |
+|       +--->[ external ]
+|       |      |
+|       |      +--->[ imgui ]
+|       |             |
+|       |             +---> This folder contains all the required files for ImGui from git repo of Dear ImGui
+|       |
+|       +--->[ gui ]
+|       |      |
+|       |      +---> ImGuiLayer.cpp
+|       |      +---> ImGuiLayer.h
+|       |      +---> ImGuiUI.cpp
+|       |      +---> ImGuiUI.h
+|       |
 |       +--->[ inputs ]
 |       |      |
 |       |      +---> inputs.c

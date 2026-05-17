@@ -1,3 +1,10 @@
+11. refactor ImGui code
+   - move editor UI logic from ImGuiLayer.cpp to ImGuiUI.cpp
+   - create ImGuiUI.h for UI function declarations
+   - keep ImGuiLayer.cpp focused on ImGui initialization, frame setup, rendering, and cleanup
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
 10. integrate Dear ImGui runtime debug interface
     - integrate Dear ImGui into the engine using Win32 + OpenGL2 backend
     - add ImGui source files and backend implementation to build system

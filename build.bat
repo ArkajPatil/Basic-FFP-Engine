@@ -41,7 +41,8 @@ src/external/imgui/imgui_widgets.cpp ^
 src/external/imgui/imgui_demo.cpp ^
 src/external/imgui/backends/imgui_impl_win32.cpp ^
 src/external/imgui/backends/imgui_impl_opengl2.cpp ^
-src/gui/ImGuiLayer.cpp
+src/gui/ImGuiLayer.cpp ^
+src/gui/ImGuiUI.cpp
 
 echo.
 echo --- Compiling Resource Files ---
@@ -71,6 +72,7 @@ build/imgui_demo.obj ^
 build/imgui_impl_win32.obj ^
 build/imgui_impl_opengl2.obj ^
 build/ImGuiLayer.obj ^
+build/ImGuiUI.obj ^
 User32.lib GDI32.lib /SUBSYSTEM:WINDOWS
 
 echo.

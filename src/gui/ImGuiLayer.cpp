@@ -3,7 +3,8 @@
 #include "windows/Window.h"
 #include "utils/logging_system/logger.h"
 
-#include "scene/linkedlist.h"
+#include "ImGuiUI.h"
+
 
 void initializeImGui()
 {
@@ -29,19 +30,7 @@ void startImGuiFrame()
 
     ImGui::NewFrame();
 
-    ImGui::Begin("Model Selector");
-
-    if (ImGui::Button("Previous Model"))
-    {
-        selectPreviousNode();
-    }
-
-    if (ImGui::Button("Next Model"))
-    {
-        selectNextNode();
-    }
-
-    ImGui::End();
+    drawUI();
 }
 
 void renderImGui()
