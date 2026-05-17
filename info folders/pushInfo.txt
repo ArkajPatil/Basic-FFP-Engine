@@ -1,3 +1,19 @@
+10. integrate Dear ImGui runtime debug interface
+    - integrate Dear ImGui into the engine using Win32 + OpenGL2 backend
+    - add ImGui source files and backend implementation to build system
+    - create dedicated gui/ImGuiLayer module for GUI lifecycle management
+    - initialize and shutdown ImGui properly with engine startup/cleanup flow
+    - integrate ImGui frame creation and rendering into main render loop
+    - forward Win32 events to ImGui using ImGui_ImplWin32_WndProcHandler()
+    - refactor rendering flow by moving SwapBuffers() out of display()
+      and into main loop for proper frame presentation order
+    - add first runtime debug window using Dear ImGui
+    - implement interactive model selection buttons for scene navigation
+      using existing selectPreviousNode() and selectNextNode() logic
+    - establish foundation for future engine tooling and editor systems
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
 9. refactor: convert all .c files to .cpp
    - Switch source files to C++ to enable integration with Dear ImGui and 
      utilize C++ classes for further development.

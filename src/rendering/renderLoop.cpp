@@ -26,7 +26,7 @@ void display(void)
     glMatrixMode(GL_MODELVIEW);
 
     // function inside inputs, for selection of current model
-    modelSelection();
+    // modelSelection();
 
     // set it to identity matrix
     glLoadIdentity();
@@ -36,9 +36,6 @@ void display(void)
 
     // renderNode(scene->selectedNode);
     renderAllNodes();
-
-    // swap the buffers
-    SwapBuffers(ghdc);
 }
 
 void update(void)

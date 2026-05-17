@@ -65,7 +65,7 @@ void createWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLin
     // Create window
     ghwnd = CreateWindowEx(WS_EX_APPWINDOW,
                            szAppName,
-                           TEXT("Arkaj Patil"),
+                           TEXT("OpenGL FFP Engine"),
                            WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN | WS_CLIPSIBLINGS | WS_VISIBLE,
                            screenCenterX,
                            screenCenterY,
@@ -108,14 +108,14 @@ void toggleFullScreen(void)
                 SetWindowPos(ghwnd, HWND_TOP, mi.rcMonitor.left, mi.rcMonitor.top, mi.rcMonitor.right - mi.rcMonitor.left, mi.rcMonitor.bottom - mi.rcMonitor.top, SWP_NOZORDER | SWP_FRAMECHANGED);
             }
         }
-        ShowCursor(FALSE);
+        // ShowCursor(FALSE);
     }
     else
     {
         SetWindowPlacement(ghwnd, &wpPrev);
         SetWindowLong(ghwnd, GWL_STYLE, dwStyle | WS_OVERLAPPEDWINDOW);
         SetWindowPos(ghwnd, HWND_TOP, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOOWNERZORDER | SWP_NOZORDER | SWP_FRAMECHANGED);
-        ShowCursor(TRUE);
+        // ShowCursor(TRUE);
     }
 }
 

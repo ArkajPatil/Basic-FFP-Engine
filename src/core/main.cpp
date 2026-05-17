@@ -4,6 +4,7 @@
 #include "rendering/OpenGLSetup.h"
 #include "rendering/renderLoop.h"
 #include "inputs/inputs.h"
+#include "gui/ImGuiLayer.h"
 
 // global functions declarations
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM); // HWND->HANDLE->UINT->Unsigned int
@@ -36,6 +37,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLi
 
     // initializing OpenGL context
     int result = initialize();
+    // initializing ImGui
+    initializeImGui();
     if (result != 0)
     {
         writeLog(">>>>> ERROR <<<<< ::: initialize () failed");
@@ -71,10 +74,17 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLi
                     bDone = TRUE;
                 }
 
+                startImGuiFrame();
+
                 // rendering loop
                 display();
                 // update
                 update();
+
+                renderImGui();
+
+                // swap the buffers
+                SwapBuffers(ghdc);
             }
         }
     }
@@ -91,6 +101,12 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
     void toggleFullScreen(void);
     void resize(int, int);
     void uninitialize(void);
+
+    // ImGui Integration
+    if (ImGui_ImplWin32_WndProcHandler(hwnd, iMsg, wParam, lParam))
+    {
+        return true;
+    }
 
     // code
     switch (iMsg)
@@ -153,7 +169,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
         break;
 
     case WM_CLOSE:
-        uninitialize();
         break;
 
     case WM_DESTROY:
@@ -170,7 +185,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 
 void uninitialize(void)
 {
-    cleanupWindow();
+    cleanupImGui();
+
     cleanupOpenGL();
+
+    cleanupWindow();
+
     cleanupLogger();
 }
