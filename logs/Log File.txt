@@ -1,30 +1,30 @@
-[2026-05-17 16:35:07] Program Started Successfully
-[2026-05-17 16:35:07] Window creation done Successfully
+[2026-05-19 16:07:14] Program Started Successfully
+[2026-05-19 16:07:14] Window creation done Successfully
 OpenGL Information :
 ********************
 OpenGL Vendor : NVIDIA Corporation
 OpenGL Renderer : NVIDIA GeForce GTX 1050/PCIe/SSE2
 OpenGL Version : 4.6.0 NVIDIA 576.02
 ********************
-[2026-05-17 16:35:07] Model: triangle1 was created.
-[2026-05-17 16:35:07] Model: square1 was created.
-[2026-05-17 16:35:07] Model: pyramid1 was created.
-[2026-05-17 16:35:07] Model: cube1 was created.
-[2026-05-17 16:35:07] Model: triangle1 has been inserted as head node.
-[2026-05-17 16:35:07] Model: square1 has been appended to the linked list.
-[2026-05-17 16:35:07] Model: pyramid1 has been appended to the linked list.
-[2026-05-17 16:35:07] Model: cube1 has been appended to the linked list.
-[2026-05-17 16:35:07] ImGui Initialization is done.
-[2026-05-17 16:35:07] initialize() completed successfully, OpenGL setup is done.
+[2026-05-19 16:07:14] Model: triangle1 was created.
+[2026-05-19 16:07:14] Model: square1 was created.
+[2026-05-19 16:07:14] Model: pyramid1 was created.
+[2026-05-19 16:07:14] Model: cube1 was created.
+[2026-05-19 16:07:14] Model: triangle1 has been inserted as head node.
+[2026-05-19 16:07:14] Model: square1 has been appended to the linked list.
+[2026-05-19 16:07:14] Model: pyramid1 has been appended to the linked list.
+[2026-05-19 16:07:14] Model: cube1 has been appended to the linked list.
+[2026-05-19 16:07:14] ImGui Initialization is done.
+[2026-05-19 16:07:14] initialize() completed successfully, OpenGL setup is done.
 
-[2026-05-17 16:35:12] >>>>>EXITING<<<<< Escape Key pressed
-[2026-05-17 16:35:12] Cleaning ImGui is done.
-[2026-05-17 16:35:12] Model: triangle1 was destroyed.
-[2026-05-17 16:35:12] Node of Model: triangle1 has been deleted successfully.
-[2026-05-17 16:35:12] Model: square1 was destroyed.
-[2026-05-17 16:35:12] Node of Model: square1 has been deleted successfully.
-[2026-05-17 16:35:12] Model: cube1 was destroyed.
-[2026-05-17 16:35:12] Node of Model: cube1 has been deleted successfully.
-[2026-05-17 16:35:12] Model: pyramid1 was destroyed.
-[2026-05-17 16:35:12] Node of Model: pyramid1 has been deleted successfully.
+[2026-05-19 16:07:23] >>>>>EXITING<<<<< Escape Key pressed
+[2026-05-19 16:07:24] Cleaning ImGui is done.
+[2026-05-19 16:07:24] Model: triangle1 was destroyed.
+[2026-05-19 16:07:24] Node of Model: triangle1 has been deleted successfully.
+[2026-05-19 16:07:24] Model: square1 was destroyed.
+[2026-05-19 16:07:24] Node of Model: square1 has been deleted successfully.
+[2026-05-19 16:07:24] Model: cube1 was destroyed.
+[2026-05-19 16:07:24] Node of Model: cube1 has been deleted successfully.
+[2026-05-19 16:07:24] Model: pyramid1 was destroyed.
+[2026-05-19 16:07:24] Node of Model: pyramid1 has been deleted successfully.
 Program terminated successfully

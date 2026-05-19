@@ -4,7 +4,10 @@
 
 
 +---> [ build ]
-|       -> .obj files
+|       |
+|       +--->[ Dear_ImGui_build_Files ]
+|       |
+|       +---> .obj files
 | 
 +---> [ logs ]
 |       -> LogFile.txt

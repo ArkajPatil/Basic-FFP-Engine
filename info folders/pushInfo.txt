@@ -1,7 +1,15 @@
+12. optimize Dear ImGui build process
+    - stop recompiling static(unchanged) Dear ImGui source files during every build
+    - pre-compile ImGui source files into build/Dear_ImGui_build_Files/
+    - update build script to directly link cached ImGui .obj files
+    - improve incremental build performance and reduce overall compile time
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
 11. refactor ImGui code
-   - move editor UI logic from ImGuiLayer.cpp to ImGuiUI.cpp
-   - create ImGuiUI.h for UI function declarations
-   - keep ImGuiLayer.cpp focused on ImGui initialization, frame setup, rendering, and cleanup
+    - move editor UI logic from ImGuiLayer.cpp to ImGuiUI.cpp
+    - create ImGuiUI.h for UI function declarations
+    - keep ImGuiLayer.cpp focused on ImGui initialization, frame setup, rendering, and cleanup
 
 -----------------------------------------------------------------------------------------------------------------------------------------------
 
