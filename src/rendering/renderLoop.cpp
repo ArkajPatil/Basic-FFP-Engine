@@ -25,17 +25,14 @@ void display(void)
     // set matrix to model view mode
     glMatrixMode(GL_MODELVIEW);
 
-    // function inside inputs, for selection of current model
-    // modelSelection();
 
     // set it to identity matrix
     glLoadIdentity();
 
     // Translate cube backward
-    glTranslatef(0.0f, 0.0f, -2.0f);
+    glTranslatef(0.0f, 0.0f, -5.0f);
 
-    // renderNode(scene->selectedNode);
-    renderAllNodes();
+    renderNode(scene->selectedNode);
 }
 
 void update(void)

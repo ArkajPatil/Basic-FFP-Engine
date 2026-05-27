@@ -27,6 +27,8 @@ void deleteNode(Model *model);
 void renderAllNodes(void);
 void selectNextNode(void);
 void selectPreviousNode(void);
+void renderNode(Node *node);
+void renderAllNodes(void);
 
 
 #endif

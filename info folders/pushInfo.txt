@@ -1,3 +1,10 @@
+13. separate the input handling logic
+    - inputsHandling() is created inside inputs.cpp
+    - this fucntion handles full screen toggling and exit logic
+    - this function is called at the end of wndProc() (i.e. at every frame)
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
 12. optimize Dear ImGui build process
     - stop recompiling static(unchanged) Dear ImGui source files during every build
     - pre-compile ImGui source files into build/Dear_ImGui_build_Files/

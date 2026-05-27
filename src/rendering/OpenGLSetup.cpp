@@ -191,7 +191,7 @@ void modelsCreation(void)
 {
     triangle1 = createModel(
         "triangle1",                            // name
-        vec3{-4.0f, 2.25f, -10.0f},           // translate
+        vec3{0.0f, 0.0f, 0.0f},           // translate
         // (vec3){0.0f, 0.0f, -3.0f},           // translate
         vec3{0.0f, 0.0f, 0.0f},               // rotate
         vec3{1.0f, 1.0f, 1.0f},               // scale
@@ -207,7 +207,7 @@ void modelsCreation(void)
     GLfloat squareColor[] = {0.7f, 0.3f, 0.6f};
     square1 = createModel(
         "square1",                     // name
-        vec3{4.0f, 2.25f, -10.0f},   // translate
+        vec3{0.0f, 0.0f, 0.0f},   // translate
         vec3{0.0f, 0.0f, 0.0f},      // rotate
         vec3{1.0f, 1.0f, 1.0f},      // scale
         GL_QUADS,                      // drawMode
@@ -222,7 +222,7 @@ void modelsCreation(void)
     GLfloat pyramidColor[] = {0.6f, 0.5f, 0.1f}; 
     pyramid1 = createModel(
         "pyramid1",                    // name
-        vec3{-4.0f, -1.5f, -10.0f},  // translate
+        vec3{0.0f, 0.0f, 0.0f},  // translate
         vec3{0.0f, 0.0f, 0.0f},      // rotate
         vec3{1.0f, 1.0f, 1.0f},      // scale
         GL_TRIANGLES,                  // drawMode
@@ -237,7 +237,7 @@ void modelsCreation(void)
     GLfloat cubeColor[] = {0.2f, 0.4f, 0.6f};
     cube1 = createModel(
         "cube1",                       // name
-        vec3{4.0f, -1.5f, -10.0f},   // translate
+        vec3{0.0f, 0.0f, 0.0f},   // translate
         vec3{0.0f, 0.0f, 0.0f},      // rotate
         vec3{1.0f, 1.0f, 1.0f},      // scale
         GL_QUADS,                      // drawMode

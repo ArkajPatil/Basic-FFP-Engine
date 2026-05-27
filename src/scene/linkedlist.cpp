@@ -141,7 +141,7 @@ void renderNode(Node *node)
 void renderAllNodes(void)
 {
     Node *temp = scene->head;
-    while (temp)
+    while (temp) 
     {
         if(temp == scene->selectedNode)
         {
