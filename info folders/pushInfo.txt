@@ -1,3 +1,11 @@
+14. refactor inputsHandling() call location
+    - remove inputsHandling() call from wndProc()
+    - move input handling execution to main game loop
+    - fix fullscreen issues caused by repeated wndProc() calls
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
 13. separate the input handling logic
     - inputsHandling() is created inside inputs.cpp
     - this fucntion handles full screen toggling and exit logic

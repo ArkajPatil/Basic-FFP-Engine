@@ -76,6 +76,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLi
 
                 startImGuiFrame();
 
+                // input handling
+                inputsHandling();
+
                 // rendering loop
                 display();
                 // update
@@ -132,10 +135,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
         keys[wParam] = true;
         switch (wParam)
         {
-        // case VK_ESCAPE:
-        //     gbEscapeKeyIsPressed = TRUE;
-        //     writeLog(">>>>>EXITING<<<<< Escape Key pressed");
-        //     break;
+            // case VK_ESCAPE:
+            //     gbEscapeKeyIsPressed = TRUE;
+            //     writeLog(">>>>>EXITING<<<<< Escape Key pressed");
+            //     break;
 
         default:
             break;
@@ -149,19 +152,19 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
     case WM_CHAR:
         switch (wParam)
         {
-        // case 'F':
-        // case 'f':
-        //     if (gbFullScreen == FALSE)
-        //     {
-        //         toggleFullScreen();
-        //         gbFullScreen = TRUE;
-        //     }
-        //     else
-        //     {
-        //         toggleFullScreen();
-        //         gbFullScreen = FALSE;
-        //     }
-        //     break;
+            // case 'F':
+            // case 'f':
+            //     if (gbFullScreen == FALSE)
+            //     {
+            //         toggleFullScreen();
+            //         gbFullScreen = TRUE;
+            //     }
+            //     else
+            //     {
+            //         toggleFullScreen();
+            //         gbFullScreen = FALSE;
+            //     }
+            //     break;
 
         default:
             break;
@@ -179,9 +182,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
     default:
         break;
     }
-
-    // input handling
-    inputsHandling();
 
     return (DefWindowProc(hwnd, iMsg, wParam, lParam));
 }

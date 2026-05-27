@@ -30,7 +30,7 @@ void display(void)
     glLoadIdentity();
 
     // Translate cube backward
-    glTranslatef(0.0f, 0.0f, -5.0f);
+    glTranslatef(0.0f, 0.0f, -10.0f);
 
     renderNode(scene->selectedNode);
 }
