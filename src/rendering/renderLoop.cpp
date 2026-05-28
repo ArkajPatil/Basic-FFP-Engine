@@ -14,6 +14,9 @@
 // local variable
 GLfloat angleCube =  0.0f;
 
+// variables
+bool bShowGrid = false;
+
 void display(void)
 {
     void modelSelection(void);  // from inputs.h
@@ -32,7 +35,10 @@ void display(void)
     // Translate cube backward
     glTranslatef(0.0f, 0.0f, -10.0f);
 
-    renderNode(scene->selectedNode);
+    if(bShowGrid){
+        showGrid();
+    }
+    // renderNode(scene->selectedNode);
 }
 
 void update(void)
@@ -43,4 +49,9 @@ void update(void)
     {
         angleCube -= 360.0 ;
     }
+}
+
+void showGrid(void)
+{
+renderNode(scene->selectedNode);
 }

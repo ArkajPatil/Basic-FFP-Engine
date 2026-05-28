@@ -1,8 +1,16 @@
+15. update ImGui editor control panel
+    - Add main "Engine Controls" ImGui window.
+    - Implement collapsible editor sections using ImGui::CollapsingHeader().
+    - Add "Screen Rotation" control section structure.
+    - Add "Add / Delete Shapes" section.
+    - Add "Navigation for models" sections with scene node selection system.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
 14. refactor inputsHandling() call location
     - remove inputsHandling() call from wndProc()
     - move input handling execution to main game loop
     - fix fullscreen issues caused by repeated wndProc() calls
-
 
 -----------------------------------------------------------------------------------------------------------------------------------------------
 
