@@ -1,3 +1,21 @@
+16. implement screen transformation controls in ImGui editor
+    - Add "Screen Transformations" editor section.
+    - Implement grid toggle checkbox control.
+    - Add mouse wheel based rotation controls for:
+      - X Rotation
+      - Y Rotation
+      - Z Rotation
+    - Add hover-based interaction for rotation editing.
+    - Implement reset rotation functionality.
+    - Add translation controls using ImGui::SliderFloat():
+      - Translate X
+      - Translate Y
+      - Translate Z
+    - Implement reset translation functionality.
+    - Improve editor layout using separators and spacing utilities for example: creatd function addVerticalSpace(float size).
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
 15. update ImGui editor control panel
     - Add main "Engine Controls" ImGui window.
     - Implement collapsible editor sections using ImGui::CollapsingHeader().

@@ -38,7 +38,7 @@ void cleanupLogger(void)
     // close the file
     if (gpFile)
     {
-        fprintf(gpFile, "Program terminated successfully\n");
+        writeLog("Program terminated successfully\n");
         fclose(gpFile);
         gpFile = NULL;
     }

@@ -9,10 +9,20 @@ void drawUI()
 {
     ImGui::Begin("Engine Controls");
 
-    // Screen Rotation
-    if (ImGui::CollapsingHeader("Screen Rotation"))
+    // Screen Transformations
+    if (ImGui::CollapsingHeader("Screen Transformations"))
     {
         ImGui::Checkbox("Grid", &bShowGrid);
+        ImGui::Separator();
+        addVerticalSpace(15.0f);
+
+        // screen rotation
+        screenRotationControls();
+        addVerticalSpace(15.0f);
+
+        // screen translation
+        screenTranslationControls();
+        addVerticalSpace(8.0f);
     }
 
     // adding or deleting shapes
@@ -38,20 +48,126 @@ void drawUI()
     ImGui::End();
 }
 
-// ImGui::Text("Renderer Stats");
+void screenTranslationControls(void)
+{
+    // screen translation
+    float wheel = ImGui::GetIO().MouseWheel;
 
-// ImGui::Separator();
+    ImGui::Text("Screen Translation");
 
-// ImGui::Text("FPS: %d", 75);
+    ImGui::SliderFloat(
+        "Translate X",
+        &gfScreenXTranslation,
+        -20.0f,
+        20.0f,
+        "%.2f");
 
-// bool wireframe = false;
-// ImGui::Checkbox("Wireframe", &wireframe);
+    ImGui::SliderFloat(
+        "Translate Y",
+        &gfScreenYTranslation,
+        -20.0f,
+        20.0f,
+        "%.2f");
 
-// float cameraSpeed = 10.0f;
-// ImGui::SliderFloat("Camera Speed", &cameraSpeed, 1.0f, 20.0f);
-// float rotation = 45.0f;
-// ImGui::InputFloat("Rotation", &rotation);
-// if (ImGui::Button("Reload Scene"))
-// {
-//     // reloadScene();
-// }
+    ImGui::SliderFloat(
+        "Translate Z",
+        &gfScreenZTranslation,
+        -50.0f,
+        50.0f,
+        "%.2f");
+
+    if (ImGui::Button("Reset Translation"))
+    {
+        gfScreenXTranslation = 2.0f;
+        gfScreenYTranslation = 0.0f;
+        gfScreenZTranslation = -10.0f;
+    }
+    ImGui::Separator();
+}
+
+void screenRotationControls(void)
+{
+    // screen rotation
+    float wheel = ImGui::GetIO().MouseWheel;
+
+    ImGui::Text("Screen Rotations (hover & control with mouse wheel)");
+
+    ImGui::Selectable("X Rotation Angle : ");
+    if (ImGui::IsItemHovered())
+    {
+        if (wheel > 0)
+        {
+            if (gfScreenXRotationAngle >= 360.0f)
+            {
+                gfScreenXRotationAngle = 0.0f;
+            }
+        }
+        if (wheel < 0)
+        {
+            if (gfScreenXRotationAngle <= -360.0f)
+            {
+                gfScreenXRotationAngle = 0.0f;
+            }
+        }
+        gfScreenXRotationAngle += wheel * 5.0f;
+    }
+    ImGui::SameLine();
+    ImGui::Text("%.0f", gfScreenXRotationAngle);
+
+    ImGui::Selectable("Y Rotation Angle : ");
+    if (ImGui::IsItemHovered())
+    {
+        if (wheel > 0)
+        {
+            if (gfScreenYRotationAngle >= 360.0f)
+            {
+                gfScreenYRotationAngle = 0.0f;
+            }
+        }
+        if (wheel < 0)
+        {
+            if (gfScreenYRotationAngle <= -360.0f)
+            {
+                gfScreenYRotationAngle = 0.0f;
+            }
+        }
+        gfScreenYRotationAngle += wheel * 5.0f;
+    }
+    ImGui::SameLine();
+    ImGui::Text("%.0f", gfScreenYRotationAngle);
+
+    ImGui::Selectable("Z Rotation Angle : ");
+    if (ImGui::IsItemHovered())
+    {
+        if (wheel > 0)
+        {
+            if (gfScreenZRotationAngle >= 360.0f)
+            {
+                gfScreenZRotationAngle = 0.0f;
+            }
+        }
+        if (wheel < 0)
+        {
+            if (gfScreenZRotationAngle <= -360.0f)
+            {
+                gfScreenZRotationAngle = 0.0f;
+            }
+        }
+        gfScreenZRotationAngle += wheel * 5.0f;
+    }
+    ImGui::SameLine();
+    ImGui::Text("%.0f", gfScreenZRotationAngle);
+
+    if (ImGui::Button("Reset Rotation Angles"))
+    {
+        gfScreenXRotationAngle = 0.0f;
+        gfScreenYRotationAngle = 0.0f;
+        gfScreenZRotationAngle = 0.0f;
+    }
+    ImGui::Separator();
+}
+
+void addVerticalSpace(float size)
+{
+    ImGui::Dummy(ImVec2(0.0f, size));
+}

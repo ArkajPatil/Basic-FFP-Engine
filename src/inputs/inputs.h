@@ -6,7 +6,6 @@
 extern bool keys[256] ;
 
 // functions declarations
-void modelSelection(void);
 void inputsHandling(void);
 
 #endif
