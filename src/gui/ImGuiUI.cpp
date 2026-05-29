@@ -12,7 +12,8 @@ void drawUI()
     // Screen Transformations
     if (ImGui::CollapsingHeader("Screen Transformations"))
     {
-        ImGui::Checkbox("Grid", &bShowGrid);
+        ImGui::Checkbox("Grid", &gbShowGrid);
+        ImGui::Checkbox("Axis", &gbShowAxis);
         ImGui::Separator();
         addVerticalSpace(15.0f);
 
@@ -160,8 +161,8 @@ void screenRotationControls(void)
 
     if (ImGui::Button("Reset Rotation Angles"))
     {
-        gfScreenXRotationAngle = 0.0f;
-        gfScreenYRotationAngle = 0.0f;
+        gfScreenXRotationAngle = 20.0f;
+        gfScreenYRotationAngle = -160.0f;
         gfScreenZRotationAngle = 0.0f;
     }
     ImGui::Separator();

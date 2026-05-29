@@ -2,7 +2,8 @@
 #define RENDERLOOP_H
 
 // variables declarations
-extern bool bShowGrid;
+extern bool gbShowGrid;
+extern bool gbShowAxis;
 extern float gfScreenXRotationAngle ;
 extern float gfScreenYRotationAngle ;
 extern float gfScreenZRotationAngle ;
@@ -16,6 +17,7 @@ void display(void);
 void update(void);
 
 // local fucntions
+void showAxis(void);
 void showGrid(void);
 
 

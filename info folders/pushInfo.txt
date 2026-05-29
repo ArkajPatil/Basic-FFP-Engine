@@ -1,3 +1,11 @@
+17. implement grid and axis system
+    - Add showGrid() utility for rendering world-space grid.
+    - Add showAxis() utility for rendering coordinate axes.
+    - Integrate grid and axis rendering into renderLoop.cpp.
+    - Add editor support for toggling grid visibility.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
 16. implement screen transformation controls in ImGui editor
     - Add "Screen Transformations" editor section.
     - Implement grid toggle checkbox control.

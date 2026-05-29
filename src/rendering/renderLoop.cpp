@@ -9,16 +9,17 @@
 
 // OpenGL related header file
 #include <gl/GL.h>
-#include<gl/GLU.h>
+#include <gl/GLU.h>
 
 // local variable
 // GLfloat angleCube =  0.0f;
 
 // variables
-bool bShowGrid = false;
+bool gbShowGrid = false;
+bool gbShowAxis = false;
 // global screen rotation angles
-float gfScreenXRotationAngle = 0.0f;
-float gfScreenYRotationAngle = 0.0f;
+float gfScreenXRotationAngle = 20.0f;
+float gfScreenYRotationAngle = -160.0f;
 float gfScreenZRotationAngle = 0.0f;
 // global float var for scrren translation
 float gfScreenXTranslation = 2.0f;
@@ -45,8 +46,13 @@ void display(void)
     glRotatef(gfScreenZRotationAngle, 0.0f, 0.0f, 1.0f);
 
     // grid displaying control
-    if(bShowGrid){
+    if (gbShowGrid)
+    {
         showGrid();
+    }
+    if (gbShowAxis)
+    {
+        showAxis();
     }
 
     renderNode(scene->selectedNode);
@@ -67,11 +73,47 @@ void showGrid(void)
     glPushMatrix();
 
     glBegin(GL_LINES);
-    glColor3f(1.0f, 0.0f, 0.0f);
-    glVertex3f(-100.0f, 0.0f, 0.0f);
-    glVertex3f(100.0f, 0.0f, 0.0f);
+    glColor3f(0.5f, 0.5f, 0.5f);
+
+    float size = 15;
+    for (float i = 0.5; i <= size; i+=0.5)
+    {
+        glVertex3f(i, 0.0f, size);
+        glVertex3f(i, 0.0f, -size);
+    
+        glVertex3f(-i, 0.0f, size);
+        glVertex3f(-i, 0.0f, -size);
+    
+        glVertex3f(size, 0.0f, i);
+        glVertex3f(-size, 0.0f, i);
+    
+        glVertex3f(size, 0.0f, -i);
+        glVertex3f(-size, 0.0f, -i);
+
+    }
+
     glEnd();
 
     glPopMatrix();
 }
 
+void showAxis(void)
+{
+    glPushMatrix();
+
+    glBegin(GL_LINES);
+    glColor3f(1.0f, 0.0f, 0.0f);
+    glVertex3f(-100.0f, 0.0f, 0.0f);
+    glVertex3f(100.0f, 0.0f, 0.0f);
+
+    glColor3f(0.0f, 1.0f, 0.0f);
+    glVertex3f(0.0f, 100.0f, 0.0f);
+    glVertex3f(0.0f, -100.0f, 0.0f);
+
+    glColor3f(0.0f, 0.0f, 1.0f);
+    glVertex3f(0.0f, 0.0f, 100.0f);
+    glVertex3f(0.0f, 0.0f, -100.0f);
+    glEnd();
+
+    glPopMatrix();
+}
