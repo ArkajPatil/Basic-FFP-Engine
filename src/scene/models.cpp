@@ -2,7 +2,7 @@
 
 // fucntions body
 Model* createModel(
-    char *modelName, vec3 translate, vec3 rotate, vec3 scale,
+    char *modelName, bool bHighlightModel, vec3 translate, vec3 rotate, vec3 scale,
     GLenum drawMode, GLint vertexCount, GLfloat *vertices,
     GLfloat *perVertexColors, GLfloat *uniformColor,
     GLfloat *texcoords, GLfloat *normals )
@@ -15,6 +15,7 @@ Model* createModel(
     }
 
     model->modelName = modelName;
+    model->bHighlightModel = bHighlightModel;
 
     // transformations
     model->transform.translate = translate;
@@ -135,6 +136,30 @@ void drawModel(Model *model)
 {
     glPushMatrix();
     applyTransform(&model->transform);
+
+        if (model->bHighlightModel)
+    {
+        {
+            glPushMatrix();
+            glBegin(GL_LINES);
+
+            glColor3f(1.0f, 0.0f, 0.0f);
+            glVertex3f(9.0f, 0.0f, 0.0f);
+            glVertex3f(-9.0f, 0.0f, 0.0f);
+
+            glColor3f(0.0f, 1.0f, 0.0f);
+            glVertex3f(0.0f, 9.0f, 0.0f);
+            glVertex3f(0.0f, -9.0f, 0.0f);
+
+            glColor3f(0.0f, 0.0f, 1.0f);
+            glVertex3f(0.0f, 0.0f, 9.0f);
+            glVertex3f(0.0f, 0.0f, -9.0f);
+
+            glEnd();
+            glPopMatrix();
+        }
+    }
+
     glBegin(model->mesh.drawMode);
 
     // checking for uniform color

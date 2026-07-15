@@ -29,10 +29,11 @@ typedef struct {
     char *modelName;
     Transform transform;
     Mesh mesh;    // pointer to shared geometry
+    bool bHighlightModel;
 } Model;
 
 // functions
-Model *createModel(char *modelName, vec3 translate, vec3 rotate, vec3 scale,
+Model *createModel(char *modelName, bool bHighlightModel, vec3 translate, vec3 rotate, vec3 scale,
                    GLenum drawMode, GLint vertexCount, GLfloat *vertices,
                    GLfloat *perVertexColors, GLfloat *uniformColor, GLfloat *texcoords, GLfloat *normals);
 void applyTransform(Transform *transform);

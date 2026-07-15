@@ -203,6 +203,7 @@ void addMultiColoredTriangleToScene(void)
     Model *triangle;
     triangle = createModel(
         "multi colored-triangle",             // name
+        false,                                  // highlight model
         vec3{0.0f, 0.0f, 0.0f}, // translate
         vec3{0.0f, 0.0f, 0.0f},                 // rotate
         vec3{1.0f, 1.0f, 1.0f},                 // scale
@@ -226,6 +227,7 @@ void addTriangleToScene(void)
     GLfloat uniformTriangleColor[] = {0.65f, 0.65f, 0.625f}; 
     triangle = createModel(
         "triangle",             // name
+        false,                                  // highlight model
         vec3{0.0f, 0.0f, 0.0f}, // translate
         vec3{0.0f, 0.0f, 0.0f},                 // rotate
         vec3{1.0f, 1.0f, 1.0f},                 // scale
@@ -249,6 +251,7 @@ void addSquareToScene(void)
     GLfloat squareColor[] = {0.7f, 0.3f, 0.6f};
     square = createModel(
         "square",               // name
+        false,                                  // highlight model
         vec3{0.0f, 0.0f, 0.0f}, // translate
         vec3{0.0f, 0.0f, 0.0f}, // rotate
         vec3{1.0f, 1.0f, 1.0f}, // scale
@@ -273,6 +276,7 @@ void addPyramidToScene(void)
 
     pyramid = createModel(
         "pyramid",              // name
+        false,                                  // highlight model
         vec3{0.0f, 0.0f, 0.0f}, // translate
         vec3{0.0f, 0.0f, 0.0f}, // rotate
         vec3{1.0f, 1.0f, 1.0f}, // scale
@@ -296,6 +300,7 @@ void addCubeToScene(void)
 
     cube = createModel(
         "cube",                 // name
+        false,                                  // highlight model
         vec3{0.0f, 0.0f, 0.0f}, // translate
         vec3{0.0f, 0.0f, 0.0f}, // rotate
         vec3{1.0f, 1.0f, 1.0f}, // scale

@@ -63,24 +63,26 @@ void display(void)
     // displyaing models
     if(gbHighlightSelectedModel)
     {
-        if(scene->selectedNode){
-        scene->selectedNode->currentModel->transform.scale = vec3{1.5f, 1.5f, 1.5f};
-    }}
-    else{
-        if(scene->selectedNode){
-        scene->selectedNode->currentModel->transform.scale = vec3{1.0f, 1.0f, 1.0f};
-    }}
+        if (scene->selectedNode)
+        {
+            scene->selectedNode->currentModel->bHighlightModel = true;
+        }
+    }
+
     if (gbDisplayAllModels)
     {
         renderAllNodes();
     }
-    else if(gbDisplaySelectedModel)
+    else if (gbDisplaySelectedModel)
     {
         renderNode(scene->selectedNode);
     }
-    if(scene->selectedNode){
-        scene->selectedNode->currentModel->transform.scale = vec3{1.0f, 1.0f, 1.0f};
-    }}
+
+    if (scene->selectedNode)
+    {
+        scene->selectedNode->currentModel->bHighlightModel = false;
+    }
+}
 
 void update(void)
 {

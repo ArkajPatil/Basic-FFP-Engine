@@ -1,3 +1,11 @@
+22. Implement model transformations and improve selected model highlighting
+    - Added runtime translation, rotation, and scaling controls for models through the ImGui interface.
+    - Most transformation logic is implemented in `ImGuiUI.cpp`.
+    - Added `bool bHighlightModel` to the `Model` structure for render-time highlighting.
+    - Improved selected model highlighting by rendering the model's local X, Y, and Z axes.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
 21. implement uniform model coloring
     - Added support for uniform coloring across entire models.
     - Added ImGui RGB sliders to adjust the uniform color of the selected model in real time.

@@ -1,15 +1,29 @@
-[2026-07-15 19:21:56] Program Started Successfully
-[2026-07-15 19:21:56] Window creation done Successfully
+[2026-07-15 23:43:21] Program Started Successfully
+[2026-07-15 23:43:21] Window creation done Successfully
 OpenGL Information :
 ********************
 OpenGL Vendor : NVIDIA Corporation
 OpenGL Renderer : NVIDIA GeForce GTX 1050/PCIe/SSE2
 OpenGL Version : 4.6.0 NVIDIA 576.02
 ********************
-[2026-07-15 19:21:56] ImGui Initialization is done.
-[2026-07-15 19:21:56] initialize() completed successfully, OpenGL setup is done.
+[2026-07-15 23:43:21] ImGui Initialization is done.
+[2026-07-15 23:43:21] initialize() completed successfully, OpenGL setup is done.
 
-[2026-07-15 19:22:01] >>>>>EXITING<<<<< Escape Key pressed
-[2026-07-15 19:22:01] Cleaning ImGui is done.
-[2026-07-15 19:22:01] Program terminated successfully
+[2026-07-15 23:43:32] Model: triangle was created.
+[2026-07-15 23:43:32] Model: triangle has been inserted as head node.
+[2026-07-15 23:43:41] Model: cube was created.
+[2026-07-15 23:43:41] Model: cube has been appended to the linked list.
+[2026-07-15 23:44:11] Model: triangle was created.
+[2026-07-15 23:44:11] Model: triangle has been appended to the linked list.
+[2026-07-15 23:44:12] Model: multi colored-triangle was created.
+[2026-07-15 23:44:12] Model: multi colored-triangle has been appended to the linked list.
+[2026-07-15 23:44:12] Model: pyramid was created.
+[2026-07-15 23:44:12] Model: pyramid has been appended to the linked list.
+[2026-07-15 23:44:13] Model: cube was created.
+[2026-07-15 23:44:13] Model: cube has been appended to the linked list.
+[2026-07-15 23:44:14] Model: square was created.
+[2026-07-15 23:44:14] Model: square has been appended to the linked list.
+[2026-07-15 23:44:39] >>>>>EXITING<<<<< Escape Key pressed
+[2026-07-15 23:44:39] Cleaning ImGui is done.
+[2026-07-15 23:44:39] Program terminated successfully
 
