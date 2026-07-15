@@ -1,3 +1,11 @@
+21. implement uniform model coloring
+    - Added support for uniform coloring across entire models.
+    - Added ImGui RGB sliders to adjust the uniform color of the selected model in real time.
+    - Models now use a single uniform color instead of per-vertex colors.
+    - To use per-vertex colors, define a custom vertex color array in: "scene/basic_models_data/basicModelsData.cpp"
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
 20. implement selected model highlight and model displaying
     - Added toggle to highlight the currently selected model
     - Added display mode to show only the selected model or all models

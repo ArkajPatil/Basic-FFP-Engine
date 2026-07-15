@@ -30,6 +30,7 @@ void selectNextNode(void);
 void selectPreviousNode(void);
 void renderNode(Node *node);
 void renderAllNodes(void);
+void addMultiColoredTriangleToScene(void);
 void addTriangleToScene(void);
 void addSquareToScene(void);
 void addPyramidToScene(void);

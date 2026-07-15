@@ -2,8 +2,14 @@
 
 #include "external/imgui/imgui.h"
 
+#include "scene/models.h"
 #include "scene/linkedlist.h"
+
 #include "rendering/renderLoop.h"
+
+// local variables
+// model uniform color
+int modelColorR = 0, modelColorG = 0, modelColorB = 0;
 
 void drawUI()
 {
@@ -33,6 +39,7 @@ void drawUI()
     // Shapes control
     if (ImGui::CollapsingHeader("Shapes control"))
     {
+        // add models
         ImGui::Text("Add a shape: ");
         ImGui::SameLine();
         if (ImGui::Button("Triangle"))
@@ -40,6 +47,11 @@ void drawUI()
             addTriangleToScene();
         }
         ImGui::SameLine();
+
+        if (ImGui::Button("Multi-colored-triangle"))
+        {
+            addMultiColoredTriangleToScene();
+        }
 
         if (ImGui::Button("Square"))
         {
@@ -57,12 +69,15 @@ void drawUI()
         {
             addCubeToScene();
         }
+        ImGui::SameLine();
 
         if (ImGui::Button("Sphere"))
         {
             addSphereToScene();
         }
+        addVerticalSpace(5.0f);
 
+        // remove models
         ImGui::Text("Remove selected model: ");
         ImGui::SameLine();
         if (ImGui::Button("Delete"))
@@ -92,12 +107,37 @@ void drawUI()
         ImGui::SameLine();
         ImGui::Checkbox("Only selected", &gbDisplaySelectedModel);
         ImGui::SameLine();
-        if(gbDisplaySelectedModel){ gbDisplayAllModels=false; }
+        if (gbDisplaySelectedModel)
+        {
+            gbDisplayAllModels = false;
+        }
         ImGui::Checkbox("All", &gbDisplayAllModels);
-        if(gbDisplayAllModels) { gbDisplaySelectedModel=false; }
+        if (gbDisplayAllModels)
+        {
+            gbDisplaySelectedModel = false;
+        }
         ImGui::Separator();
         addVerticalSpace(8.0f);
 
+        // coloring models
+        ImGui::Text("Color the selected model");
+        if (scene->selectedNode && scene->selectedNode->currentModel->mesh.uniformColor)
+        {
+            modelColorR = scene->selectedNode->currentModel->mesh.uniformColor[0] * 255;
+            modelColorG = scene->selectedNode->currentModel->mesh.uniformColor[1] * 255;
+            modelColorB = scene->selectedNode->currentModel->mesh.uniformColor[2] * 255;
+
+            ImGui::SliderInt(" R ", &modelColorR, 0, 255, "%d");
+            ImGui::SliderInt(" G ", &modelColorG, 0, 255, "%d");
+            ImGui::SliderInt(" B ", &modelColorB, 0, 255, "%d");
+
+            scene->selectedNode->currentModel->mesh.uniformColor[0] = (float)modelColorR / 255;
+            scene->selectedNode->currentModel->mesh.uniformColor[1] = (float)modelColorG / 255;
+            scene->selectedNode->currentModel->mesh.uniformColor[2] = (float)modelColorB / 255;
+        }
+
+        ImGui::Separator();
+        addVerticalSpace(8.0f);
     }
 
     // Scenes Management

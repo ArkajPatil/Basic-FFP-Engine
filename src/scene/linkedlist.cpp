@@ -197,14 +197,13 @@ void renderAllNodes(void)
     }
 }
 
-void addTriangleToScene(void)
+void addMultiColoredTriangleToScene(void)
 {
     // creating triangle model
     Model *triangle;
     triangle = createModel(
-        "triangle",             // name
+        "multi colored-triangle",             // name
         vec3{0.0f, 0.0f, 0.0f}, // translate
-        // (vec3){0.0f, 0.0f, -3.0f},           // translate
         vec3{0.0f, 0.0f, 0.0f},                 // rotate
         vec3{1.0f, 1.0f, 1.0f},                 // scale
         GL_TRIANGLES,                           // drawMode
@@ -212,6 +211,29 @@ void addTriangleToScene(void)
         trianglePosition,                       // position
         triangleColor,                          // per vertex colors
         NULL /*(GLfloat[]){0.0f, 0.0f, 0.0f}*/, // uniform color
+        NULL,                                   // texcoords
+        NULL                                    // normals
+    );
+
+    // inserting into linkedlist(scene)
+    insertNode(triangle);
+}
+
+void addTriangleToScene(void)
+{
+    // creating triangle model
+    Model *triangle;
+    GLfloat uniformTriangleColor[] = {0.65f, 0.65f, 0.625f}; 
+    triangle = createModel(
+        "triangle",             // name
+        vec3{0.0f, 0.0f, 0.0f}, // translate
+        vec3{0.0f, 0.0f, 0.0f},                 // rotate
+        vec3{1.0f, 1.0f, 1.0f},                 // scale
+        GL_TRIANGLES,                           // drawMode
+        3,                                      // vertexCount
+        trianglePosition,                       // position
+        NULL,                          // per vertex colors
+        uniformTriangleColor, // uniform color
         NULL,                                   // texcoords
         NULL                                    // normals
     );
