@@ -29,6 +29,10 @@ void selectNextNode(void);
 void selectPreviousNode(void);
 void renderNode(Node *node);
 void renderAllNodes(void);
-
+void addTriangleToScene(void);
+void addSquareToScene(void);
+void addPyramidToScene(void);
+void addCubeToScene(void);
+void addSphereToScene(void);
 
 #endif

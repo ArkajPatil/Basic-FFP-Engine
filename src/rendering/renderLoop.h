@@ -4,6 +4,7 @@
 // variables declarations
 extern bool gbShowGrid;
 extern bool gbShowAxis;
+extern bool gbHighlightShape;
 extern float gfScreenXRotationAngle ;
 extern float gfScreenYRotationAngle ;
 extern float gfScreenZRotationAngle ;

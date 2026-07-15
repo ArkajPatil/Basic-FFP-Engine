@@ -17,6 +17,7 @@
 // variables
 bool gbShowGrid = false;
 bool gbShowAxis = false;
+bool gbHighlightShape = false;
 // global screen rotation angles
 float gfScreenXRotationAngle = 20.0f;
 float gfScreenYRotationAngle = -160.0f;

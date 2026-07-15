@@ -2,7 +2,6 @@
 #include "utils/logging_system/logger.h"
 #include "windows/Window.h"
 #include "scene/linkedlist.h"
-#include "scene/basic_models_data/basicModelsData.h"
 
 
 // OpenGL related header file
@@ -110,8 +109,8 @@ int initialize(void)
     // warm up resize
     resize(WIN_WIDTH, WIN_HEIGHT);
 
-    // gen models and link them to linked list
-    modelsCreation();
+    // creating linked list
+    initScene();
 
     return (0);
 }
@@ -187,74 +186,6 @@ void cleanupOpenGL(void)
     }
 }
 
-void modelsCreation(void)
-{
-    triangle1 = createModel(
-        "triangle1",                            // name
-        vec3{0.0f, 0.0f, 0.0f},           // translate
-        // (vec3){0.0f, 0.0f, -3.0f},           // translate
-        vec3{0.0f, 0.0f, 0.0f},               // rotate
-        vec3{1.0f, 1.0f, 1.0f},               // scale
-        GL_TRIANGLES,                           // drawMode
-        3,                                      // vertexCount
-        trianglePosition,                       // position
-        triangleColor,                          // per vertex colors
-        NULL /*(GLfloat[]){0.0f, 0.0f, 0.0f}*/, // uniform color
-        NULL,                                   // texcoords
-        NULL                                    // normals
-    );
-
-    GLfloat squareColor[] = {0.7f, 0.3f, 0.6f};
-    square1 = createModel(
-        "square1",                     // name
-        vec3{0.0f, 0.0f, 0.0f},   // translate
-        vec3{0.0f, 0.0f, 0.0f},      // rotate
-        vec3{1.0f, 1.0f, 1.0f},      // scale
-        GL_QUADS,                      // drawMode
-        4,                             // vertexCount
-        squarePosition,                // position
-        NULL,                          // per vertex colors
-        squareColor, // uniform color
-        NULL,                          // texcoords
-        NULL                           // normals
-    );
-
-    GLfloat pyramidColor[] = {0.6f, 0.5f, 0.1f}; 
-    pyramid1 = createModel(
-        "pyramid1",                    // name
-        vec3{0.0f, 0.0f, 0.0f},  // translate
-        vec3{0.0f, 0.0f, 0.0f},      // rotate
-        vec3{1.0f, 1.0f, 1.0f},      // scale
-        GL_TRIANGLES,                  // drawMode
-        12,                            // vertexCount
-        pyramidPosition,               // position
-        NULL,                          // per vertex colors
-        pyramidColor, // uniform color
-        NULL,                          // texcoords
-        NULL                           // normals
-    );
-
-    GLfloat cubeColor[] = {0.2f, 0.4f, 0.6f};
-    cube1 = createModel(
-        "cube1",                       // name
-        vec3{0.0f, 0.0f, 0.0f},   // translate
-        vec3{0.0f, 0.0f, 0.0f},      // rotate
-        vec3{1.0f, 1.0f, 1.0f},      // scale
-        GL_QUADS,                      // drawMode
-        24,                            // vertexCount
-        cubePosition,                  // position
-        NULL,                          // per vertex colors
-        cubeColor, // uniform color
-        NULL,                          // texcoords
-        NULL                           // normals
-    );
-
-    initScene();
-    insertNode(triangle1);
-    insertNode(square1);
-    insertNode(pyramid1);
-    insertNode(cube1);
-}
 
 void destroyModels(void)
 {

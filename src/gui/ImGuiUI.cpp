@@ -13,6 +13,10 @@ void drawUI()
     if (ImGui::CollapsingHeader("Screen Transformations"))
     {
         ImGui::Checkbox("Grid", &gbShowGrid);
+        if (gbShowGrid)
+        {
+            gbShowAxis = true;
+        }
         ImGui::Checkbox("Axis", &gbShowAxis);
         ImGui::Separator();
         addVerticalSpace(15.0f);
@@ -26,24 +30,68 @@ void drawUI()
         addVerticalSpace(8.0f);
     }
 
-    // adding or deleting shapes
-    if (ImGui::CollapsingHeader("Add / Delete Shapes"))
+    // Shapes control
+    if (ImGui::CollapsingHeader("Shapes control"))
     {
-    }
+        ImGui::Text("Create a shape: ");
+        ImGui::SameLine();
+        if (ImGui::Button("Triangle"))
+        {
+            addTriangleToScene();
+        }
+        ImGui::SameLine();
 
-    // Navigation for models
-    if (ImGui::CollapsingHeader("Navigation for Models"))
-    {
-        ImGui::Text("Select Model: ");
-        if (ImGui::Button("Previous Model"))
+        if (ImGui::Button("Square"))
+        {
+            addSquareToScene();
+        }
+        ImGui::SameLine();
+
+        if (ImGui::Button("Pyramid"))
+        {
+            addPyramidToScene();
+        }
+        ImGui::SameLine();
+
+        if (ImGui::Button("Cube"))
+        {
+            addCubeToScene();
+        }
+
+        if (ImGui::Button("Sphere"))
+        {
+            addSphereToScene();
+        }
+
+        ImGui::Separator();
+
+        ImGui::Text("Highlight selected shape: ");
+        ImGui::SameLine();
+        ImGui::Checkbox("Highlight", &gbHighlightShape);
+
+        ImGui::Text("Delete selected shape: ");
+        ImGui::SameLine();
+        if (ImGui::Button("Delete"))
+        {
+        }
+        ImGui::Separator();
+        addVerticalSpace(8.0f);
+
+        ImGui::Text("Select Shape: ");
+        if (ImGui::Button("Previous Shape"))
         {
             selectPreviousNode();
         }
         ImGui::SameLine();
-        if (ImGui::Button("Next Model"))
+        if (ImGui::Button("Next Shape"))
         {
             selectNextNode();
         }
+    }
+
+    // Scenes Management
+    if (ImGui::CollapsingHeader("Scenes Management"))
+    {
     }
 
     ImGui::End();
