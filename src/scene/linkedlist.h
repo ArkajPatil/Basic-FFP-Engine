@@ -24,6 +24,7 @@ extern Scene *scene;
 void initScene(void);
 void insertNode(Model *model);
 void deleteNode(Model *model);
+void removeSelectedNode(void);
 void renderAllNodes(void);
 void selectNextNode(void);
 void selectPreviousNode(void);

@@ -116,6 +116,53 @@ void deleteNode(Model *model)
     }
 }
 
+void removeSelectedNode(void)
+{
+    if (scene->head == NULL)
+    {
+        writeLog(">>>>> ERROR <<<<< :: You tried to delete node, but linked list is empty.");
+        return;
+    }
+
+    // deleting head node
+    if (scene->selectedNode == scene->head)
+    {
+        if (scene->head->nextNode)
+        {
+            scene->head = scene->head->nextNode;
+            scene->head->prevNode = NULL;
+            free(scene->selectedNode);
+            scene->selectedNode = scene->head;
+        }
+        else
+        {
+            free(scene->selectedNode);
+            scene->head = NULL;
+            scene->selectedNode = NULL;
+        }
+        return;
+    }
+
+    // deleting tail node
+    if (scene->selectedNode == scene->tail)
+    {
+        scene->tail = scene->tail->prevNode;
+        scene->tail->nextNode = NULL;
+        free(scene->selectedNode);
+        scene->selectedNode = scene->tail;
+        return;
+    }
+
+    // deleting middle nodes
+    scene->selectedNode->prevNode->nextNode = scene->selectedNode->nextNode;
+    scene->selectedNode->nextNode->prevNode = scene->selectedNode->prevNode;
+    Node *temp = scene->selectedNode->nextNode;
+    free(scene->selectedNode);
+    scene->selectedNode = temp;
+
+    return;
+}
+
 void selectNextNode(void)
 {
     if (scene->selectedNode && scene->selectedNode->nextNode)
@@ -165,7 +212,7 @@ void addTriangleToScene(void)
     // creating triangle model
     Model *triangle;
     triangle = createModel(
-        "triangle",            // name
+        "triangle",             // name
         vec3{0.0f, 0.0f, 0.0f}, // translate
         // (vec3){0.0f, 0.0f, -3.0f},           // translate
         vec3{0.0f, 0.0f, 0.0f},                 // rotate
@@ -189,78 +236,74 @@ void addSquareToScene(void)
     Model *square;
     GLfloat squareColor[] = {0.7f, 0.3f, 0.6f};
     square = createModel(
-        "square",                     // name
-        vec3{0.0f, 0.0f, 0.0f},   // translate
-        vec3{0.0f, 0.0f, 0.0f},      // rotate
-        vec3{1.0f, 1.0f, 1.0f},      // scale
-        GL_QUADS,                      // drawMode
-        4,                             // vertexCount
-        squarePosition,                // position
-        NULL,                          // per vertex colors
-        squareColor, // uniform color
-        NULL,                          // texcoords
-        NULL                           // normals
+        "square",               // name
+        vec3{0.0f, 0.0f, 0.0f}, // translate
+        vec3{0.0f, 0.0f, 0.0f}, // rotate
+        vec3{1.0f, 1.0f, 1.0f}, // scale
+        GL_QUADS,               // drawMode
+        4,                      // vertexCount
+        squarePosition,         // position
+        NULL,                   // per vertex colors
+        squareColor,            // uniform color
+        NULL,                   // texcoords
+        NULL                    // normals
     );
 
     // inserting into linkedlist(scene)
     insertNode(square);
 }
 
-
 void addPyramidToScene(void)
 {
     // creating pyramid model
     Model *pyramid;
-    GLfloat pyramidColor[] = {0.6f, 0.5f, 0.1f}; 
+    GLfloat pyramidColor[] = {0.6f, 0.5f, 0.1f};
 
     pyramid = createModel(
-        "pyramid",                    // name
-        vec3{0.0f, 0.0f, 0.0f},  // translate
-        vec3{0.0f, 0.0f, 0.0f},      // rotate
-        vec3{1.0f, 1.0f, 1.0f},      // scale
-        GL_TRIANGLES,                  // drawMode
-        12,                            // vertexCount
-        pyramidPosition,               // position
-        NULL,                          // per vertex colors
-        pyramidColor, // uniform color
-        NULL,                          // texcoords
-        NULL                           // normals
+        "pyramid",              // name
+        vec3{0.0f, 0.0f, 0.0f}, // translate
+        vec3{0.0f, 0.0f, 0.0f}, // rotate
+        vec3{1.0f, 1.0f, 1.0f}, // scale
+        GL_TRIANGLES,           // drawMode
+        12,                     // vertexCount
+        pyramidPosition,        // position
+        NULL,                   // per vertex colors
+        pyramidColor,           // uniform color
+        NULL,                   // texcoords
+        NULL                    // normals
     );
 
     // inserting into linkedlist(scene)
     insertNode(pyramid);
 }
 
-
 void addCubeToScene(void)
 {
     Model *cube;
     GLfloat cubeColor[] = {0.2f, 0.4f, 0.6f};
-    
+
     cube = createModel(
-        "cube",                       // name
-        vec3{0.0f, 0.0f, 0.0f},   // translate
-        vec3{0.0f, 0.0f, 0.0f},      // rotate
-        vec3{1.0f, 1.0f, 1.0f},      // scale
-        GL_QUADS,                      // drawMode
-        24,                            // vertexCount
-        cubePosition,                  // position
-        NULL,                          // per vertex colors
-        cubeColor, // uniform color
-        NULL,                          // texcoords
-        NULL                           // normals
+        "cube",                 // name
+        vec3{0.0f, 0.0f, 0.0f}, // translate
+        vec3{0.0f, 0.0f, 0.0f}, // rotate
+        vec3{1.0f, 1.0f, 1.0f}, // scale
+        GL_QUADS,               // drawMode
+        24,                     // vertexCount
+        cubePosition,           // position
+        NULL,                   // per vertex colors
+        cubeColor,              // uniform color
+        NULL,                   // texcoords
+        NULL                    // normals
     );
 
     // inserting into linkedlist(scene)
     insertNode(cube);
 }
 
-
 void addSphereToScene(void)
 {
     // creating sphere model
-   
+
     // inserting into linkedlist(scene)
     // insertNode(sphere);
 }
-

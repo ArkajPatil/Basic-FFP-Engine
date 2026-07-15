@@ -1,3 +1,8 @@
+19. implement remove models using UI buttons at runtime 
+    - created function void removeSelectedNode(void) in linkedlist.cpp for this purpose
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
 18. add models creation using UI buttons at runtime
     - created below functions inside linkedlist.cpp for this prupose: 
         void addTriangleToScene(void);

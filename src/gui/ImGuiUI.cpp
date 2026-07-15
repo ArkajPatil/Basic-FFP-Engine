@@ -33,7 +33,7 @@ void drawUI()
     // Shapes control
     if (ImGui::CollapsingHeader("Shapes control"))
     {
-        ImGui::Text("Create a shape: ");
+        ImGui::Text("Add a shape: ");
         ImGui::SameLine();
         if (ImGui::Button("Triangle"))
         {
@@ -69,10 +69,11 @@ void drawUI()
         ImGui::SameLine();
         ImGui::Checkbox("Highlight", &gbHighlightShape);
 
-        ImGui::Text("Delete selected shape: ");
+        ImGui::Text("Remove selected shape: ");
         ImGui::SameLine();
         if (ImGui::Button("Delete"))
         {
+            removeSelectedNode();
         }
         ImGui::Separator();
         addVerticalSpace(8.0f);
