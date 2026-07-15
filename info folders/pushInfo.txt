@@ -1,3 +1,9 @@
+20. implement selected model highlight and model displaying
+    - Added toggle to highlight the currently selected model
+    - Added display mode to show only the selected model or all models
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
 19. implement remove models using UI buttons at runtime 
     - created function void removeSelectedNode(void) in linkedlist.cpp for this purpose
 

@@ -2,6 +2,7 @@
 #include "OpenGLSetup.h"
 #include "utils/logging_system/logger.h"
 #include "scene/linkedlist.h"
+#include "utils/my_math_library/myMath.h"
 #include "inputs/inputs.h"
 
 // win32 headers
@@ -17,7 +18,6 @@
 // variables
 bool gbShowGrid = false;
 bool gbShowAxis = false;
-bool gbHighlightShape = false;
 // global screen rotation angles
 float gfScreenXRotationAngle = 20.0f;
 float gfScreenYRotationAngle = -160.0f;
@@ -26,6 +26,10 @@ float gfScreenZRotationAngle = 0.0f;
 float gfScreenXTranslation = 2.0f;
 float gfScreenYTranslation = 0.0f;
 float gfScreenZTranslation = -10.0f;
+// displaying models
+bool gbDisplaySelectedModel = true;
+bool gbDisplayAllModels = false;
+bool gbHighlightSelectedModel = false;
 
 void display(void)
 {
@@ -56,8 +60,27 @@ void display(void)
         showAxis();
     }
 
-    renderNode(scene->selectedNode);
-}
+    // displyaing models
+    if(gbHighlightSelectedModel)
+    {
+        if(scene->selectedNode){
+        scene->selectedNode->currentModel->transform.scale = vec3{1.5f, 1.5f, 1.5f};
+    }}
+    else{
+        if(scene->selectedNode){
+        scene->selectedNode->currentModel->transform.scale = vec3{1.0f, 1.0f, 1.0f};
+    }}
+    if (gbDisplayAllModels)
+    {
+        renderAllNodes();
+    }
+    else if(gbDisplaySelectedModel)
+    {
+        renderNode(scene->selectedNode);
+    }
+    if(scene->selectedNode){
+        scene->selectedNode->currentModel->transform.scale = vec3{1.0f, 1.0f, 1.0f};
+    }}
 
 void update(void)
 {
@@ -77,20 +100,19 @@ void showGrid(void)
     glColor3f(0.5f, 0.5f, 0.5f);
 
     float size = 15;
-    for (float i = 0.5; i <= size; i+=0.5)
+    for (float i = 0.5; i <= size; i += 0.5)
     {
         glVertex3f(i, 0.0f, size);
         glVertex3f(i, 0.0f, -size);
-    
+
         glVertex3f(-i, 0.0f, size);
         glVertex3f(-i, 0.0f, -size);
-    
+
         glVertex3f(size, 0.0f, i);
         glVertex3f(-size, 0.0f, i);
-    
+
         glVertex3f(size, 0.0f, -i);
         glVertex3f(-size, 0.0f, -i);
-
     }
 
     glEnd();

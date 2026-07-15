@@ -192,17 +192,7 @@ void renderAllNodes(void)
     Node *temp = scene->head;
     while (temp)
     {
-        if (temp == scene->selectedNode)
-        {
-            Model *model = scene->selectedNode->currentModel;
-            model->transform.scale = vec3{1.5f, 1.5f, 1.5f};
-            drawModel(model);
-            model->transform.scale = vec3{1.0f, 1.0f, 1.0f};
-        }
-        else
-        {
-            drawModel(temp->currentModel);
-        }
+        drawModel(temp->currentModel);
         temp = temp->nextNode;
     }
 }

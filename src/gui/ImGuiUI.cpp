@@ -63,13 +63,7 @@ void drawUI()
             addSphereToScene();
         }
 
-        ImGui::Separator();
-
-        ImGui::Text("Highlight selected shape: ");
-        ImGui::SameLine();
-        ImGui::Checkbox("Highlight", &gbHighlightShape);
-
-        ImGui::Text("Remove selected shape: ");
+        ImGui::Text("Remove selected model: ");
         ImGui::SameLine();
         if (ImGui::Button("Delete"))
         {
@@ -78,16 +72,32 @@ void drawUI()
         ImGui::Separator();
         addVerticalSpace(8.0f);
 
-        ImGui::Text("Select Shape: ");
-        if (ImGui::Button("Previous Shape"))
+        ImGui::Text("Select Model: ");
+        if (ImGui::Button("Previous Model"))
         {
             selectPreviousNode();
         }
         ImGui::SameLine();
-        if (ImGui::Button("Next Shape"))
+        if (ImGui::Button("Next Model"))
         {
             selectNextNode();
         }
+
+        ImGui::Text("Highlight selected model: ");
+        ImGui::SameLine();
+        ImGui::Checkbox("Highlight", &gbHighlightSelectedModel);
+
+        // models displaying
+        ImGui::Text("Display models: ");
+        ImGui::SameLine();
+        ImGui::Checkbox("Only selected", &gbDisplaySelectedModel);
+        ImGui::SameLine();
+        if(gbDisplaySelectedModel){ gbDisplayAllModels=false; }
+        ImGui::Checkbox("All", &gbDisplayAllModels);
+        if(gbDisplayAllModels) { gbDisplaySelectedModel=false; }
+        ImGui::Separator();
+        addVerticalSpace(8.0f);
+
     }
 
     // Scenes Management
