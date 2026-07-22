@@ -64,6 +64,14 @@ void drawUI()
                 sceneManager->currentScene = sceneManager->scenesArray[i];
             }
         }
+
+        addVerticalSpace(6.0f);
+        ImGui::Text("Delete selected scene: ");
+        ImGui::SameLine();
+        if(ImGui::Button("Delete"))
+        {
+            deleteSelectedScene();
+        }
     }
 
     ImGui::End();

@@ -35,10 +35,12 @@ extern char newSceneName[64];
 void initSceneManager(void);
 void initDemoScene(void);
 void createScene(char *sceneName);
+void deleteSelectedScene(void);
 
 void insertNode(Model *model);
 void deleteNode(Model *model);
 void removeSelectedNode(void);
+void removeAllNodesOfScene(Scene *scene);
 
 void selectNextNode(void);
 void selectPreviousNode(void);

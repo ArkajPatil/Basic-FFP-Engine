@@ -7,7 +7,7 @@ echo ==============================
 echo Building Basic FFP Engine...
 echo ==============================
 
-:: creating build folder
+:: creating important folders
 if not exist build mkdir build
 if not exist logs mkdir logs
 

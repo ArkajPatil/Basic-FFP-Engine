@@ -66,8 +66,35 @@ void createScene(char *sceneName)
     writeLog(">>>>> SUCCESS <<<<< :: Scene '%s' allocation successfull.", scene->sceneName);
 }
 
-void deleteScene(void)
+void deleteSelectedScene(void)
 {
+    Scene *scene = sceneManager->currentScene;
+
+    removeAllNodesOfScene(scene);
+
+    for (int i = 0; i < sceneManager->sceneCount; i++)
+    {
+        if (sceneManager->scenesArray[i] == scene)
+        {
+            for (int j = i; j < sceneManager->sceneCount - 1; j++)
+            {
+                sceneManager->scenesArray[j] = sceneManager->scenesArray[j + 1];
+            }
+            sceneManager->scenesArray[sceneManager->sceneCount - 1] = NULL;
+            free(scene);
+            sceneManager->sceneCount--;
+            break;
+        }
+    }
+
+    if (sceneManager->sceneCount > 0)
+    {
+        sceneManager->currentScene = sceneManager->scenesArray[0];
+    }
+    else
+    {
+        createScene("demo");
+    }
 }
 
 void insertNode(Model *model)
@@ -214,6 +241,28 @@ void removeSelectedNode(void)
     sceneManager->currentScene->selectedNode = temp;
 
     return;
+}
+
+void removeAllNodesOfScene(Scene *scene)
+{
+    Node *temp = scene->head;
+    Node *next;
+
+    while (temp)
+    {
+        next = temp->nextNode;
+
+        destroyModel(temp->currentModel);
+
+        temp->prevNode = NULL;
+        temp->nextNode = NULL;
+        free(temp);
+        temp = next;
+    }
+
+    scene->head = NULL;
+    scene->tail = NULL;
+    scene->selectedNode = NULL;
 }
 
 void selectNextNode(void)

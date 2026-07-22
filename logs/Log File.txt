@@ -1,35 +1,35 @@
-[2026-07-22 09:21:27] >>>>> SUCCESS <<<<< :: Log File created
-[2026-07-22 09:21:27] >>>>> SUCCESS <<<<< :: Window creation done Successfully
-[2026-07-22 09:21:27] OpenGL Information :
-[2026-07-22 09:21:27] ********************
-[2026-07-22 09:21:27] OpenGL Vendor : NVIDIA Corporation
-[2026-07-22 09:21:27] OpenGL Renderer : NVIDIA GeForce GTX 1050/PCIe/SSE2
-[2026-07-22 09:21:27] OpenGL Version : 4.6.0 NVIDIA 576.02
-[2026-07-22 09:21:27] ********************
+[2026-07-22 10:58:12] >>>>> SUCCESS <<<<< :: Log File created
+[2026-07-22 10:58:12] >>>>> SUCCESS <<<<< :: Window creation done Successfully
+[2026-07-22 10:58:13] OpenGL Information :
+[2026-07-22 10:58:13] ********************
+[2026-07-22 10:58:13] OpenGL Vendor : NVIDIA Corporation
+[2026-07-22 10:58:13] OpenGL Renderer : NVIDIA GeForce GTX 1050/PCIe/SSE2
+[2026-07-22 10:58:13] OpenGL Version : 4.6.0 NVIDIA 576.02
+[2026-07-22 10:58:13] ********************
 
-[2026-07-22 09:21:27] >>>>> SUCCESS <<<<< :: initializeOpenGL() completed successfully, OpenGL setup is done.
-[2026-07-22 09:21:27] >>>>> SUCCESS <<<<< :: ImGui Initialization is done.
-[2026-07-22 09:21:27] >>>>> SUCCESS <<<<< :: SceneManager allocation successfull.
-[2026-07-22 09:21:27] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
-[2026-07-22 09:22:08] >>>>> SUCCESS <<<<< :: Scene 'Scene 2' allocation successfull.
-[2026-07-22 09:22:09] >>>>> SUCCESS <<<<< :: Scene 'Scene 3' allocation successfull.
-[2026-07-22 09:22:10] >>>>> SUCCESS <<<<< :: Scene 'Scene 4' allocation successfull.
-[2026-07-22 09:22:11] >>>>> SUCCESS <<<<< :: Scene 'Scene 5' allocation successfull.
-[2026-07-22 09:22:11] >>>>> SUCCESS <<<<< :: Scene 'Scene 6' allocation successfull.
-[2026-07-22 09:22:11] >>>>> SUCCESS <<<<< :: Scene 'Scene 7' allocation successfull.
-[2026-07-22 09:22:12] >>>>> SUCCESS <<<<< :: Scene 'Scene 8' allocation successfull.
-[2026-07-22 09:22:12] >>>>> SUCCESS <<<<< :: Scene 'Scene 9' allocation successfull.
-[2026-07-22 09:22:13] >>>>> SUCCESS <<<<< :: Scene 'Scene 10' allocation successfull.
-[2026-07-22 09:22:13] >>>>> ERROR <<<<< :: Maximum number of scenes reached.
-[2026-07-22 09:22:15] >>>>> ERROR <<<<< :: Maximum number of scenes reached.
-[2026-07-22 09:22:15] >>>>> ERROR <<<<< :: Maximum number of scenes reached.
-[2026-07-22 09:22:16] >>>>> ERROR <<<<< :: Maximum number of scenes reached.
-[2026-07-22 09:22:17] >>>>> ERROR <<<<< :: Maximum number of scenes reached.
-[2026-07-22 09:22:17] >>>>> ERROR <<<<< :: Maximum number of scenes reached.
-[2026-07-22 09:22:18] >>>>> ERROR <<<<< :: Maximum number of scenes reached.
-[2026-07-22 09:22:18] >>>>> ERROR <<<<< :: Maximum number of scenes reached.
-[2026-07-22 09:22:18] >>>>> ERROR <<<<< :: Maximum number of scenes reached.
-[2026-07-22 09:22:28] >>>>>EXITING<<<<< Escape Key pressed
-[2026-07-22 09:22:28] Cleaning ImGui is done.
-[2026-07-22 09:22:28] Program terminated successfully
+[2026-07-22 10:58:13] >>>>> SUCCESS <<<<< :: initializeOpenGL() completed successfully, OpenGL setup is done.
+[2026-07-22 10:58:13] >>>>> SUCCESS <<<<< :: ImGui Initialization is done.
+[2026-07-22 10:58:13] >>>>> SUCCESS <<<<< :: SceneManager allocation successfull.
+[2026-07-22 10:58:13] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
+[2026-07-22 10:58:29] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
+[2026-07-22 10:58:30] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
+[2026-07-22 10:58:33] >>>>> SUCCESS <<<<< :: Scene 'qwe' allocation successfull.
+[2026-07-22 10:58:38] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
+[2026-07-22 10:58:42] >>>>> SUCCESS <<<<< :: Scene 'Scene 2' allocation successfull.
+[2026-07-22 10:58:42] >>>>> SUCCESS <<<<< :: Scene 'Scene 3' allocation successfull.
+[2026-07-22 10:58:43] >>>>> SUCCESS <<<<< :: Scene 'Scene 4' allocation successfull.
+[2026-07-22 10:58:43] >>>>> SUCCESS <<<<< :: Scene 'Scene 5' allocation successfull.
+[2026-07-22 10:58:43] >>>>> SUCCESS <<<<< :: Scene 'Scene 6' allocation successfull.
+[2026-07-22 10:58:43] >>>>> SUCCESS <<<<< :: Scene 'Scene 7' allocation successfull.
+[2026-07-22 10:58:43] >>>>> SUCCESS <<<<< :: Scene 'Scene 8' allocation successfull.
+[2026-07-22 10:58:43] >>>>> SUCCESS <<<<< :: Scene 'Scene 9' allocation successfull.
+[2026-07-22 10:58:44] >>>>> SUCCESS <<<<< :: Scene 'Scene 10' allocation successfull.
+[2026-07-22 10:58:44] >>>>> ERROR <<<<< :: Maximum number of scenes reached.
+[2026-07-22 10:58:44] >>>>> ERROR <<<<< :: Maximum number of scenes reached.
+[2026-07-22 10:58:44] >>>>> ERROR <<<<< :: Maximum number of scenes reached.
+[2026-07-22 10:58:55] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
+[2026-07-22 10:58:56] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
+[2026-07-22 10:58:59] >>>>>EXITING<<<<< Escape Key pressed
+[2026-07-22 10:58:59] Cleaning ImGui is done.
+[2026-07-22 10:58:59] Program terminated successfully
 
