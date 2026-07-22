@@ -63,9 +63,9 @@ void display(void)
     // displyaing models
     if(gbHighlightSelectedModel)
     {
-        if (scene->selectedNode)
+        if (sceneManager->currentScene->selectedNode)
         {
-            scene->selectedNode->currentModel->bHighlightModel = true;
+            sceneManager->currentScene->selectedNode->currentModel->bHighlightModel = true;
         }
     }
 
@@ -75,12 +75,12 @@ void display(void)
     }
     else if (gbDisplaySelectedModel)
     {
-        renderNode(scene->selectedNode);
+        renderNode(sceneManager->currentScene->selectedNode);
     }
 
-    if (scene->selectedNode)
+    if (sceneManager->currentScene->selectedNode)
     {
-        scene->selectedNode->currentModel->bHighlightModel = false;
+        sceneManager->currentScene->selectedNode->currentModel->bHighlightModel = false;
     }
 }
 

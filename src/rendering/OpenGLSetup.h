@@ -14,7 +14,7 @@ extern Model *pyramid1;
 extern Model *cube1;
 
 // functions declarations
-int initialize(void);
+int initializeOpenGL(void);
 void printGLInfo(void);
 void resize(int width, int height);
 void cleanupOpenGL(void);

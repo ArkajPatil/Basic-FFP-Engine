@@ -1,14 +1,14 @@
 #include "models.h"
 
 // fucntions body
-Model* createModel(
+Model *createModel(
     char *modelName, bool bHighlightModel, vec3 translate, vec3 rotate, vec3 scale,
     GLenum drawMode, GLint vertexCount, GLfloat *vertices,
     GLfloat *perVertexColors, GLfloat *uniformColor,
-    GLfloat *texcoords, GLfloat *normals )
+    GLfloat *texcoords, GLfloat *normals)
 {
     Model *model = (Model *)malloc(sizeof(Model));
-    if(!model)
+    if (!model)
     {
         writeLog(">>>>> ERROR <<<<<  :: Memory allocation for model: %s failed.", modelName);
         return NULL;
@@ -26,12 +26,12 @@ Model* createModel(
     model->mesh.drawMode = drawMode;
     model->mesh.vertexCount = vertexCount;
 
-    //vertices
-    if(vertices) 
+    // vertices
+    if (vertices)
     {
         int size = vertexCount * 3 * sizeof(GLfloat);
         model->mesh.vertices = (GLfloat *)malloc(size);
-        memcpy(model->mesh.vertices, vertices, size); 
+        memcpy(model->mesh.vertices, vertices, size);
     }
     else
     {
@@ -39,7 +39,7 @@ Model* createModel(
     }
 
     // per vertex colors
-    if(perVertexColors)
+    if (perVertexColors)
     {
         int size = vertexCount * 3 * sizeof(GLfloat);
         model->mesh.perVertexColors = (GLfloat *)malloc(size);
@@ -93,7 +93,7 @@ Model* createModel(
 
     writeLog("Model: %s was created.", model->modelName);
     return model;
-} 
+}
 
 void destroyModel(Model *model)
 {
@@ -137,7 +137,7 @@ void drawModel(Model *model)
     glPushMatrix();
     applyTransform(&model->transform);
 
-        if (model->bHighlightModel)
+    if (model->bHighlightModel)
     {
         {
             glPushMatrix();
@@ -194,4 +194,3 @@ void drawModel(Model *model)
     glEnd();
     glPopMatrix();
 }
-

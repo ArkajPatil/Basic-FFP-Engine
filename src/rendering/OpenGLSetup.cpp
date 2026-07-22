@@ -27,7 +27,7 @@ Model *square1;
 Model *pyramid1;
 Model *cube1;
 
-int initialize(void)
+int initializeOpenGL(void)
 {
     // function declaration
     void printGLInfo(void);
@@ -98,7 +98,7 @@ int initialize(void)
     // depth related code
     glShadeModel(GL_SMOOTH); //3d object show kartanna smothness cha vichar kr
     glClearDepth(1.0f); 
-    glEnable(GL_DEPTH_TEST); //depth test enable kele for resterixer
+    glEnable(GL_DEPTH_TEST); //depth test enable kele for rasterizer
     glDepthFunc(GL_LEQUAL);
     glHint(GL_PERSPECTIVE_CORRECTION_HINT , GL_NICEST);
 
@@ -109,9 +109,6 @@ int initialize(void)
     // warm up resize
     resize(WIN_WIDTH, WIN_HEIGHT);
 
-    // creating linked list
-    initScene();
-
     return (0);
 }
 
@@ -120,12 +117,12 @@ void printGLInfo(void)
 {
     // code
     // print opengl info
-    fprintf(gpFile, "OpenGL Information :\n");
-    fprintf(gpFile, "********************\n");
-    fprintf(gpFile, "OpenGL Vendor : %s\n", glGetString(GL_VENDOR));
-    fprintf(gpFile, "OpenGL Renderer : %s\n", glGetString(GL_RENDERER));
-    fprintf(gpFile, "OpenGL Version : %s\n", glGetString(GL_VERSION));
-    fprintf(gpFile, "********************\n");
+    writeLog("OpenGL Information :");
+    writeLog("********************");
+    writeLog("OpenGL Vendor : %s", glGetString(GL_VENDOR));
+    writeLog("OpenGL Renderer : %s", glGetString(GL_RENDERER));
+    writeLog("OpenGL Version : %s", glGetString(GL_VERSION));
+    writeLog("********************\n");
 }
 
 

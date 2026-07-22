@@ -86,6 +86,9 @@ void createWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLin
     // set this window as foreground and active window
     SetForegroundWindow(ghwnd);
     SetFocus(ghwnd);
+
+    writeLog(">>>>> SUCCESS <<<<< :: Window creation done Successfully");
+
 }
 
 void toggleFullScreen(void)

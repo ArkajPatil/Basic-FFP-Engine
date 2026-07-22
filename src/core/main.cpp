@@ -5,6 +5,7 @@
 #include "rendering/renderLoop.h"
 #include "inputs/inputs.h"
 #include "gui/ImGuiLayer.h"
+#include "scene/linkedlist.h"
 
 // global functions declarations
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM); // HWND->HANDLE->UINT->Unsigned int
@@ -28,27 +29,32 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLi
     }
     else
     {
-        writeLog("Program Started Successfully");
+        writeLog(">>>>> SUCCESS <<<<< :: Log File created");
     }
 
     // creating window
     createWindow(hInstance, hPrevInstance, lpszCmdLine, iCmdShow, hwnd);
-    writeLog("Window creation done Successfully");
 
+    // initializing
     // initializing OpenGL context
-    int result = initialize();
-    // initializing ImGui
-    initializeImGui();
+    int result = initializeOpenGL();
     if (result != 0)
     {
-        writeLog(">>>>> ERROR <<<<< ::: initialize () failed");
+        writeLog(">>>>> ERROR <<<<< ::: initializeOpenGL() failed");
         DestroyWindow(hwnd);
         hwnd = NULL;
     }
     else
     {
-        writeLog("initialize() completed successfully, OpenGL setup is done.\n");
+        writeLog(">>>>> SUCCESS <<<<< :: initializeOpenGL() completed successfully, OpenGL setup is done.");
     }
+
+    // initializing ImGui
+    initializeImGui();
+
+    // initializing Scene Manager
+    initSceneManager();
+    initDemoScene();
 
     // Game Loop
     while (bDone == FALSE)

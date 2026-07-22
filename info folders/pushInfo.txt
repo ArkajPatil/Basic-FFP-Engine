@@ -1,3 +1,15 @@
+23. implement basic scene management system :: scene creation
+    - Added SceneManager to manage the current scene and store multiple scene pointers.
+    - Added sceneName field to the Scene struct for scene identification.
+    - Implemented initSceneManager() to initialize the scene management system.
+    - Implemented initDemoScene() to create the default startup scene.
+    - Implemented createScene(char *sceneName) to create new scenes with custom or auto-generated names.
+    - Added ImGui support for creating scenes by entering a scene name at runtime.
+    - Introduced MAX_SCENES macro to define the maximum number of scenes managed by the SceneManager.
+    - MAX_SCENES is defined inside linkedlist.h and current value is 10.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
 22. Implement model transformations and improve selected model highlighting
     - Added runtime translation, rotation, and scaling controls for models through the ImGui interface.
     - Most transformation logic is implemented in `ImGuiUI.cpp`.

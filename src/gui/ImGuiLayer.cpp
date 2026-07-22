@@ -20,7 +20,7 @@ void initializeImGui()
     ImGui_ImplWin32_Init(ghwnd);
     ImGui_ImplOpenGL2_Init();
 
-    writeLog("ImGui Initialization is done.");
+    writeLog(">>>>> SUCCESS <<<<< :: ImGui Initialization is done.");
 }
 
 void startImGuiFrame()
