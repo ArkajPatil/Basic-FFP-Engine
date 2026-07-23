@@ -5,10 +5,11 @@
 void drawUI(void);
 
 // local function declarations
+void fSceneManagement(void);
 void fModelsControls(void);
-void fModelTransformations(void);
-void addVerticalSpace(float size);
 void screenRotationControls(void);
 void screenTranslationControls(void);
+void DrawVec3Control(const char *label, float *x, float *y, float *z);
+void addVerticalSpace(float size);
 
 #endif

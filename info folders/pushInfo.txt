@@ -1,9 +1,22 @@
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+25. improve transformations editor UI
+    - implement `DrawVec3Control(const char *label, float *x, float *y, float *z)` in `ImGuiUI.cpp`
+       to create a reusable editor for Position, Rotation, and Scale vectors
+    - replace `SliderFloat` controls with `DragFloat` for smoother and more precise runtime transform editing
+    - refactor transform editing UI to reduce duplicate code and improve maintainability
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
 24. implement scene deletion system
     - Implemented deleteSelectedScene() in linkedlist.cpp to remove the currently selected scene at runtime.
     - Added scene deletion logic to release all models, nodes, and scene resources.
     - Updated SceneManager to remove deleted scenes from the scene list and maintain scene order.
     - Automatically updates the active scene after deleting the current scene.
     - Added ImGui support to delete the selected scene at runtime.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
 
 23. implement basic scene management system :: scene creation
     - Added SceneManager to manage the current scene and store multiple scene pointers.

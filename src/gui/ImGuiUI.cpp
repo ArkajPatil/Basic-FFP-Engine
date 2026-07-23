@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "ImGuiUI.h"
 
 #include "external/imgui/imgui.h"
@@ -7,9 +9,12 @@
 
 #include "rendering/renderLoop.h"
 
+// using namespace std;
+
 // local variables
 // model uniform color
 int modelColorR = 0, modelColorG = 0, modelColorB = 0;
+float uniformModelScale = 1.0f;
 
 void drawUI()
 {
@@ -25,56 +30,122 @@ void drawUI()
         }
         ImGui::Checkbox("Axis", &gbShowAxis);
         ImGui::Separator();
-        addVerticalSpace(15.0f);
-
-        // screen rotation
-        screenRotationControls();
-        addVerticalSpace(15.0f);
 
         // screen translation
-        screenTranslationControls();
-        addVerticalSpace(8.0f);
+        DrawVec3Control("Screen Translations", &gfScreenXTranslation, &gfScreenYTranslation, &gfScreenZTranslation);
+        if (ImGui::Button("Reset Translation"))
+        {
+            gfScreenXTranslation = 2.0f;
+            gfScreenYTranslation = 0.0f;
+            gfScreenZTranslation = -10.0f;
+        }
+        ImGui::Separator();
+
+        // screen rotation
+        DrawVec3Control("Screen Rotation", &gfScreenXRotationAngle, &gfScreenYRotationAngle, &gfScreenZRotationAngle);
+        if (ImGui::Button("Reset Rotation Angles"))
+        {
+            gfScreenXRotationAngle = 25.0f;
+            gfScreenYRotationAngle = 0.0f;
+            gfScreenZRotationAngle = 0.0f;
+        }
+        ImGui::Separator();
+        addVerticalSpace(5.0f);
     }
 
     // Models control
     fModelsControls();
 
     // models transformations
-    fModelTransformations();
+    if (ImGui::CollapsingHeader("Model Transformations"))
+    {
+        if (sceneManager->currentScene->selectedNode)
+        {
+            Model *model = sceneManager->currentScene->selectedNode->currentModel;
 
+            // model position controls
+            DrawVec3Control("Position", &model->transform.translate.x, &model->transform.translate.y, &model->transform.translate.z);
+            if (ImGui::Button("Reset Translation(0,0,0)"))
+            {
+                sceneManager->currentScene->selectedNode->currentModel->transform.translate.x = 0.0f;
+                sceneManager->currentScene->selectedNode->currentModel->transform.translate.y = 0.0f;
+                sceneManager->currentScene->selectedNode->currentModel->transform.translate.z = 0.0f;
+            }
+            ImGui::Separator();
+
+            // model rotation controls
+            DrawVec3Control("Rotation", &model->transform.rotate.x, &model->transform.rotate.y, &model->transform.rotate.z);
+            if (ImGui::Button("Reset Rotation(models) Angles"))
+            {
+                sceneManager->currentScene->selectedNode->currentModel->transform.rotate.x = 0.0f;
+                sceneManager->currentScene->selectedNode->currentModel->transform.rotate.y = 0.0f;
+                sceneManager->currentScene->selectedNode->currentModel->transform.rotate.z = 0.0f;
+            }
+            ImGui::Separator();
+
+            // model scaling controls
+            DrawVec3Control("Scale", &model->transform.scale.x, &model->transform.scale.y, &model->transform.scale.z);
+            ImGui::Text("Scale in all axis: ");
+            ImGui::SameLine();
+            ImGui::PushItemWidth(150);
+            if (ImGui::DragFloat("##Model Scaling", &uniformModelScale, 0.1f))
+            {
+                model->transform.scale.x = uniformModelScale;
+                model->transform.scale.y = uniformModelScale;
+                model->transform.scale.z = uniformModelScale;
+            }
+            ImGui::PopItemWidth();
+
+            if (ImGui::Button("Reset Scaling"))
+            {
+                sceneManager->currentScene->selectedNode->currentModel->transform.scale.x = 1.0f;
+                sceneManager->currentScene->selectedNode->currentModel->transform.scale.y = 1.0f;
+                sceneManager->currentScene->selectedNode->currentModel->transform.scale.z = 1.0f;
+                uniformModelScale = 1.0f;
+            }
+            ImGui::Separator();
+            addVerticalSpace(7.0f);
+        }
+    }
     // Scenes Management
     if (ImGui::CollapsingHeader("Scenes Management"))
     {
-        ImGui::Text("Create Scene: ");
-
-        ImGui::InputText("Scene Name", newSceneName, sizeof(newSceneName));
-
-        if (ImGui::Button("Create Scene"))
-        {
-            createScene(newSceneName);
-        }
-
-        addVerticalSpace(5.0f);
-        ImGui::Text("All Scenes: ");
-        for (int i = 0; i < sceneManager->sceneCount; i++)
-        {
-            bool isSelected = (sceneManager->currentScene == sceneManager->scenesArray[i]);
-            if (ImGui::Selectable(sceneManager->scenesArray[i]->sceneName, isSelected))
-            {
-                sceneManager->currentScene = sceneManager->scenesArray[i];
-            }
-        }
-
-        addVerticalSpace(6.0f);
-        ImGui::Text("Delete selected scene: ");
-        ImGui::SameLine();
-        if(ImGui::Button("Delete"))
-        {
-            deleteSelectedScene();
-        }
+        fSceneManagement();
     }
 
     ImGui::End();
+}
+
+void fSceneManagement(void)
+{
+
+    ImGui::Text("Create Scene: ");
+
+    ImGui::InputText("Scene Name", newSceneName, sizeof(newSceneName));
+
+    if (ImGui::Button("Create Scene"))
+    {
+        createScene(newSceneName);
+    }
+
+    addVerticalSpace(5.0f);
+    ImGui::Text("All Scenes: ");
+    for (int i = 0; i < sceneManager->sceneCount; i++)
+    {
+        bool isSelected = (sceneManager->currentScene == sceneManager->scenesArray[i]);
+        if (ImGui::Selectable(sceneManager->scenesArray[i]->sceneName, isSelected))
+        {
+            sceneManager->currentScene = sceneManager->scenesArray[i];
+        }
+    }
+
+    addVerticalSpace(6.0f);
+    ImGui::Text("Delete selected scene: ");
+    ImGui::SameLine();
+    if (ImGui::Button("Delete Scene"))
+    {
+        deleteSelectedScene();
+    }
 }
 
 void fModelsControls(void)
@@ -183,243 +254,40 @@ void fModelsControls(void)
     }
 }
 
-void fModelTransformations(void)
+void DrawVec3Control(const char *label, float *x, float *y, float *z)
 {
-    if (ImGui::CollapsingHeader("Models transformations"))
-    {
-        addVerticalSpace(8.0f);
-        if (sceneManager->currentScene->selectedNode)
-        {
-            // translation
-            ImGui::Text("Model Translation");
-            ImGui::SliderFloat("Translate Model in X", &sceneManager->currentScene->selectedNode->currentModel->transform.translate.x, -50.0f, 50.0f, "%.2f");
-            ImGui::SliderFloat("Translate Model in Y", &sceneManager->currentScene->selectedNode->currentModel->transform.translate.y, -50.0f, 50.0f, "%.2f");
-            ImGui::SliderFloat("Translate Model in Z", &sceneManager->currentScene->selectedNode->currentModel->transform.translate.z, -50.0f, 50.0f, "%.2f");
+    // if (ImGui::TreeNode(label))
+    // {
+    addVerticalSpace(6.0f);
+    ImGui::Text(" ");
+    ImGui::SameLine(10);
+    ImGui::Text("--->> %s", label);
 
-            if (ImGui::Button("Reset Translation(0,0,0)"))
-            {
-                sceneManager->currentScene->selectedNode->currentModel->transform.translate.x = 0.0f;
-                sceneManager->currentScene->selectedNode->currentModel->transform.translate.y = 0.0f;
-                sceneManager->currentScene->selectedNode->currentModel->transform.translate.z = 0.0f;
-            }
+    ImGui::PushItemWidth(70);
 
-            ImGui::Separator();
-            addVerticalSpace(8.0f);
+    ImGui::Text(" ");
+    ImGui::SameLine(20);
 
-            // scale
-            ImGui::Text("Model Scaling");
-            ImGui::SliderFloat("Scale X", &sceneManager->currentScene->selectedNode->currentModel->transform.scale.x, 0.0f, 5.0f, "%.2f");
-            ImGui::SliderFloat("Scale Y", &sceneManager->currentScene->selectedNode->currentModel->transform.scale.y, 0.0f, 5.0f, "%.2f");
-            ImGui::SliderFloat("Scale Z", &sceneManager->currentScene->selectedNode->currentModel->transform.scale.z, 0.0f, 5.0f, "%.2f");
-
-            if (ImGui::Button("Reset Scaling"))
-            {
-                sceneManager->currentScene->selectedNode->currentModel->transform.scale.x = 1.0f;
-                sceneManager->currentScene->selectedNode->currentModel->transform.scale.y = 1.0f;
-                sceneManager->currentScene->selectedNode->currentModel->transform.scale.z = 1.0f;
-            }
-
-            ImGui::Separator();
-            addVerticalSpace(8.0f);
-
-            // rotation
-            float wheel = ImGui::GetIO().MouseWheel;
-
-            ImGui::Text("Model Rotations (hover & control with mouse wheel)");
-
-            ImGui::Selectable("X Rotation Angle :");
-            if (ImGui::IsItemHovered())
-            {
-                if (wheel > 0)
-                {
-                    if (sceneManager->currentScene->selectedNode->currentModel->transform.rotate.x >= 360.0f)
-                    {
-                        sceneManager->currentScene->selectedNode->currentModel->transform.rotate.x = 0.0f;
-                    }
-                }
-                if (wheel < 0)
-                {
-                    if (sceneManager->currentScene->selectedNode->currentModel->transform.rotate.x <= -360.0f)
-                    {
-                        sceneManager->currentScene->selectedNode->currentModel->transform.rotate.x = 0.0f;
-                    }
-                }
-                sceneManager->currentScene->selectedNode->currentModel->transform.rotate.x += wheel * 5.0f;
-            }
-            ImGui::SameLine();
-            ImGui::Text("%.0f", sceneManager->currentScene->selectedNode->currentModel->transform.rotate.x);
-
-            ImGui::Selectable("Y Rotation Angle :");
-            if (ImGui::IsItemHovered())
-            {
-                if (wheel > 0)
-                {
-                    if (sceneManager->currentScene->selectedNode->currentModel->transform.rotate.y >= 360.0f)
-                    {
-                        sceneManager->currentScene->selectedNode->currentModel->transform.rotate.y = 0.0f;
-                    }
-                }
-                if (wheel < 0)
-                {
-                    if (sceneManager->currentScene->selectedNode->currentModel->transform.rotate.y <= -360.0f)
-                    {
-                        sceneManager->currentScene->selectedNode->currentModel->transform.rotate.y = 0.0f;
-                    }
-                }
-                sceneManager->currentScene->selectedNode->currentModel->transform.rotate.y += wheel * 5.0f;
-            }
-            ImGui::SameLine();
-            ImGui::Text("%.0f", sceneManager->currentScene->selectedNode->currentModel->transform.rotate.y);
-
-            ImGui::Selectable("Z Rotation Angle :");
-            if (ImGui::IsItemHovered())
-            {
-                if (wheel > 0)
-                {
-                    if (sceneManager->currentScene->selectedNode->currentModel->transform.rotate.z >= 360.0f)
-                    {
-                        sceneManager->currentScene->selectedNode->currentModel->transform.rotate.z = 0.0f;
-                    }
-                }
-                if (wheel < 0)
-                {
-                    if (sceneManager->currentScene->selectedNode->currentModel->transform.rotate.z <= -360.0f)
-                    {
-                        sceneManager->currentScene->selectedNode->currentModel->transform.rotate.z = 0.0f;
-                    }
-                }
-                sceneManager->currentScene->selectedNode->currentModel->transform.rotate.z += wheel * 5.0f;
-            }
-            ImGui::SameLine();
-            ImGui::Text("%.0f", sceneManager->currentScene->selectedNode->currentModel->transform.rotate.z);
-
-            if (ImGui::Button("Reset Rotation Angles"))
-            {
-                sceneManager->currentScene->selectedNode->currentModel->transform.rotate.x = 0.0f;
-                sceneManager->currentScene->selectedNode->currentModel->transform.rotate.y = 0.0f;
-                sceneManager->currentScene->selectedNode->currentModel->transform.rotate.z = 0.0f;
-            }
-        }
-        ImGui::Separator();
-        addVerticalSpace(8.0f);
-    }
-}
-
-void screenTranslationControls(void)
-{
-    // screen translation
-    ImGui::Text("Screen Translation");
-
-    ImGui::SliderFloat(
-        "Translate X",
-        &gfScreenXTranslation,
-        -20.0f,
-        20.0f,
-        "%.2f");
-
-    ImGui::SliderFloat(
-        "Translate Y",
-        &gfScreenYTranslation,
-        -20.0f,
-        20.0f,
-        "%.2f");
-
-    ImGui::SliderFloat(
-        "Translate Z",
-        &gfScreenZTranslation,
-        -50.0f,
-        50.0f,
-        "%.2f");
-
-    if (ImGui::Button("Reset Translation"))
-    {
-        gfScreenXTranslation = 2.0f;
-        gfScreenYTranslation = 0.0f;
-        gfScreenZTranslation = -10.0f;
-    }
-    ImGui::Separator();
-}
-
-void screenRotationControls(void)
-{
-    // screen rotation
-    float wheel = ImGui::GetIO().MouseWheel;
-
-    ImGui::Text("Screen Rotations (hover & control with mouse wheel)");
-
-    ImGui::Selectable("X Rotation Angle : ");
-    if (ImGui::IsItemHovered())
-    {
-        if (wheel > 0)
-        {
-            if (gfScreenXRotationAngle >= 360.0f)
-            {
-                gfScreenXRotationAngle = 0.0f;
-            }
-        }
-        if (wheel < 0)
-        {
-            if (gfScreenXRotationAngle <= -360.0f)
-            {
-                gfScreenXRotationAngle = 0.0f;
-            }
-        }
-        gfScreenXRotationAngle += wheel * 5.0f;
-    }
+    ImGui::Text("X");
     ImGui::SameLine();
-    ImGui::Text("%.0f", gfScreenXRotationAngle);
+    ImGui::DragFloat(("##X" + std::string(label)).c_str(), x, 0.1f);
 
-    ImGui::Selectable("Y Rotation Angle : ");
-    if (ImGui::IsItemHovered())
-    {
-        if (wheel > 0)
-        {
-            if (gfScreenYRotationAngle >= 360.0f)
-            {
-                gfScreenYRotationAngle = 0.0f;
-            }
-        }
-        if (wheel < 0)
-        {
-            if (gfScreenYRotationAngle <= -360.0f)
-            {
-                gfScreenYRotationAngle = 0.0f;
-            }
-        }
-        gfScreenYRotationAngle += wheel * 5.0f;
-    }
+    ImGui::SameLine(130);
+
+    ImGui::Text("Y");
     ImGui::SameLine();
-    ImGui::Text("%.0f", gfScreenYRotationAngle);
+    ImGui::DragFloat(("##Y" + std::string(label)).c_str(), y, 0.1f);
 
-    ImGui::Selectable("Z Rotation Angle : ");
-    if (ImGui::IsItemHovered())
-    {
-        if (wheel > 0)
-        {
-            if (gfScreenZRotationAngle >= 360.0f)
-            {
-                gfScreenZRotationAngle = 0.0f;
-            }
-        }
-        if (wheel < 0)
-        {
-            if (gfScreenZRotationAngle <= -360.0f)
-            {
-                gfScreenZRotationAngle = 0.0f;
-            }
-        }
-        gfScreenZRotationAngle += wheel * 5.0f;
-    }
+    ImGui::SameLine(250);
+
+    ImGui::Text("Z");
     ImGui::SameLine();
-    ImGui::Text("%.0f", gfScreenZRotationAngle);
+    ImGui::DragFloat(("##Z" + std::string(label)).c_str(), z, 0.1f);
 
-    if (ImGui::Button("Reset Rotation Angles"))
-    {
-        gfScreenXRotationAngle = 20.0f;
-        gfScreenYRotationAngle = -160.0f;
-        gfScreenZRotationAngle = 0.0f;
-    }
-    ImGui::Separator();
+    ImGui::PopItemWidth();
+    // ImGui::TreePop();
+
+    addVerticalSpace(6.0f);
 }
 
 void addVerticalSpace(float size)
