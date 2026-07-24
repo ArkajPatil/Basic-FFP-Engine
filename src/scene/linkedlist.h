@@ -1,10 +1,10 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 
-#define MAX_SCENES 10
-
-#include "models.h"
+#include "scene/models.h"
 #include "utils/my_math_library/myMath.h"
+
+typedef struct Scene Scene;
 
 // node struct
 typedef struct Node {
@@ -13,46 +13,24 @@ typedef struct Node {
     struct Node *nextNode;
 } Node ;
 
-// scene struct
-typedef struct {
-    Node *head;
-    Node *tail;
-    Node *selectedNode;
-    char sceneName[64];
-} Scene;
-
-typedef struct {
-    Scene *currentScene ;
-    Scene *scenesArray[MAX_SCENES];
-    int sceneCount;
-} SceneManager ;
-
 // variables
-extern SceneManager *sceneManager ;
-extern char newSceneName[64];
 
 // functions declarations
-void initSceneManager(void);
-void initDemoScene(void);
-void createScene(char *sceneName);
-void deleteSelectedScene(void);
+void insertNode(Scene *scene, Model *model);
+void deleteNode(Scene *scene, Model *model);
+void removeSelectedNode(Scene *scene);
 
-void insertNode(Model *model);
-void deleteNode(Model *model);
-void removeSelectedNode(void);
-void removeAllNodesOfScene(Scene *scene);
-
-void selectNextNode(void);
-void selectPreviousNode(void);
+void selectNextNode(Scene *scene);
+void selectPreviousNode(Scene *scene);
 
 void renderNode(Node *node);
-void renderAllNodes(void);
+void renderAllNodes(Scene *scene);
 
-void addMultiColoredTriangleToScene(void);
-void addTriangleToScene(void);
-void addSquareToScene(void);
-void addPyramidToScene(void);
-void addCubeToScene(void);
-void addSphereToScene(void);
+void addMultiColoredTriangleToScene(Scene *scene);
+void addTriangleToScene(Scene *scene);
+void addSquareToScene(Scene *scene);
+void addPyramidToScene(Scene *scene);
+void addCubeToScene(Scene *scene);
+void addSphereToScene(Scene *scene);
 
 #endif

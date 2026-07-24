@@ -5,7 +5,7 @@
 #include "rendering/renderLoop.h"
 #include "inputs/inputs.h"
 #include "gui/ImGuiLayer.h"
-#include "scene/linkedlist.h"
+#include "scene/sceneManager.h"
 
 // global functions declarations
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM); // HWND->HANDLE->UINT->Unsigned int

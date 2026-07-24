@@ -32,6 +32,7 @@ src/rendering/OpenGLSetup.cpp ^
 src/rendering/renderLoop.cpp ^
 src/scene/models.cpp ^
 src/scene/linkedlist.cpp ^
+src/scene/sceneManager.cpp ^
 src/scene/basic_models_data/basicModelsData.cpp ^
 src/inputs/inputs.cpp ^
 src/gui/ImGuiLayer.cpp ^
@@ -55,6 +56,7 @@ build/OpenGLSetup.obj ^
 build/renderLoop.obj ^
 build/models.obj ^
 build/linkedlist.obj ^
+build/sceneManager.obj ^
 build/basicModelsData.obj ^
 build/inputs.obj ^
 build/Dear_ImGui_build_Files/imgui.obj ^

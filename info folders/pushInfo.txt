@@ -1,7 +1,13 @@
+26. organize scene system
+    - Created `Scene.h` to store the `Scene` structure.
+    - Created `SceneManager.h` to store the `SceneManager` structure and related declarations.
+    - Moved scene-related code out of `LinkedList` into dedicated files.
+    - Improved code organization by separating linked list logic from scene management.
+    - Prepared the project structure for upcoming scene saving and loading features.
 
 -----------------------------------------------------------------------------------------------------------------------------------------------
 
-25. improve transformations editor UI
+25. improve transformations editor UI 
     - implement `DrawVec3Control(const char *label, float *x, float *y, float *z)` in `ImGuiUI.cpp`
        to create a reusable editor for Position, Rotation, and Scale vectors
     - replace `SliderFloat` controls with `DragFloat` for smoother and more precise runtime transform editing

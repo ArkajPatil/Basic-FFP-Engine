@@ -2,6 +2,7 @@
 #include "OpenGLSetup.h"
 #include "utils/logging_system/logger.h"
 #include "scene/linkedlist.h"
+#include "scene/sceneManager.h"
 #include "utils/my_math_library/myMath.h"
 #include "inputs/inputs.h"
 
@@ -71,7 +72,7 @@ void display(void)
 
     if (gbDisplayAllModels)
     {
-        renderAllNodes();
+        renderAllNodes(sceneManager->currentScene);
     }
     else if (gbDisplaySelectedModel)
     {

@@ -1,19 +1,19 @@
-[2026-07-23 16:39:21] >>>>> SUCCESS <<<<< :: Log File created
-[2026-07-23 16:39:22] >>>>> SUCCESS <<<<< :: Window creation done Successfully
-[2026-07-23 16:39:22] OpenGL Information :
-[2026-07-23 16:39:22] ********************
-[2026-07-23 16:39:22] OpenGL Vendor : NVIDIA Corporation
-[2026-07-23 16:39:22] OpenGL Renderer : NVIDIA GeForce GTX 1050/PCIe/SSE2
-[2026-07-23 16:39:22] OpenGL Version : 4.6.0 NVIDIA 576.02
-[2026-07-23 16:39:22] ********************
+[2026-07-24 08:32:43] >>>>> SUCCESS <<<<< :: Log File created
+[2026-07-24 08:32:43] >>>>> SUCCESS <<<<< :: Window creation done Successfully
+[2026-07-24 08:32:43] OpenGL Information :
+[2026-07-24 08:32:43] ********************
+[2026-07-24 08:32:43] OpenGL Vendor : NVIDIA Corporation
+[2026-07-24 08:32:43] OpenGL Renderer : NVIDIA GeForce GTX 1050/PCIe/SSE2
+[2026-07-24 08:32:43] OpenGL Version : 4.6.0 NVIDIA 576.02
+[2026-07-24 08:32:43] ********************
 
-[2026-07-23 16:39:22] >>>>> SUCCESS <<<<< :: initializeOpenGL() completed successfully, OpenGL setup is done.
-[2026-07-23 16:39:22] >>>>> SUCCESS <<<<< :: ImGui Initialization is done.
-[2026-07-23 16:39:22] >>>>> SUCCESS <<<<< :: SceneManager allocation successfull.
-[2026-07-23 16:39:22] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
-[2026-07-23 16:39:26] Model: pyramid was created.
-[2026-07-23 16:39:26] Model: pyramid has been inserted as head node in scene 'demo'.
-[2026-07-23 16:39:48] >>>>>EXITING<<<<< Escape Key pressed
-[2026-07-23 16:39:48] Cleaning ImGui is done.
-[2026-07-23 16:39:48] Program terminated successfully
+[2026-07-24 08:32:43] >>>>> SUCCESS <<<<< :: initializeOpenGL() completed successfully, OpenGL setup is done.
+[2026-07-24 08:32:43] >>>>> SUCCESS <<<<< :: ImGui Initialization is done.
+[2026-07-24 08:32:43] >>>>> SUCCESS <<<<< :: SceneManager allocation successfull.
+[2026-07-24 08:32:43] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
+[2026-07-24 08:34:13] Model: triangle was created.
+[2026-07-24 08:34:13] Model: triangle has been inserted as head node in scene 'demo'.
+[2026-07-24 08:34:17] >>>>>EXITING<<<<< Escape Key pressed
+[2026-07-24 08:34:17] Cleaning ImGui is done.
+[2026-07-24 08:34:17] Program terminated successfully
 

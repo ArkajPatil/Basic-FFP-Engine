@@ -1,178 +1,84 @@
 #include "linkedlist.h"
 
+#include "scene/scene.h"
 #include "scene/basic_models_data/basicModelsData.h"
 
-SceneManager *sceneManager;
-char newSceneName[64];
-
-void initSceneManager(void)
+void insertNode(Scene *scene, Model *model)
 {
-    sceneManager = (SceneManager *)malloc(sizeof(SceneManager));
-    if (sceneManager == NULL)
-    {
-        writeLog(">>>>> FATAL <<<<< :: SceneManager allocation failed.");
-        return;
-    }
-
-    sceneManager->currentScene = NULL;
-    sceneManager->sceneCount = 0;
-    memset(sceneManager->scenesArray, 0, sizeof(sceneManager->scenesArray));
-
-    writeLog(">>>>> SUCCESS <<<<< :: SceneManager allocation successfull.");
-}
-
-void initDemoScene(void)
-{
-    createScene("demo");
-}
-
-void createScene(char *sceneName)
-{
-    Scene *scene;
-
-    scene = (Scene *)malloc(sizeof(Scene));
-    if (scene == NULL)
-    {
-        writeLog(">>>>> FATAL <<<<< :: Scene allocation failed.");
-        return;
-    }
-
-    scene->head = NULL;
-    scene->tail = NULL;
-    scene->selectedNode = NULL;
-
-    if (strlen(sceneName) == 0)
-    {
-        snprintf(scene->sceneName, sizeof(scene->sceneName), "Scene %d", sceneManager->sceneCount + 1);
-    }
-    else
-    {
-        strncpy(scene->sceneName, sceneName, sizeof(scene->sceneName) - 1);
-
-        scene->sceneName[sizeof(scene->sceneName) - 1] = '\0';
-    }
-
-    // adding scene into scenesArray
-    if (sceneManager->sceneCount >= MAX_SCENES)
-    {
-        writeLog(">>>>> ERROR <<<<< :: Maximum number of scenes reached.");
-        free(scene);
-        return;
-    }
-    sceneManager->scenesArray[sceneManager->sceneCount] = scene;
-
-    sceneManager->currentScene = scene;
-    sceneManager->sceneCount += 1;
-    writeLog(">>>>> SUCCESS <<<<< :: Scene '%s' allocation successfull.", scene->sceneName);
-}
-
-void deleteSelectedScene(void)
-{
-    Scene *scene = sceneManager->currentScene;
-
-    removeAllNodesOfScene(scene);
-
-    for (int i = 0; i < sceneManager->sceneCount; i++)
-    {
-        if (sceneManager->scenesArray[i] == scene)
-        {
-            for (int j = i; j < sceneManager->sceneCount - 1; j++)
-            {
-                sceneManager->scenesArray[j] = sceneManager->scenesArray[j + 1];
-            }
-            sceneManager->scenesArray[sceneManager->sceneCount - 1] = NULL;
-            free(scene);
-            sceneManager->sceneCount--;
-            break;
-        }
-    }
-
-    if (sceneManager->sceneCount > 0)
-    {
-        sceneManager->currentScene = sceneManager->scenesArray[0];
-    }
-    else
-    {
-        createScene("demo");
-    }
-}
-
-void insertNode(Model *model)
-{
-    if (sceneManager->currentScene->head == NULL) // LL is empty i.e. inserting as head node
+    if (scene->head == NULL) // LL is empty i.e. inserting as head node
     {
         Node *node;
         node = (Node *)malloc(sizeof(Node));
         node->prevNode = NULL;
         node->currentModel = model;
         node->nextNode = NULL;
-        sceneManager->currentScene->head = node;
-        sceneManager->currentScene->tail = node;
+        scene->head = node;
+        scene->tail = node;
         // select this node as selected node
-        if (sceneManager->currentScene->selectedNode == NULL)
+        if (scene->selectedNode == NULL)
         {
-            sceneManager->currentScene->selectedNode = node;
+            scene->selectedNode = node;
         }
-        writeLog("Model: %s has been inserted as head node in scene '%s'.", node->currentModel->modelName, sceneManager->currentScene->sceneName);
+        writeLog("Model: %s has been inserted as head node in scene '%s'.", node->currentModel->modelName, scene->sceneName);
     }
     else // LL already available
     {
         Node *node;
         node = (Node *)malloc(sizeof(Node));
-        node->prevNode = sceneManager->currentScene->tail;
+        node->prevNode = scene->tail;
         node->currentModel = model;
         node->nextNode = NULL;
-        sceneManager->currentScene->tail->nextNode = node;
-        sceneManager->currentScene->tail = node;
-        writeLog("Model: %s has been appended to the linked list in scene '%s'.", node->currentModel->modelName, sceneManager->currentScene->sceneName);
+        scene->tail->nextNode = node;
+        scene->tail = node;
+        writeLog("Model: %s has been appended to the linked list in scene '%s'.", node->currentModel->modelName, scene->sceneName);
     }
 }
 
-void deleteNode(Model *model)
+void deleteNode(Scene *scene, Model *model)
 {
-    if (sceneManager->currentScene->head == NULL)
+    if (scene->head == NULL)
     {
-        writeLog(">>>>> ERROR <<<<< :: You tried to delete node from scene '%s' , but linked list is empty.", sceneManager->currentScene->sceneName);
+        writeLog(">>>>> ERROR <<<<< :: You tried to delete node from scene '%s' , but linked list is empty.", scene->sceneName);
         return;
     }
 
-    Node *temp = sceneManager->currentScene->head;
+    Node *temp = scene->head;
     while (temp)
     {
         if (temp->currentModel == model)
         {
             // deleting head
-            if (temp == sceneManager->currentScene->head)
+            if (temp == scene->head)
             {
                 // deleting the model
-                if (sceneManager->currentScene->head->currentModel)
+                if (scene->head->currentModel)
                 {
-                    destroyModel(sceneManager->currentScene->head->currentModel);
+                    destroyModel(scene->head->currentModel);
                 }
                 // breaking the links of the node
-                sceneManager->currentScene->head = sceneManager->currentScene->head->nextNode;
-                if (sceneManager->currentScene->head)
+                scene->head = scene->head->nextNode;
+                if (scene->head)
                 {
-                    sceneManager->currentScene->head->prevNode = NULL;
+                    scene->head->prevNode = NULL;
                 }
                 else // if updated head does not exist
                 {
-                    sceneManager->currentScene->tail = NULL;
+                    scene->tail = NULL;
                 }
             }
             // deleting tail
-            else if (temp == sceneManager->currentScene->tail)
+            else if (temp == scene->tail)
             {
                 // destroying the model
-                if (sceneManager->currentScene->tail->currentModel)
+                if (scene->tail->currentModel)
                 {
-                    destroyModel(sceneManager->currentScene->tail->currentModel);
+                    destroyModel(scene->tail->currentModel);
                 }
                 // breaking the links of node
-                sceneManager->currentScene->tail = temp->prevNode;
-                if (sceneManager->currentScene->tail)
+                scene->tail = temp->prevNode;
+                if (scene->tail)
                 {
-                    sceneManager->currentScene->tail->nextNode = NULL;
+                    scene->tail->nextNode = NULL;
                 }
             }
             // deleting middle nodes
@@ -187,7 +93,7 @@ void deleteNode(Model *model)
                 temp->prevNode->nextNode = temp->nextNode;
                 temp->nextNode->prevNode = temp->prevNode;
             }
-            writeLog("Node of Model: %s has been deleted successfully from scene '%s'.", temp->currentModel->modelName, sceneManager->currentScene->sceneName);
+            writeLog("Node of Model: %s has been deleted successfully from scene '%s'.", temp->currentModel->modelName, scene->sceneName);
             free(temp);
             temp = NULL;
             return;
@@ -196,49 +102,49 @@ void deleteNode(Model *model)
     }
 }
 
-void removeSelectedNode(void)
+void removeSelectedNode(Scene *scene)
 {
-    if (sceneManager->currentScene->head == NULL)
+    if (scene->head == NULL)
     {
-        writeLog(">>>>> ERROR <<<<< :: You tried to delete node from scene '%s', but linked list is empty.", sceneManager->currentScene->sceneName);
+        writeLog(">>>>> ERROR <<<<< :: You tried to delete node from scene '%s', but linked list is empty.", scene->sceneName);
         return;
     }
 
     // deleting head node
-    if (sceneManager->currentScene->selectedNode == sceneManager->currentScene->head)
+    if (scene->selectedNode == scene->head)
     {
-        if (sceneManager->currentScene->head->nextNode)
+        if (scene->head->nextNode)
         {
-            sceneManager->currentScene->head = sceneManager->currentScene->head->nextNode;
-            sceneManager->currentScene->head->prevNode = NULL;
-            free(sceneManager->currentScene->selectedNode);
-            sceneManager->currentScene->selectedNode = sceneManager->currentScene->head;
+            scene->head = scene->head->nextNode;
+            scene->head->prevNode = NULL;
+            free(scene->selectedNode);
+            scene->selectedNode = scene->head;
         }
         else
         {
-            free(sceneManager->currentScene->selectedNode);
-            sceneManager->currentScene->head = NULL;
-            sceneManager->currentScene->selectedNode = NULL;
+            free(scene->selectedNode);
+            scene->head = NULL;
+            scene->selectedNode = NULL;
         }
         return;
     }
 
     // deleting tail node
-    if (sceneManager->currentScene->selectedNode == sceneManager->currentScene->tail)
+    if (scene->selectedNode == scene->tail)
     {
-        sceneManager->currentScene->tail = sceneManager->currentScene->tail->prevNode;
-        sceneManager->currentScene->tail->nextNode = NULL;
-        free(sceneManager->currentScene->selectedNode);
-        sceneManager->currentScene->selectedNode = sceneManager->currentScene->tail;
+        scene->tail = scene->tail->prevNode;
+        scene->tail->nextNode = NULL;
+        free(scene->selectedNode);
+        scene->selectedNode = scene->tail;
         return;
     }
 
     // deleting middle nodes
-    sceneManager->currentScene->selectedNode->prevNode->nextNode = sceneManager->currentScene->selectedNode->nextNode;
-    sceneManager->currentScene->selectedNode->nextNode->prevNode = sceneManager->currentScene->selectedNode->prevNode;
-    Node *temp = sceneManager->currentScene->selectedNode->nextNode;
-    free(sceneManager->currentScene->selectedNode);
-    sceneManager->currentScene->selectedNode = temp;
+    scene->selectedNode->prevNode->nextNode = scene->selectedNode->nextNode;
+    scene->selectedNode->nextNode->prevNode = scene->selectedNode->prevNode;
+    Node *temp = scene->selectedNode->nextNode;
+    free(scene->selectedNode);
+    scene->selectedNode = temp;
 
     return;
 }
@@ -265,19 +171,19 @@ void removeAllNodesOfScene(Scene *scene)
     scene->selectedNode = NULL;
 }
 
-void selectNextNode(void)
+void selectNextNode(Scene *scene)
 {
-    if (sceneManager->currentScene->selectedNode && sceneManager->currentScene->selectedNode->nextNode)
+    if (scene->selectedNode && scene->selectedNode->nextNode)
     {
-        sceneManager->currentScene->selectedNode = sceneManager->currentScene->selectedNode->nextNode;
+        scene->selectedNode = scene->selectedNode->nextNode;
     }
 }
 
-void selectPreviousNode(void)
+void selectPreviousNode(Scene *scene)
 {
-    if (sceneManager->currentScene->selectedNode && sceneManager->currentScene->selectedNode->prevNode)
+    if (scene->selectedNode && scene->selectedNode->prevNode)
     {
-        sceneManager->currentScene->selectedNode = sceneManager->currentScene->selectedNode->prevNode;
+        scene->selectedNode = scene->selectedNode->prevNode;
     }
 }
 
@@ -289,9 +195,9 @@ void renderNode(Node *node)
     }
 }
 
-void renderAllNodes(void)
+void renderAllNodes(Scene *scene)
 {
-    Node *temp = sceneManager->currentScene->head;
+    Node *temp = scene->head;
     while (temp)
     {
         drawModel(temp->currentModel);
@@ -299,7 +205,7 @@ void renderAllNodes(void)
     }
 }
 
-void addMultiColoredTriangleToScene(void)
+void addMultiColoredTriangleToScene(Scene *scene)
 {
     // creating triangle model
     Model *triangle;
@@ -319,10 +225,10 @@ void addMultiColoredTriangleToScene(void)
     );
 
     // inserting into linkedlist(scene)
-    insertNode(triangle);
+    insertNode(scene, triangle);
 }
 
-void addTriangleToScene(void)
+void addTriangleToScene(Scene *scene)
 {
     // creating triangle model
     Model *triangle;
@@ -343,10 +249,10 @@ void addTriangleToScene(void)
     );
 
     // inserting into linkedlist(scene)
-    insertNode(triangle);
+    insertNode(scene, triangle);
 }
 
-void addSquareToScene(void)
+void addSquareToScene(Scene *scene)
 {
     // creating square model
     Model *square;
@@ -367,10 +273,10 @@ void addSquareToScene(void)
     );
 
     // inserting into linkedlist(scene)
-    insertNode(square);
+    insertNode(scene, square);
 }
 
-void addPyramidToScene(void)
+void addPyramidToScene(Scene *scene)
 {
     // creating pyramid model
     Model *pyramid;
@@ -392,10 +298,10 @@ void addPyramidToScene(void)
     );
 
     // inserting into linkedlist(scene)
-    insertNode(pyramid);
+    insertNode(scene, pyramid);
 }
 
-void addCubeToScene(void)
+void addCubeToScene(Scene *scene)
 {
     Model *cube;
     GLfloat cubeColor[] = {0.2f, 0.4f, 0.6f};
@@ -416,10 +322,10 @@ void addCubeToScene(void)
     );
 
     // inserting into linkedlist(scene)
-    insertNode(cube);
+    insertNode(scene, cube);
 }
 
-void addSphereToScene(void)
+void addSphereToScene(Scene *scene)
 {
     // creating sphere model
 

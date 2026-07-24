@@ -2,6 +2,7 @@
 #include "utils/logging_system/logger.h"
 #include "windows/Window.h"
 #include "scene/linkedlist.h"
+#include "scene/sceneManager.h"
 
 
 // OpenGL related header file
@@ -191,19 +192,19 @@ void destroyModels(void)
     // destroying nodes of linkedlist
     if(triangle1)
     {
-        deleteNode(triangle1); 
+        deleteNode(sceneManager->currentScene, triangle1); 
     }
     if(square1)
     {
-        deleteNode(square1); 
+        deleteNode(sceneManager->currentScene, square1); 
     }
     if(cube1)
     {
-        deleteNode(cube1); 
+        deleteNode(sceneManager->currentScene, cube1); 
     }
     if(pyramid1)
     {
-        deleteNode(pyramid1); 
+        deleteNode(sceneManager->currentScene, pyramid1); 
     }
 
 }
