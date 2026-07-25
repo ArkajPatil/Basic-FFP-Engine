@@ -21,5 +21,6 @@ void initDemoScene(void);
 void createScene(char *sceneName);
 void deleteSelectedScene(void);
 void removeAllNodesOfScene(Scene *scene);
+void saveSelectedScene(void);
 
 #endif

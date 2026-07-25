@@ -205,29 +205,6 @@ void renderAllNodes(Scene *scene)
     }
 }
 
-void addMultiColoredTriangleToScene(Scene *scene)
-{
-    // creating triangle model
-    Model *triangle;
-    triangle = createModel(
-        "multi colored-triangle",               // name
-        false,                                  // highlight model
-        vec3{0.0f, 0.0f, 0.0f},                 // translate
-        vec3{0.0f, 0.0f, 0.0f},                 // rotate
-        vec3{1.0f, 1.0f, 1.0f},                 // scale
-        GL_TRIANGLES,                           // drawMode
-        3,                                      // vertexCount
-        trianglePosition,                       // position
-        triangleColor,                          // per vertex colors
-        NULL /*(GLfloat[]){0.0f, 0.0f, 0.0f}*/, // uniform color
-        NULL,                                   // texcoords
-        NULL                                    // normals
-    );
-
-    // inserting into linkedlist(scene)
-    insertNode(scene, triangle);
-}
-
 void addTriangleToScene(Scene *scene)
 {
     // creating triangle model
@@ -235,6 +212,7 @@ void addTriangleToScene(Scene *scene)
     GLfloat uniformTriangleColor[] = {0.65f, 0.65f, 0.625f};
     triangle = createModel(
         "triangle",             // name
+        "TRIANGLE",               // MODEL TYPE
         false,                  // highlight model
         vec3{0.0f, 0.0f, 0.0f}, // translate
         vec3{0.0f, 0.0f, 0.0f}, // rotate
@@ -258,7 +236,8 @@ void addSquareToScene(Scene *scene)
     Model *square;
     GLfloat squareColor[] = {0.7f, 0.3f, 0.6f};
     square = createModel(
-        "square",               // name
+        "square", // name
+        "QUAD",     // MODEL TYPE
         false,                  // highlight model
         vec3{0.0f, 0.0f, 0.0f}, // translate
         vec3{0.0f, 0.0f, 0.0f}, // rotate
@@ -283,7 +262,8 @@ void addPyramidToScene(Scene *scene)
     GLfloat pyramidColor[] = {0.6f, 0.5f, 0.1f};
 
     pyramid = createModel(
-        "pyramid",              // name
+        "pyramid", // name
+        "PYRAMID",   // MODEL TYPE
         false,                  // highlight model
         vec3{0.0f, 0.0f, 0.0f}, // translate
         vec3{0.0f, 0.0f, 0.0f}, // rotate
@@ -307,7 +287,8 @@ void addCubeToScene(Scene *scene)
     GLfloat cubeColor[] = {0.2f, 0.4f, 0.6f};
 
     cube = createModel(
-        "cube",                 // name
+        "cube", // name
+        "CUBE",   // MODEL TYPE
         false,                  // highlight model
         vec3{0.0f, 0.0f, 0.0f}, // translate
         vec3{0.0f, 0.0f, 0.0f}, // rotate

@@ -27,13 +27,16 @@ typedef struct {
 // creating Model structure
 typedef struct {
     char *modelName;
+    char *modelType;
     Transform transform;
     Mesh mesh;    // pointer to shared geometry
     bool bHighlightModel;
 } Model;
 
+//  char *modelType ==> [ TRIANGLE, QUAD, PYRAMID, CUBE ]
+
 // functions
-Model *createModel(char *modelName, bool bHighlightModel, vec3 translate, vec3 rotate, vec3 scale,
+Model *createModel(char *modelName, char *modelType, bool bHighlightModel, vec3 translate, vec3 rotate, vec3 scale,
                    GLenum drawMode, GLint vertexCount, GLfloat *vertices,
                    GLfloat *perVertexColors, GLfloat *uniformColor, GLfloat *texcoords, GLfloat *normals);
 void applyTransform(Transform *transform);

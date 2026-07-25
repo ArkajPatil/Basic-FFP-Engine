@@ -1,3 +1,4 @@
+#include <windows.h>
 #include <iostream>
 
 #include "external/imgui/imgui.h"
@@ -116,6 +117,11 @@ void drawUI()
     ImGui::End();
 }
 
+void showSavedScenes(void)
+{
+    
+}
+
 void fSceneManagement(void)
 {
 
@@ -140,6 +146,14 @@ void fSceneManagement(void)
     }
 
     addVerticalSpace(6.0f);
+    ImGui::Text("Save selected scene: ");
+    ImGui::SameLine();
+    if (ImGui::Button("Save Scene"))
+    {
+        saveSelectedScene();
+    }
+
+    addVerticalSpace(6.0f);
     ImGui::Text("Delete selected scene: ");
     ImGui::SameLine();
     if (ImGui::Button("Delete Scene"))
@@ -159,11 +173,6 @@ void fModelsControls(void)
     }
     ImGui::SameLine();
 
-    if (ImGui::Button("Multi-colored-triangle"))
-    {
-        addMultiColoredTriangleToScene(sceneManager->currentScene);
-    }
-
     if (ImGui::Button("Square"))
     {
         addSquareToScene(sceneManager->currentScene);
@@ -180,7 +189,6 @@ void fModelsControls(void)
     {
         addCubeToScene(sceneManager->currentScene);
     }
-    ImGui::SameLine();
 
     if (ImGui::Button("Sphere"))
     {

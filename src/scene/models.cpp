@@ -2,7 +2,7 @@
 
 // fucntions body
 Model *createModel(
-    char *modelName, bool bHighlightModel, vec3 translate, vec3 rotate, vec3 scale,
+    char *modelName, char *modelType, bool bHighlightModel, vec3 translate, vec3 rotate, vec3 scale,
     GLenum drawMode, GLint vertexCount, GLfloat *vertices,
     GLfloat *perVertexColors, GLfloat *uniformColor,
     GLfloat *texcoords, GLfloat *normals)
@@ -15,6 +15,7 @@ Model *createModel(
     }
 
     model->modelName = modelName;
+    model->modelType = modelType;
     model->bHighlightModel = bHighlightModel;
 
     // transformations

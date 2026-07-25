@@ -1,3 +1,13 @@
+27. implement Scene Save System
+    - Added `saveSelectedScene()` in `sceneManager.cpp` for saving the current scene.
+    - Exported scene data to JSON, including scene name, list of all model, model type, transform properties,
+       and uniform color.
+    - Scene files are automatically created in the `assets/scenes/` folder.
+    - Included a version field in the scene format for future-proof scene loading.(K^3B: This version is for scene loading,
+       it does not related to model version or anything like that)
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
 26. organize scene system
     - Created `Scene.h` to store the `Scene` structure.
     - Created `SceneManager.h` to store the `SceneManager` structure and related declarations.
