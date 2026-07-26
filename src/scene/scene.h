@@ -1,7 +1,7 @@
 #ifndef SCENE_H
 #define SCENE_H
 
-#include "scene/linkedlist.h"
+#include "scene/linkedlist/linkedlist.h"
 
 // scene struct
 typedef struct Scene {

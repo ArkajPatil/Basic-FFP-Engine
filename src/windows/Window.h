@@ -2,6 +2,7 @@
 #define WINDOW_H
 
 #include <windows.h>
+#include <string>
 
 #define WIN_WIDTH 800
 #define WIN_HEIGHT 600
@@ -21,5 +22,6 @@ extern HWND ghwnd;
 void createWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLine, int iCmdShow, HWND hnwd);
 void toggleFullScreen(void);
 void cleanupWindow(void);
+std::string WideToUtf8(const wchar_t* wideString);
 
 #endif

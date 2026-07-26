@@ -132,3 +132,35 @@ void cleanupWindow(void)
         gbFullScreen = FALSE;
     }
 }
+
+
+std::string WideToUtf8(const wchar_t* wideString)
+{
+    if (wideString == nullptr)
+        return "";
+
+    int size = WideCharToMultiByte(
+        CP_UTF8,
+        0,
+        wideString,
+        -1,
+        nullptr,
+        0,
+        nullptr,
+        nullptr);
+
+    std::string result(size - 1, '\0');
+
+    WideCharToMultiByte(
+        CP_UTF8,
+        0,
+        wideString,
+        -1,
+        &result[0],
+        size,
+        nullptr,
+        nullptr);
+
+    return result;
+}
+

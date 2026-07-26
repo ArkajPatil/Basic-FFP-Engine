@@ -1,7 +1,7 @@
 #include "renderLoop.h"
 #include "OpenGLSetup.h"
 #include "utils/logging_system/logger.h"
-#include "scene/linkedlist.h"
+#include "scene/linkedlist/linkedlist.h"
 #include "scene/sceneManager.h"
 #include "utils/my_math_library/myMath.h"
 #include "inputs/inputs.h"

@@ -1,3 +1,12 @@
+28. refactor scene folder
+    - reorganized the scene folder into dedicated submodules:
+      basic_models_data, models, linkedlist, and scene_loader
+    - created SceneLoader (SceneLoader.h / SceneLoader.cpp)
+    - moved scene saving logic void saveSelectedScene(void) into SceneLoader
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+
 27. implement Scene Save System
     - Added `saveSelectedScene()` in `sceneManager.cpp` for saving the current scene.
     - Exported scene data to JSON, including scene name, list of all model, model type, transform properties,

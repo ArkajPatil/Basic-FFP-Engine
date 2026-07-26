@@ -2,7 +2,7 @@
 #define OPENGLSETUP_H
 
 #include <windows.h>
-#include "scene/models.h"
+#include "scene/models/models.h"
 
 // variables declarations
 extern HDC ghdc;

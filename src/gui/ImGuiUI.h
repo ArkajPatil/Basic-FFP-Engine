@@ -1,10 +1,14 @@
 #ifndef IMGUIUI_H
 #define IMGUIUI_H
 
+#include <vector> // for giveSavedScenes()
+
 // functions declarations
 void drawUI(void);
 
 // local function declarations
+std::vector<std::string> giveSavedScenes(void);
+void fmodelTransformations(void);
 void fSceneManagement(void);
 void fModelsControls(void);
 void screenRotationControls(void);

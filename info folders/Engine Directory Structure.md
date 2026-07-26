@@ -9,6 +9,15 @@
 |       |
 |       +---> .obj files
 | 
++---> [ assets ]
+|       |
+|       +--->[ models ]
+|       |
+|       +--->[ scenes ]   -> this folder contains scenes saved at runtime
+|       |
+|       +--->[ textures ]
+|       
+| 
 +---> [ logs ]
 |       -> LogFile.txt
 | 
@@ -16,7 +25,7 @@
 |       |
 |       +--->[ core ]
 |       |      |
-|       |      +---> main.c
+|       |      +---> main.cpp
 |       |
 |       +--->[ external ]
 |       |      |
@@ -33,14 +42,14 @@
 |       |
 |       +--->[ inputs ]
 |       |      |
-|       |      +---> inputs.c
+|       |      +---> inputs.cpp
 |       |      +---> inputs.h
 |       |
 |       +--->[ rendering ]
 |       |      |
-|       |      +---> OpenGLSetup.c
+|       |      +---> OpenGLSetup.cpp
 |       |      +---> OpenGLSetup.h
-|       |      +---> renderLoop.c
+|       |      +---> renderLoop.cpp
 |       |      +---> renderLoop.h
 |       |
 |       +--->[ scene ]
@@ -48,30 +57,45 @@
 |       |      +--->[ basic_models_data ]
 |       |      |      |
 |       |      |      +---> basicModelsData.h
-|       |      |      +---> basicModelsData.c
+|       |      |      +---> basicModelsData.cpp
 |       |      |
-|       |      +---> models.c
-|       |      +---> models.h
-|       |      +---> linkedlist.c
-|       |      +---> linkedlist.h
+|       |      +--->[ models ]
+|       |      |      |
+|       |      |      +---> models.h
+|       |      |      +---> models.cpp
+|       |      |
+|       |      +--->[ linkedlist ]
+|       |      |      |
+|       |      |      +---> linkedlist.h
+|       |      |      +---> linkedlist.cpp
+|       |      |
+|       |      |
+|       |      +--->[ scene_loader ]
+|       |      |      |
+|       |      |      +---> SceneLoader.h
+|       |      |      +---> SceneLoader.cpp
+|       |      |
+|       |      +---> scene.h
+|       |      +---> sceneManager.h
+|       |      +---> sceneManager.cpp
 |       |
 |       +--->[ utils ]
 |       |      |
 |       |      +--->[ logging_system ]
 |       |      |      |
 |       |      |      +---> logger.h
-|       |      |      +---> logger.c
+|       |      |      +---> logger.cpp
 |       |      |
 |       |      +--->[ my_math_library ]
 |       |      |      |
 |       |      |      +---> myMath.h
-|       |      |      +---> myMath.c
+|       |      |      +---> myMath.cpp
 |       |
 |       +--->[ windows ]
 |       |      |
 |       |      +---> resource.h
 |       |      +---> Window.h
-|       |      +---> Window.c
+|       |      +---> Window.cpp
 |       |      +---> Window.rc
 |       |      +---> Window.res
 |

@@ -1,13 +1,16 @@
 #include <windows.h>
 #include <iostream>
+#include <vector>
 
 #include "external/imgui/imgui.h"
 #include "ImGuiUI.h"
 
-#include "scene/models.h"
-#include "scene/linkedlist.h"
+#include "scene/models/models.h"
+#include "scene/linkedlist/linkedlist.h"
 #include "scene/sceneManager.h"
 #include "rendering/renderLoop.h"
+#include "windows/Window.h"
+#include "scene/scene_loader/SceneLoader.h"
 
 // local variables
 // model uniform color
@@ -60,53 +63,7 @@ void drawUI()
     // models transformations
     if (ImGui::CollapsingHeader("Model Transformations"))
     {
-        if (sceneManager->currentScene->selectedNode)
-        {
-            Model *model = sceneManager->currentScene->selectedNode->currentModel;
-
-            // model position controls
-            DrawVec3Control("Position", &model->transform.translate.x, &model->transform.translate.y, &model->transform.translate.z);
-            if (ImGui::Button("Reset Translation(0,0,0)"))
-            {
-                sceneManager->currentScene->selectedNode->currentModel->transform.translate.x = 0.0f;
-                sceneManager->currentScene->selectedNode->currentModel->transform.translate.y = 0.0f;
-                sceneManager->currentScene->selectedNode->currentModel->transform.translate.z = 0.0f;
-            }
-            ImGui::Separator();
-
-            // model rotation controls
-            DrawVec3Control("Rotation", &model->transform.rotate.x, &model->transform.rotate.y, &model->transform.rotate.z);
-            if (ImGui::Button("Reset Rotation(models) Angles"))
-            {
-                sceneManager->currentScene->selectedNode->currentModel->transform.rotate.x = 0.0f;
-                sceneManager->currentScene->selectedNode->currentModel->transform.rotate.y = 0.0f;
-                sceneManager->currentScene->selectedNode->currentModel->transform.rotate.z = 0.0f;
-            }
-            ImGui::Separator();
-
-            // model scaling controls
-            DrawVec3Control("Scale", &model->transform.scale.x, &model->transform.scale.y, &model->transform.scale.z);
-            ImGui::Text("Scale in all axis: ");
-            ImGui::SameLine();
-            ImGui::PushItemWidth(150);
-            if (ImGui::DragFloat("##Model Scaling", &uniformModelScale, 0.1f))
-            {
-                model->transform.scale.x = uniformModelScale;
-                model->transform.scale.y = uniformModelScale;
-                model->transform.scale.z = uniformModelScale;
-            }
-            ImGui::PopItemWidth();
-
-            if (ImGui::Button("Reset Scaling"))
-            {
-                sceneManager->currentScene->selectedNode->currentModel->transform.scale.x = 1.0f;
-                sceneManager->currentScene->selectedNode->currentModel->transform.scale.y = 1.0f;
-                sceneManager->currentScene->selectedNode->currentModel->transform.scale.z = 1.0f;
-                uniformModelScale = 1.0f;
-            }
-            ImGui::Separator();
-            addVerticalSpace(7.0f);
-        }
+        fmodelTransformations();
     }
     // Scenes Management
     if (ImGui::CollapsingHeader("Scenes Management"))
@@ -117,9 +74,34 @@ void drawUI()
     ImGui::End();
 }
 
-void showSavedScenes(void)
+std::vector<std::string> giveSavedScenes(void)
 {
-    
+    std::vector<std::string> savedScenes;
+    WIN32_FIND_DATA findData;
+
+    HANDLE hFind = FindFirstFile(TEXT("assets/scenes/*.json"), &findData);
+    if (hFind == INVALID_HANDLE_VALUE)
+    {
+        return savedScenes;
+    }
+
+    do
+    {
+        std::string name = findData.cFileName;
+
+        size_t pos = name.find(".json");
+
+        if (pos != std::string::npos)
+        {
+            name.erase(pos);
+        }
+
+        savedScenes.push_back(name);
+    } while (FindNextFile(hFind, &findData));
+
+    FindClose(hFind);
+
+    return savedScenes;
 }
 
 void fSceneManagement(void)
@@ -159,6 +141,75 @@ void fSceneManagement(void)
     if (ImGui::Button("Delete Scene"))
     {
         deleteSelectedScene();
+    }
+
+    if (ImGui::TreeNode("Loading Scene"))
+    {
+        ImGui::Text("Saved Scenes:");
+        std::vector<std::string> savedScenes = giveSavedScenes(); // this funct returns dynamic list of saved scenes
+
+        static int selectedScene = 0;
+        for (int i = 0; i < savedScenes.size(); i++)
+        {
+            bool isSelected = (selectedScene == i);
+            if (ImGui::Selectable(savedScenes[i].c_str(), isSelected))
+            {
+                selectedScene = i;
+            }
+        }
+
+        ImGui::TreePop();
+    }
+}
+
+void fmodelTransformations(void)
+{
+    if (sceneManager->currentScene->selectedNode)
+    {
+        Model *model = sceneManager->currentScene->selectedNode->currentModel;
+
+        // model position controls
+        DrawVec3Control("Position", &model->transform.translate.x, &model->transform.translate.y, &model->transform.translate.z);
+        if (ImGui::Button("Reset Translation(0,0,0)"))
+        {
+            sceneManager->currentScene->selectedNode->currentModel->transform.translate.x = 0.0f;
+            sceneManager->currentScene->selectedNode->currentModel->transform.translate.y = 0.0f;
+            sceneManager->currentScene->selectedNode->currentModel->transform.translate.z = 0.0f;
+        }
+        ImGui::Separator();
+
+        // model rotation controls
+        DrawVec3Control("Rotation", &model->transform.rotate.x, &model->transform.rotate.y, &model->transform.rotate.z);
+        if (ImGui::Button("Reset Rotation(models) Angles"))
+        {
+            sceneManager->currentScene->selectedNode->currentModel->transform.rotate.x = 0.0f;
+            sceneManager->currentScene->selectedNode->currentModel->transform.rotate.y = 0.0f;
+            sceneManager->currentScene->selectedNode->currentModel->transform.rotate.z = 0.0f;
+        }
+        ImGui::Separator();
+
+        // model scaling controls
+        DrawVec3Control("Scale", &model->transform.scale.x, &model->transform.scale.y, &model->transform.scale.z);
+        ImGui::Text("Scale in all axis: ");
+        ImGui::SameLine();
+        ImGui::PushItemWidth(150);
+        if (ImGui::DragFloat("##Model Scaling", &uniformModelScale, 0.1f))
+        {
+            model->transform.scale.x = uniformModelScale;
+            model->transform.scale.y = uniformModelScale;
+            model->transform.scale.z = uniformModelScale;
+        }
+        ImGui::PopItemWidth();
+
+        if (ImGui::Button("Reset Scaling"))
+        {
+            sceneManager->currentScene->selectedNode->currentModel->transform.scale.x = 1.0f;
+            sceneManager->currentScene->selectedNode->currentModel->transform.scale.y = 1.0f;
+            sceneManager->currentScene->selectedNode->currentModel->transform.scale.z = 1.0f;
+            uniformModelScale = 1.0f;
+        }
+        ImGui::Separator();
+        addVerticalSpace(7.0f);
     }
 }
 

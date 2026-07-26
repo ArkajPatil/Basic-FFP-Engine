@@ -1,7 +1,7 @@
 #include "OpenGLSetup.h"
 #include "utils/logging_system/logger.h"
 #include "windows/Window.h"
-#include "scene/linkedlist.h"
+#include "scene/linkedlist/linkedlist.h"
 #include "scene/sceneManager.h"
 
 

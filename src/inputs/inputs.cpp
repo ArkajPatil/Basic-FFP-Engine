@@ -1,6 +1,6 @@
 #include "inputs.h"
 // #include <windows.h>
-#include "scene/linkedlist.h"
+#include "scene/linkedlist/linkedlist.h"
 #include "windows/Window.h"
 
 // global keys handler array

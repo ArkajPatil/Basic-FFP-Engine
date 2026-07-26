@@ -1,7 +1,7 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 
-#include "scene/models.h"
+#include "scene/models/models.h"
 #include "utils/my_math_library/myMath.h"
 
 typedef struct Scene Scene;
