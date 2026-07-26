@@ -1,3 +1,15 @@
+30. scene loading
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+29. fix ImGui duplicate widget IDs for scenes name
+    - prepend scene names with "->" in the active scene list(scenes created or currently implementing in Engine at runtime)
+    - without this I was having ImGui ID conflicts, with active scenes name & scenes name saved in 'assets/scenes/' 
+    - before: ImGui::Selectable(sceneName.c_str(), isSelected);
+    - after : ImGui::Selectable(("-> " + sceneName).c_str(), isSelected);
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
 28. refactor scene folder
     - reorganized the scene folder into dedicated submodules:
       basic_models_data, models, linkedlist, and scene_loader
@@ -5,7 +17,6 @@
     - moved scene saving logic void saveSelectedScene(void) into SceneLoader
 
 -----------------------------------------------------------------------------------------------------------------------------------------------
-
 
 27. implement Scene Save System
     - Added `saveSelectedScene()` in `sceneManager.cpp` for saving the current scene.

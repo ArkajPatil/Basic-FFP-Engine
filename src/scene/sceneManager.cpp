@@ -48,6 +48,7 @@ void createScene(char *sceneName)
     }
     else
     {
+        // char *prefix = " -> " ;
         strncpy(scene->sceneName, sceneName, sizeof(scene->sceneName) - 1);
 
         scene->sceneName[sizeof(scene->sceneName) - 1] = '\0';

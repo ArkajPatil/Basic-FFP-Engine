@@ -1,6 +1,6 @@
-#include <windows.h>
-#include <iostream>
-#include <vector>
+// #include <windows.h>
+// #include <iostream>
+// #include <vector>
 
 #include "external/imgui/imgui.h"
 #include "ImGuiUI.h"
@@ -74,42 +74,12 @@ void drawUI()
     ImGui::End();
 }
 
-std::vector<std::string> giveSavedScenes(void)
-{
-    std::vector<std::string> savedScenes;
-    WIN32_FIND_DATA findData;
-
-    HANDLE hFind = FindFirstFile(TEXT("assets/scenes/*.json"), &findData);
-    if (hFind == INVALID_HANDLE_VALUE)
-    {
-        return savedScenes;
-    }
-
-    do
-    {
-        std::string name = findData.cFileName;
-
-        size_t pos = name.find(".json");
-
-        if (pos != std::string::npos)
-        {
-            name.erase(pos);
-        }
-
-        savedScenes.push_back(name);
-    } while (FindNextFile(hFind, &findData));
-
-    FindClose(hFind);
-
-    return savedScenes;
-}
-
 void fSceneManagement(void)
 {
 
     ImGui::Text("Create Scene: ");
 
-    ImGui::InputText("Scene Name", newSceneName, sizeof(newSceneName));
+    ImGui::InputText("Scene Name", newSceneName, sizeof(newSceneName+1));
 
     if (ImGui::Button("Create Scene"))
     {
@@ -121,7 +91,9 @@ void fSceneManagement(void)
     for (int i = 0; i < sceneManager->sceneCount; i++)
     {
         bool isSelected = (sceneManager->currentScene == sceneManager->scenesArray[i]);
-        if (ImGui::Selectable(sceneManager->scenesArray[i]->sceneName, isSelected))
+        std::string sSceneName = sceneManager->scenesArray[i]->sceneName;
+        sSceneName = " -> " + sSceneName;
+        if (ImGui::Selectable(sSceneName.c_str(), isSelected))
         {
             sceneManager->currentScene = sceneManager->scenesArray[i];
         }
@@ -133,6 +105,7 @@ void fSceneManagement(void)
     if (ImGui::Button("Save Scene"))
     {
         saveSelectedScene();
+        giveSavedScenes();
     }
 
     addVerticalSpace(6.0f);
@@ -142,23 +115,21 @@ void fSceneManagement(void)
     {
         deleteSelectedScene();
     }
+    ImGui::Separator();
 
-    if (ImGui::TreeNode("Loading Scene"))
+    // loading a scene from 'assets/scenes'
+    ImGui::Text("Loading Scene");
+
+    ImGui::Text("Saved Scenes:");
+
+    static int selectedScene = 0;
+    for (int i = 0; i < vsSavedScenes.size(); i++)
     {
-        ImGui::Text("Saved Scenes:");
-        std::vector<std::string> savedScenes = giveSavedScenes(); // this funct returns dynamic list of saved scenes
-
-        static int selectedScene = 0;
-        for (int i = 0; i < savedScenes.size(); i++)
+        bool isSelected = (selectedScene == i);
+        if (ImGui::Selectable(vsSavedScenes[i].c_str(), isSelected))
         {
-            bool isSelected = (selectedScene == i);
-            if (ImGui::Selectable(savedScenes[i].c_str(), isSelected))
-            {
-                selectedScene = i;
-            }
+            selectedScene = i;
         }
-
-        ImGui::TreePop();
     }
 }
 

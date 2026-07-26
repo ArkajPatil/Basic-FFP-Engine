@@ -1,6 +1,41 @@
 #include <windows.h>
+#include <iostream>
+
 #include "SceneLoader.h"
 #include "scene/sceneManager.h"
+
+// global variables
+std::vector<std::string> vsSavedScenes;
+// variables
+
+void giveSavedScenes(void)
+{
+    WIN32_FIND_DATA findData;
+
+    HANDLE hFind = FindFirstFile(TEXT("assets/scenes/*.json"), &findData);
+    if (hFind == INVALID_HANDLE_VALUE)
+    {
+        return;
+    }
+
+    vsSavedScenes.clear();
+
+    do
+    {
+        std::string name = findData.cFileName;
+
+        size_t pos = name.find(".json");
+
+        if (pos != std::string::npos)
+        {
+            name.erase(pos);
+        }
+
+        vsSavedScenes.push_back(name);
+    } while (FindNextFile(hFind, &findData));
+
+    FindClose(hFind);
+}
 
 void saveSelectedScene(void)
 {

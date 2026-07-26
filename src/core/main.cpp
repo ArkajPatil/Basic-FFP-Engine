@@ -6,6 +6,7 @@
 #include "inputs/inputs.h"
 #include "gui/ImGuiLayer.h"
 #include "scene/sceneManager.h"
+#include "scene/scene_loader/SceneLoader.h"
 
 // global functions declarations
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM); // HWND->HANDLE->UINT->Unsigned int
@@ -55,6 +56,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLi
     // initializing Scene Manager
     initSceneManager();
     initDemoScene();
+
+    // load the saved scenes from 'assets/scenes' in vector(dynamic list) which is located in SceneManager
+    giveSavedScenes(); // this funct load dynamic list(std::vector<std::string> vsSavedScenes) of saved scenes which is located inside SceneLoader
 
     // Game Loop
     while (bDone == FALSE)

@@ -7,7 +7,6 @@
 void drawUI(void);
 
 // local function declarations
-std::vector<std::string> giveSavedScenes(void);
 void fmodelTransformations(void);
 void fSceneManagement(void);
 void fModelsControls(void);
