@@ -108,17 +108,19 @@ void fSceneManagement(void)
         giveSavedScenes();
     }
 
-    addVerticalSpace(6.0f);
+    addVerticalSpace(5.0f);
     ImGui::Text("Delete selected scene: ");
     ImGui::SameLine();
     if (ImGui::Button("Delete Scene"))
     {
         deleteSelectedScene();
     }
+    addVerticalSpace(1.0f);
     ImGui::Separator();
+    addVerticalSpace(6.0f);
 
     // loading a scene from 'assets/scenes'
-    ImGui::Text("Loading Scene");
+    ImGui::Text("--->> Loading Scene");
 
     ImGui::Text("Saved Scenes:");
 
@@ -130,6 +132,11 @@ void fSceneManagement(void)
         {
             selectedScene = i;
         }
+    }
+
+    if(ImGui::Button("Load selected Scene"))
+    {
+          loadSelectedScene(selectedScene);
     }
 }
 
@@ -191,25 +198,25 @@ void fModelsControls(void)
     ImGui::SameLine();
     if (ImGui::Button("Triangle"))
     {
-        addTriangleToScene(sceneManager->currentScene);
+        addModelToScene(sceneManager->currentScene, "TRIANGLE");
     }
     ImGui::SameLine();
 
     if (ImGui::Button("Square"))
     {
-        addSquareToScene(sceneManager->currentScene);
+        addModelToScene(sceneManager->currentScene, "QUAD");
     }
     ImGui::SameLine();
 
     if (ImGui::Button("Pyramid"))
     {
-        addPyramidToScene(sceneManager->currentScene);
+        addModelToScene(sceneManager->currentScene, "PYRAMID");
     }
     ImGui::SameLine();
 
     if (ImGui::Button("Cube"))
     {
-        addCubeToScene(sceneManager->currentScene);
+        addModelToScene(sceneManager->currentScene, "CUBE");
     }
 
     if (ImGui::Button("Sphere"))

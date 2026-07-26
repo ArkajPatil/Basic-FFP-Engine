@@ -26,10 +26,6 @@ void selectPreviousNode(Scene *scene);
 void renderNode(Node *node);
 void renderAllNodes(Scene *scene);
 
-void addTriangleToScene(Scene *scene);
-void addSquareToScene(Scene *scene);
-void addPyramidToScene(Scene *scene);
-void addCubeToScene(Scene *scene);
-void addSphereToScene(Scene *scene);
+void addModelToScene(Scene *scene, char *modelType);
 
 #endif

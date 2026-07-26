@@ -1,22 +1,25 @@
-[2026-07-26 16:48:00] >>>>> SUCCESS <<<<< :: Log File created
-[2026-07-26 16:48:00] >>>>> SUCCESS <<<<< :: Window creation done Successfully
-[2026-07-26 16:48:00] OpenGL Information :
-[2026-07-26 16:48:00] ********************
-[2026-07-26 16:48:00] OpenGL Vendor : NVIDIA Corporation
-[2026-07-26 16:48:00] OpenGL Renderer : NVIDIA GeForce GTX 1050/PCIe/SSE2
-[2026-07-26 16:48:00] OpenGL Version : 4.6.0 NVIDIA 576.02
-[2026-07-26 16:48:00] ********************
+[2026-07-26 20:35:27] >>>>> SUCCESS <<<<< :: Log File created
+[2026-07-26 20:35:27] >>>>> SUCCESS <<<<< :: Window creation done Successfully
+[2026-07-26 20:35:27] OpenGL Information :
+[2026-07-26 20:35:27] ********************
+[2026-07-26 20:35:27] OpenGL Vendor : NVIDIA Corporation
+[2026-07-26 20:35:27] OpenGL Renderer : NVIDIA GeForce GTX 1050/PCIe/SSE2
+[2026-07-26 20:35:27] OpenGL Version : 4.6.0 NVIDIA 576.02
+[2026-07-26 20:35:27] ********************
 
-[2026-07-26 16:48:00] >>>>> SUCCESS <<<<< :: initializeOpenGL() completed successfully, OpenGL setup is done.
-[2026-07-26 16:48:00] >>>>> SUCCESS <<<<< :: ImGui Initialization is done.
-[2026-07-26 16:48:00] >>>>> SUCCESS <<<<< :: SceneManager allocation successfull.
-[2026-07-26 16:48:00] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
-[2026-07-26 16:48:46] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
-[2026-07-26 16:48:49] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
-[2026-07-26 16:48:50] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
-[2026-07-26 16:48:55] Model: triangle was created.
-[2026-07-26 16:48:55] Model: triangle has been inserted as head node in scene 'demo'.
-[2026-07-26 16:49:00] >>>>>EXITING<<<<< Escape Key pressed
-[2026-07-26 16:49:00] Cleaning ImGui is done.
-[2026-07-26 16:49:01] Program terminated successfully
+[2026-07-26 20:35:27] >>>>> SUCCESS <<<<< :: initializeOpenGL() completed successfully, OpenGL setup is done.
+[2026-07-26 20:35:27] >>>>> SUCCESS <<<<< :: ImGui Initialization is done.
+[2026-07-26 20:35:27] >>>>> SUCCESS <<<<< :: SceneManager allocation successfull.
+[2026-07-26 20:35:27] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
+[2026-07-26 20:35:30] Model: TRIANGLE was created.
+[2026-07-26 20:35:30] Model: TRIANGLE has been inserted as head node in scene 'demo'.
+[2026-07-26 20:35:32] Model: QUAD was created.
+[2026-07-26 20:35:32] Model: QUAD has been appended to the linked list in scene 'demo'.
+[2026-07-26 20:35:33] Model: PYRAMID was created.
+[2026-07-26 20:35:33] Model: PYRAMID has been appended to the linked list in scene 'demo'.
+[2026-07-26 20:35:34] Model: CUBE was created.
+[2026-07-26 20:35:34] Model: CUBE has been appended to the linked list in scene 'demo'.
+[2026-07-26 20:35:44] >>>>>EXITING<<<<< Escape Key pressed
+[2026-07-26 20:35:44] Cleaning ImGui is done.
+[2026-07-26 20:35:44] Program terminated successfully
 

@@ -1,4 +1,12 @@
-30. scene loading
+31. scene loading
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+30. refactor model creation function
+    - replaced individual model creation functions with a single/unified addModelToScene() function(inside linkedlist)
+    - removed addTriangleToScene(), addSquareToScene(), addPyramidToScene(), addCubeToScene()
+    - model type is now selected using the modelType parameter, reducing duplicate code
+    - it was done mainly to support loadScene() function.
 
 -----------------------------------------------------------------------------------------------------------------------------------------------
 

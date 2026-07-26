@@ -205,107 +205,6 @@ void renderAllNodes(Scene *scene)
     }
 }
 
-void addTriangleToScene(Scene *scene)
-{
-    // creating triangle model
-    Model *triangle;
-    GLfloat uniformTriangleColor[] = {0.65f, 0.65f, 0.625f};
-    triangle = createModel(
-        "triangle",             // name
-        "TRIANGLE",               // MODEL TYPE
-        false,                  // highlight model
-        vec3{0.0f, 0.0f, 0.0f}, // translate
-        vec3{0.0f, 0.0f, 0.0f}, // rotate
-        vec3{1.0f, 1.0f, 1.0f}, // scale
-        GL_TRIANGLES,           // drawMode
-        3,                      // vertexCount
-        trianglePosition,       // position
-        NULL,                   // per vertex colors
-        uniformTriangleColor,   // uniform color
-        NULL,                   // texcoords
-        NULL                    // normals
-    );
-
-    // inserting into linkedlist(scene)
-    insertNode(scene, triangle);
-}
-
-void addSquareToScene(Scene *scene)
-{
-    // creating square model
-    Model *square;
-    GLfloat squareColor[] = {0.7f, 0.3f, 0.6f};
-    square = createModel(
-        "square", // name
-        "QUAD",     // MODEL TYPE
-        false,                  // highlight model
-        vec3{0.0f, 0.0f, 0.0f}, // translate
-        vec3{0.0f, 0.0f, 0.0f}, // rotate
-        vec3{1.0f, 1.0f, 1.0f}, // scale
-        GL_QUADS,               // drawMode
-        4,                      // vertexCount
-        squarePosition,         // position
-        NULL,                   // per vertex colors
-        squareColor,            // uniform color
-        NULL,                   // texcoords
-        NULL                    // normals
-    );
-
-    // inserting into linkedlist(scene)
-    insertNode(scene, square);
-}
-
-void addPyramidToScene(Scene *scene)
-{
-    // creating pyramid model
-    Model *pyramid;
-    GLfloat pyramidColor[] = {0.6f, 0.5f, 0.1f};
-
-    pyramid = createModel(
-        "pyramid", // name
-        "PYRAMID",   // MODEL TYPE
-        false,                  // highlight model
-        vec3{0.0f, 0.0f, 0.0f}, // translate
-        vec3{0.0f, 0.0f, 0.0f}, // rotate
-        vec3{1.0f, 1.0f, 1.0f}, // scale
-        GL_TRIANGLES,           // drawMode
-        12,                     // vertexCount
-        pyramidPosition,        // position
-        NULL,                   // per vertex colors
-        pyramidColor,           // uniform color
-        NULL,                   // texcoords
-        NULL                    // normals
-    );
-
-    // inserting into linkedlist(scene)
-    insertNode(scene, pyramid);
-}
-
-void addCubeToScene(Scene *scene)
-{
-    Model *cube;
-    GLfloat cubeColor[] = {0.2f, 0.4f, 0.6f};
-
-    cube = createModel(
-        "cube", // name
-        "CUBE",   // MODEL TYPE
-        false,                  // highlight model
-        vec3{0.0f, 0.0f, 0.0f}, // translate
-        vec3{0.0f, 0.0f, 0.0f}, // rotate
-        vec3{1.0f, 1.0f, 1.0f}, // scale
-        GL_QUADS,               // drawMode
-        24,                     // vertexCount
-        cubePosition,           // position
-        NULL,                   // per vertex colors
-        cubeColor,              // uniform color
-        NULL,                   // texcoords
-        NULL                    // normals
-    );
-
-    // inserting into linkedlist(scene)
-    insertNode(scene, cube);
-}
-
 void addSphereToScene(Scene *scene)
 {
     // creating sphere model
@@ -313,3 +212,63 @@ void addSphereToScene(Scene *scene)
     // inserting into linkedlist(scene)
     // insertNode(sphere);
 }
+
+void addModelToScene(Scene *scene, char *modelType)
+{
+    Model *model;
+    float uniformColor[] = {0.55f, 0.75f, 0.75f};
+
+    GLenum drawMode;
+    GLint vertexCount;
+    float *position;
+
+    if (strcmp(modelType, "TRIANGLE") == 0)
+    {
+        drawMode = GL_TRIANGLES;
+        vertexCount = 3;
+        position = trianglePosition;
+    }
+    else if (strcmp(modelType, "QUAD") == 0)
+    {
+        drawMode = GL_QUADS;
+        vertexCount = 4;
+        position = squarePosition;
+    }
+    else if (strcmp(modelType, "PYRAMID") == 0)
+    {
+        drawMode = GL_TRIANGLES;
+        vertexCount = 12;
+        position = pyramidPosition;
+    }
+    else if (strcmp(modelType, "CUBE") == 0)
+    {
+        drawMode = GL_QUADS;
+        vertexCount = 24;
+        position = cubePosition;
+    }
+    else
+    {
+        return;
+    }
+
+    model = createModel(
+        modelType,              // name
+        modelType,              // MODEL TYPE
+        false,                  // highlight model
+        vec3{0.0f, 0.0f, 0.0f}, // translate
+        vec3{0.0f, 0.0f, 0.0f}, // rotate
+        vec3{1.0f, 1.0f, 1.0f}, // scale
+        drawMode,               // drawMode
+        vertexCount,            // vertexCount
+        position,               // position
+        NULL,                   // per vertex colors
+        uniformColor,           // uniform color
+        NULL,                   // texcoords
+        NULL                    // normals
+    );
+
+    // inserting into linkedlist(scene)
+    insertNode(scene, model);
+
+}
+

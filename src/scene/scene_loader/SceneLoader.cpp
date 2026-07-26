@@ -1,12 +1,59 @@
 #include <windows.h>
 #include <iostream>
+using namespace std;
+#include <fstream>
 
 #include "SceneLoader.h"
 #include "scene/sceneManager.h"
 
+// for scene loading fucntion
+#include "external/nlohmann/json.hpp"
+using json = nlohmann::json;
+
 // global variables
 std::vector<std::string> vsSavedScenes;
 // variables
+
+// local functions declarations
+void loadSceneV1(json& sceneData);
+
+void loadSceneV1(json& sceneData)
+{
+    Scene *scene = sceneManager->currentScene;
+
+    // updating name of scene as : old name + new name
+    string append = " + " + sceneData["sceneData"] ;
+    int remaining = sizeof(scene->sceneName) - strlen(scene->sceneName) - 1;
+    strncat(scene->sceneName, append.c_str(), remaining); 
+
+    removeAllNodesOfScene(scene);
+    
+}
+
+void loadSelectedScene(int indexOfSelectedScene)
+{
+    std::string path =
+        "assets/scenes/" +
+        vsSavedScenes[indexOfSelectedScene] +
+        ".json";
+
+    std::ifstream file(path); // ➡️ Open the JSON file.
+
+    if (!file.is_open())
+    {
+        return;
+    }
+
+    json sceneData; // ➡️ Create an empty JSON object in memory.
+
+    file >> sceneData; // ➡️ Read the contents of the file, parse the JSON text, and store it in sceneData
+
+    string version = sceneData["version"];
+    if (version == "1")
+    {
+        loadSceneV1(sceneData);
+    }
+}
 
 void giveSavedScenes(void)
 {
@@ -58,7 +105,7 @@ void saveSelectedScene(void)
     }
 
     fprintf(pFile, "{\n");
-    fprintf(pFile, "\t\"version\" : 1,\n");
+    fprintf(pFile, "\t\"version\" : \"%s\",\n", "1");
     fprintf(pFile, "\t\"sceneName\" : \"%s\",\n", scene->sceneName);
     fprintf(pFile, "\t\"models\" : [\n");
     ;
@@ -96,40 +143,6 @@ void saveSelectedScene(void)
     fprintf(pFile, "}");
     fclose(pFile);
 
+    writeLog(">>>>> SUCCESS <<<<< :: Scene '%s' was saved to 'assets/scenes/' successfully.", scene->sceneName);
     MessageBox(NULL, TEXT("Scene saved successfully."), TEXT("Scene Management"), MB_OK);
 }
-
-// void loadSelectedScene(void)
-// {
-//     char path[256];
-
-//     snprintf(path,
-//              sizeof(path),
-//              "Assets/Scenes/%s.json",
-//              savedScenes[selectedScene].c_str());
-
-//     std::ifstream file(path);
-
-//     if (!file.is_open())
-//     {
-//         return;
-//     }
-
-//     json sceneData;
-
-//     file >> sceneData;
-
-//     for (auto &modelData : sceneData["models"])
-//     {
-//         std::string modelType =
-//             modelData["modelType"];
-//         node->model.transform.rotate.x =
-//             modelData["rotation"][0];
-//         node->model.transform.scale.x =
-//             modelData["scale"][0];
-//         node->model.colors[0].r =
-//             modelData["color"][0];
-//     }
-
-//     file.close();
-// }

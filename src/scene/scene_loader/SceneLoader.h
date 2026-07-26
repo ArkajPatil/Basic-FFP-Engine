@@ -7,6 +7,7 @@
 extern std::vector<std::string> vsSavedScenes;
 
 // functions declarations
+void loadSelectedScene(int indexOfSelectedScene);
 void giveSavedScenes(void);
 void saveSelectedScene(void);
 void loadSelectedScene(void);
