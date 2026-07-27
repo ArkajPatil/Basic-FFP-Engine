@@ -124,19 +124,19 @@ void fSceneManagement(void)
 
     ImGui::Text("Saved Scenes:");
 
-    static int selectedScene = 0;
+    static short int iSelectedScene = 0;
     for (int i = 0; i < vsSavedScenes.size(); i++)
     {
-        bool isSelected = (selectedScene == i);
+        bool isSelected = (iSelectedScene == i);
         if (ImGui::Selectable(vsSavedScenes[i].c_str(), isSelected))
         {
-            selectedScene = i;
+            iSelectedScene = i;
         }
     }
 
     if(ImGui::Button("Load selected Scene"))
     {
-          loadSelectedScene(selectedScene);
+          loadSelectedScene(iSelectedScene);
     }
 }
 
@@ -198,7 +198,9 @@ void fModelsControls(void)
     ImGui::SameLine();
     if (ImGui::Button("Triangle"))
     {
+        writeLog("################################ checkpoint 0 ");
         addModelToScene(sceneManager->currentScene, "TRIANGLE");
+        writeLog("################################ checkpoint end ");
     }
     ImGui::SameLine();
 

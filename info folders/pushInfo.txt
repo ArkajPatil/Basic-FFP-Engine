@@ -1,4 +1,16 @@
-31. scene loading
+32. scene loading
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+31. fix model memory management
+    - replaced malloc/free with new/delete for Model allocation
+    - fixed createModel() crash caused by std::string members
+    - updated destroyModel() for proper std::string cleanup
+    - createModel() now uses new instead of malloc
+    - destroyModel() now uses delete instead of free
+    - fixed crashes caused by std::string constructors/destructors
+    - replaced C-style char* with std::string in Model (modelName, modelType) and LinkedList structures
 
 -----------------------------------------------------------------------------------------------------------------------------------------------
 

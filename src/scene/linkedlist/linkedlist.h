@@ -26,6 +26,7 @@ void selectPreviousNode(Scene *scene);
 void renderNode(Node *node);
 void renderAllNodes(Scene *scene);
 
-void addModelToScene(Scene *scene, char *modelType);
+void addModelToScene(Scene *scene, string modelType);
+void addSphereToScene(Scene *scene);
 
 #endif

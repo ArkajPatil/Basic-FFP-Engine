@@ -3,6 +3,10 @@
 
 #include<windows.h>
 #include<gl/GL.h>
+
+#include<iostream>
+using namespace std;
+
 #include "utils/logging_system/logger.h"
 #include "utils/my_math_library/myMath.h"
 
@@ -26,8 +30,8 @@ typedef struct {
 
 // creating Model structure
 typedef struct {
-    char *modelName;
-    char *modelType;
+    string modelName;
+    string modelType;
     Transform transform;
     Mesh mesh;    // pointer to shared geometry
     bool bHighlightModel;
@@ -36,12 +40,12 @@ typedef struct {
 //  char *modelType ==> [ TRIANGLE, QUAD, PYRAMID, CUBE ]
 
 // functions
-Model *createModel(char *modelName, char *modelType, bool bHighlightModel, vec3 translate, vec3 rotate, vec3 scale,
+Model *createModel(string modelName, string modelType, bool bHighlightModel, vec3 translate, vec3 rotate, vec3 scale,
                    GLenum drawMode, GLint vertexCount, GLfloat *vertices,
                    GLfloat *perVertexColors, GLfloat *uniformColor, GLfloat *texcoords, GLfloat *normals);
 void applyTransform(Transform *transform);
 void drawModel(Model *model);
-void destroyModel(Model *model);
+void destroyModel(Model *&model);
 
 
 #endif

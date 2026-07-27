@@ -21,12 +21,15 @@ void loadSceneV1(json& sceneData)
 {
     Scene *scene = sceneManager->currentScene;
 
-    // updating name of scene as : old name + new name
-    string append = " + " + sceneData["sceneData"] ;
-    int remaining = sizeof(scene->sceneName) - strlen(scene->sceneName) - 1;
-    strncat(scene->sceneName, append.c_str(), remaining); 
-
+    // removing all models/nodes of current scene
     removeAllNodesOfScene(scene);
+
+    // updating name of scene as : old name + new name
+    string append = " - " + sceneData["sceneName"].get<std::string>() ;
+    // int remaining = sizeof(scene->sceneName) - strlen(scene->sceneName) - 1;
+    // strncat(scene->sceneName, append.c_str(), remaining); 
+
+    
     
 }
 
@@ -114,7 +117,7 @@ void saveSelectedScene(void)
     while (tempNode)
     {
         fprintf(pFile, "\t\t{\n");
-        fprintf(pFile, "\t\t\t\"modelType\" : \"%s\",\n", tempNode->currentModel->modelType);
+        fprintf(pFile, "\t\t\t\"modelType\" : \"%s\",\n", tempNode->currentModel->modelType.c_str());
 
         // transformations
         Transform t = tempNode->currentModel->transform;

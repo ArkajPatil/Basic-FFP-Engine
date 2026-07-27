@@ -2,21 +2,29 @@
 
 // fucntions body
 Model *createModel(
-    char *modelName, char *modelType, bool bHighlightModel, vec3 translate, vec3 rotate, vec3 scale,
+    string modelName, string modelType, bool bHighlightModel, vec3 translate, vec3 rotate, vec3 scale,
     GLenum drawMode, GLint vertexCount, GLfloat *vertices,
     GLfloat *perVertexColors, GLfloat *uniformColor,
     GLfloat *texcoords, GLfloat *normals)
 {
-    Model *model = (Model *)malloc(sizeof(Model));
+        writeLog("################################ createMOdel() entered ");
+
+    // Model *model = (Model *)malloc(sizeof(Model));
+    Model *model = new Model;
+
     if (!model)
     {
         writeLog(">>>>> ERROR <<<<<  :: Memory allocation for model: %s failed.", modelName);
         return NULL;
     }
+        writeLog("################################ checkpoint 1.1 ");
 
     model->modelName = modelName;
+    writeLog("################################ checkpoint 1.2 ");
     model->modelType = modelType;
     model->bHighlightModel = bHighlightModel;
+
+        writeLog("################################ checkpoint 1.3 ");
 
     // transformations
     model->transform.translate = translate;
@@ -96,32 +104,25 @@ Model *createModel(
     return model;
 }
 
-void destroyModel(Model *model)
+void destroyModel(Model *&model)
 {
-    if (!(model))
+    if (model == nullptr)
     {
         return;
     }
 
-    // vertices
     free(model->mesh.vertices);
-    model->mesh.vertices = NULL;
-    // per vertex colors
     free(model->mesh.perVertexColors);
-    model->mesh.perVertexColors = NULL;
-    // unifrom color
     free(model->mesh.uniformColor);
-    model->mesh.uniformColor = NULL;
-    // texcoords
     free(model->mesh.texcoords);
-    model->mesh.texcoords = NULL;
-    // normals
     free(model->mesh.normals);
-    model->mesh.normals = NULL;
 
-    writeLog("Model: %s was destroyed.", model->modelName);
-    free(model);
-    model = NULL;
+    string modelName = model->modelName;
+
+    delete model;
+    model = nullptr;
+
+    writeLog(">>>>> SUCCESS <<<<< :: Model: %s was destroyed.", modelName.c_str());
 }
 
 void applyTransform(Transform *transform)

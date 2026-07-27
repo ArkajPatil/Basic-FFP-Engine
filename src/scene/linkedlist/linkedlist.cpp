@@ -213,8 +213,10 @@ void addSphereToScene(Scene *scene)
     // insertNode(sphere);
 }
 
-void addModelToScene(Scene *scene, char *modelType)
+void addModelToScene(Scene *scene, string modelType)
 {
+    writeLog("################################ Function entered ");
+
     Model *model;
     float uniformColor[] = {0.55f, 0.75f, 0.75f};
 
@@ -222,25 +224,26 @@ void addModelToScene(Scene *scene, char *modelType)
     GLint vertexCount;
     float *position;
 
-    if (strcmp(modelType, "TRIANGLE") == 0)
+    
+    if (modelType == "TRIANGLE")
     {
         drawMode = GL_TRIANGLES;
         vertexCount = 3;
         position = trianglePosition;
     }
-    else if (strcmp(modelType, "QUAD") == 0)
+    else if (modelType == "QUAD")
     {
         drawMode = GL_QUADS;
         vertexCount = 4;
         position = squarePosition;
     }
-    else if (strcmp(modelType, "PYRAMID") == 0)
+    else if (modelType == "PYRAMID")
     {
         drawMode = GL_TRIANGLES;
         vertexCount = 12;
         position = pyramidPosition;
     }
-    else if (strcmp(modelType, "CUBE") == 0)
+    else if (modelType == "CUBE")
     {
         drawMode = GL_QUADS;
         vertexCount = 24;
@@ -250,6 +253,8 @@ void addModelToScene(Scene *scene, char *modelType)
     {
         return;
     }
+
+    writeLog("################################ checkpoint 1 ");
 
     model = createModel(
         modelType,              // name
@@ -267,8 +272,10 @@ void addModelToScene(Scene *scene, char *modelType)
         NULL                    // normals
     );
 
+    writeLog("################################ checkpoint 2 ");
+
     // inserting into linkedlist(scene)
     insertNode(scene, model);
-
+    writeLog("################################ Function ending ");
 }
 
