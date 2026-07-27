@@ -1,10 +1,12 @@
 #include <windows.h>
+#include <mmsystem.h>
+#pragma comment(lib, "winmm.lib")
+
 #include <iostream>
 using namespace std;
 #include <fstream>
 
 #include "SceneLoader.h"
-#include "scene/sceneManager.h"
 
 // for scene loading fucntion
 #include "external/nlohmann/json.hpp"
@@ -15,25 +17,52 @@ std::vector<std::string> vsSavedScenes;
 // variables
 
 // local functions declarations
-void loadSceneV1(json& sceneData);
+void loadSceneV1(Scene *scene, json &sceneData);
 
-void loadSceneV1(json& sceneData)
+void loadSceneV1(Scene *scene, json &sceneData)
 {
-    Scene *scene = sceneManager->currentScene;
-
     // removing all models/nodes of current scene
     removeAllNodesOfScene(scene);
 
-    // updating name of scene as : old name + new name
-    string append = " - " + sceneData["sceneName"].get<std::string>() ;
-    // int remaining = sizeof(scene->sceneName) - strlen(scene->sceneName) - 1;
-    // strncat(scene->sceneName, append.c_str(), remaining); 
+    // updating name of scene new name
+    scene->sceneName = sceneData["sceneName"];
 
-    
-    
+    // creating models
+    for (json &modelData : sceneData["models"])
+    {
+        string modelType = modelData["modelType"];
+
+        // transformations
+        Transform t;
+
+        // translation
+        auto translate = modelData["position"];
+        t.translate.x = translate[0];
+        t.translate.y = translate[1];
+        t.translate.z = translate[2];
+        // rotation
+        auto rotate = modelData["rotate"];
+        t.rotate.x = rotate[0];
+        t.rotate.y = rotate[1];
+        t.rotate.z = rotate[2];
+        // scale
+        auto scale = modelData["scale"];
+        t.scale.x = scale[0];
+        t.scale.y = scale[1];
+        t.scale.z = scale[2];
+
+        // uniform color
+        auto color = modelData["color"];
+        float uniformColor[3];
+        uniformColor[0] = color[0];
+        uniformColor[1] = color[1];
+        uniformColor[2] = color[2];
+
+        addModelToSceneWhileSceneLoading(scene, modelType, t.translate, t.rotate, t.scale, uniformColor);
+    }
 }
 
-void loadSelectedScene(int indexOfSelectedScene)
+void loadSelectedScene(Scene *scene, int indexOfSelectedScene)
 {
     std::string path =
         "assets/scenes/" +
@@ -54,8 +83,11 @@ void loadSelectedScene(int indexOfSelectedScene)
     string version = sceneData["version"];
     if (version == "1")
     {
-        loadSceneV1(sceneData);
+        loadSceneV1(scene, sceneData);
     }
+    PlaySound(TEXT("assets/sounds/yoooo.wav"),
+              NULL,
+              SND_FILENAME | SND_ASYNC);
 }
 
 void giveSavedScenes(void)
@@ -87,9 +119,8 @@ void giveSavedScenes(void)
     FindClose(hFind);
 }
 
-void saveSelectedScene(void)
+void saveSelectedScene(Scene *scene)
 {
-    Scene *scene = sceneManager->currentScene;
     if (!scene)
     {
         MessageBox(NULL, TEXT("Current scene is null."), TEXT("Scene saving error"), MB_OK);
@@ -97,10 +128,9 @@ void saveSelectedScene(void)
     }
     FILE *pFile; // pointer of file
 
-    char fileName[64];
-    snprintf(fileName, sizeof(fileName), "assets/scenes/%s.json", scene->sceneName);
+    string fileName = "assets/scenes/" + scene->sceneName + ".json";
 
-    pFile = fopen(fileName, "w");
+    pFile = fopen(fileName.c_str(), "w");
     if (!pFile)
     {
         MessageBox(NULL, TEXT("File pointer creation failed."), TEXT("File I/O error"), MB_OK);
@@ -109,7 +139,7 @@ void saveSelectedScene(void)
 
     fprintf(pFile, "{\n");
     fprintf(pFile, "\t\"version\" : \"%s\",\n", "1");
-    fprintf(pFile, "\t\"sceneName\" : \"%s\",\n", scene->sceneName);
+    fprintf(pFile, "\t\"sceneName\" : \"%s\",\n", scene->sceneName.c_str());
     fprintf(pFile, "\t\"models\" : [\n");
     ;
 
@@ -147,5 +177,8 @@ void saveSelectedScene(void)
     fclose(pFile);
 
     writeLog(">>>>> SUCCESS <<<<< :: Scene '%s' was saved to 'assets/scenes/' successfully.", scene->sceneName);
+    PlaySound(TEXT("assets/sounds/Silly.wav"),
+              NULL,
+              SND_FILENAME | SND_ASYNC);
     MessageBox(NULL, TEXT("Scene saved successfully."), TEXT("Scene Management"), MB_OK);
 }

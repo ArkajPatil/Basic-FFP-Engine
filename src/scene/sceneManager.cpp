@@ -1,10 +1,11 @@
 #include <windows.h>
 
 #include "scene/sceneManager.h"
+#include <string>
 
 // variables
 SceneManager *sceneManager;
-char newSceneName[64];
+string newSceneName;
 
 void initSceneManager(void)
 {
@@ -27,11 +28,11 @@ void initDemoScene(void)
     createScene("demo");
 }
 
-void createScene(char *sceneName)
+void createScene(string sceneName)
 {
-    Scene *scene;
+    Scene *scene = new Scene;
+    // scene = (Scene *)malloc(sizeof(Scene));
 
-    scene = (Scene *)malloc(sizeof(Scene));
     if (scene == NULL)
     {
         writeLog(">>>>> FATAL <<<<< :: Scene allocation failed.");
@@ -42,16 +43,15 @@ void createScene(char *sceneName)
     scene->tail = NULL;
     scene->selectedNode = NULL;
 
-    if (strlen(sceneName) == 0)
+    // giving name to scene
+    if (sceneName.empty())
     {
-        snprintf(scene->sceneName, sizeof(scene->sceneName), "Scene %d", sceneManager->sceneCount + 1);
+        short int sceneCount = sceneManager->sceneCount + 1;
+        scene->sceneName = "Scene " + std::to_string(sceneCount);
     }
     else
     {
-        // char *prefix = " -> " ;
-        strncpy(scene->sceneName, sceneName, sizeof(scene->sceneName) - 1);
-
-        scene->sceneName[sizeof(scene->sceneName) - 1] = '\0';
+        scene->sceneName = sceneName;
     }
 
     // adding scene into scenesArray

@@ -25,8 +25,10 @@ void selectPreviousNode(Scene *scene);
 
 void renderNode(Node *node);
 void renderAllNodes(Scene *scene);
+void removeAllNodesOfScene(Scene *scene);
 
-void addModelToScene(Scene *scene, string modelType);
 void addSphereToScene(Scene *scene);
+void addModelToScene(Scene *scene, string modelType);
+void addModelToSceneWhileSceneLoading(Scene *scene, string modelType, vec3 translate, vec3 rotate, vec3 scale, float *uniformColor);
 
 #endif

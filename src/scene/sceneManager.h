@@ -13,14 +13,12 @@ typedef struct {
 
 // variables
 extern SceneManager *sceneManager ;
-extern char newSceneName[64];
+extern string newSceneName;
 
 // functions declarations
 void initSceneManager(void);
 void initDemoScene(void);
-void createScene(char *sceneName);
+void createScene(string sceneName);
 void deleteSelectedScene(void);
-void removeAllNodesOfScene(Scene *scene);
-void saveSelectedScene(void);
 
 #endif

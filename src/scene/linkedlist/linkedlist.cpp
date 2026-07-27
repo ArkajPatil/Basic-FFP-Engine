@@ -215,7 +215,6 @@ void addSphereToScene(Scene *scene)
 
 void addModelToScene(Scene *scene, string modelType)
 {
-    writeLog("################################ Function entered ");
 
     Model *model;
     float uniformColor[] = {0.55f, 0.75f, 0.75f};
@@ -254,8 +253,6 @@ void addModelToScene(Scene *scene, string modelType)
         return;
     }
 
-    writeLog("################################ checkpoint 1 ");
-
     model = createModel(
         modelType,              // name
         modelType,              // MODEL TYPE
@@ -272,10 +269,65 @@ void addModelToScene(Scene *scene, string modelType)
         NULL                    // normals
     );
 
-    writeLog("################################ checkpoint 2 ");
+    // inserting into linkedlist(scene)
+    insertNode(scene, model);
+}
+
+void addModelToSceneWhileSceneLoading(Scene *scene, string modelType, vec3 translate, vec3 rotate, vec3 scale, float *uniformColor)
+{
+    Model *model;
+    // float uniformColor[] = {0.55f, 0.75f, 0.75f};
+
+    GLenum drawMode;
+    GLint vertexCount;
+    float *position;
+    
+    if (modelType == "TRIANGLE")
+    {
+        drawMode = GL_TRIANGLES;
+        vertexCount = 3;
+        position = trianglePosition;
+    }
+    else if (modelType == "QUAD")
+    {
+        drawMode = GL_QUADS;
+        vertexCount = 4;
+        position = squarePosition;
+    }
+    else if (modelType == "PYRAMID")
+    {
+        drawMode = GL_TRIANGLES;
+        vertexCount = 12;
+        position = pyramidPosition;
+    }
+    else if (modelType == "CUBE")
+    {
+        drawMode = GL_QUADS;
+        vertexCount = 24;
+        position = cubePosition;
+    }
+    else
+    {
+        return;
+    }
+
+    model = createModel(
+        modelType,              // name
+        modelType,              // MODEL TYPE
+        false,                  // highlight model
+        translate, // translate
+        rotate, // rotate
+        scale, // scale
+        drawMode,               // drawMode
+        vertexCount,            // vertexCount
+        position,               // position
+        NULL,                   // per vertex colors
+        uniformColor,           // uniform color
+        NULL,                   // texcoords
+        NULL                    // normals
+    );
 
     // inserting into linkedlist(scene)
     insertNode(scene, model);
-    writeLog("################################ Function ending ");
 }
 

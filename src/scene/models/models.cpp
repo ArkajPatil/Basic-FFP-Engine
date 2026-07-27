@@ -7,24 +7,18 @@ Model *createModel(
     GLfloat *perVertexColors, GLfloat *uniformColor,
     GLfloat *texcoords, GLfloat *normals)
 {
-        writeLog("################################ createMOdel() entered ");
 
     // Model *model = (Model *)malloc(sizeof(Model));
     Model *model = new Model;
 
     if (!model)
     {
-        writeLog(">>>>> ERROR <<<<<  :: Memory allocation for model: %s failed.", modelName);
         return NULL;
     }
-        writeLog("################################ checkpoint 1.1 ");
 
     model->modelName = modelName;
-    writeLog("################################ checkpoint 1.2 ");
     model->modelType = modelType;
     model->bHighlightModel = bHighlightModel;
-
-        writeLog("################################ checkpoint 1.3 ");
 
     // transformations
     model->transform.translate = translate;

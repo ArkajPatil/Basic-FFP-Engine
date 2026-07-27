@@ -8,7 +8,7 @@ typedef struct Scene {
     Node *head;
     Node *tail;
     Node *selectedNode;
-    char sceneName[64];
+    string sceneName;
 } Scene;
 
 #endif

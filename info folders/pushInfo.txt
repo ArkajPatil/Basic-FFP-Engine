@@ -1,5 +1,16 @@
-32. scene loading
+33. scene loading feature bClear
 
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+32. implement scene loading
+    - implemented loadSelectedScene() to load scene data from JSON files
+    - added version-based scene loading architecture using loadSceneV1()
+    - loadSelectedScene() opens the JSON file, parses it, verifies the scene version, 
+       and then redirect to the appropriate loader function like loadSceneV1()
+    - loadSceneV1() clears the current scene, restores the scene name, recreates all models,
+       and applies saved transforms and colors
+    - added imgui_stdlib.cpp to Dear_ImGui_build_Files for std::string support in ImGui::InputText()
+    - added notification sound after successful scene loading
 
 -----------------------------------------------------------------------------------------------------------------------------------------------
 

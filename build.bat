@@ -68,6 +68,7 @@ build/Dear_ImGui_build_Files/imgui_widgets.obj ^
 build/Dear_ImGui_build_Files/imgui_demo.obj ^
 build/Dear_ImGui_build_Files/imgui_impl_win32.obj ^
 build/Dear_ImGui_build_Files/imgui_impl_opengl2.obj ^
+build/Dear_ImGui_build_Files/imgui_stdlib.obj ^
 build/ImGuiLayer.obj ^
 build/ImGuiUI.obj ^
 User32.lib GDI32.lib /SUBSYSTEM:WINDOWS

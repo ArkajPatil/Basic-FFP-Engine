@@ -1,8 +1,5 @@
-// #include <windows.h>
-// #include <iostream>
-// #include <vector>
-
 #include "external/imgui/imgui.h"
+#include "external/imgui/imgui_stdlib.h"
 #include "ImGuiUI.h"
 
 #include "scene/models/models.h"
@@ -79,7 +76,7 @@ void fSceneManagement(void)
 
     ImGui::Text("Create Scene: ");
 
-    ImGui::InputText("Scene Name", newSceneName, sizeof(newSceneName+1));
+    ImGui::InputText("Scene Name", &newSceneName);
 
     if (ImGui::Button("Create Scene"))
     {
@@ -104,7 +101,7 @@ void fSceneManagement(void)
     ImGui::SameLine();
     if (ImGui::Button("Save Scene"))
     {
-        saveSelectedScene();
+        saveSelectedScene(sceneManager->currentScene);
         giveSavedScenes();
     }
 
@@ -136,7 +133,7 @@ void fSceneManagement(void)
 
     if(ImGui::Button("Load selected Scene"))
     {
-          loadSelectedScene(iSelectedScene);
+          loadSelectedScene(sceneManager->currentScene, iSelectedScene);
     }
 }
 
@@ -198,9 +195,7 @@ void fModelsControls(void)
     ImGui::SameLine();
     if (ImGui::Button("Triangle"))
     {
-        writeLog("################################ checkpoint 0 ");
         addModelToScene(sceneManager->currentScene, "TRIANGLE");
-        writeLog("################################ checkpoint end ");
     }
     ImGui::SameLine();
 

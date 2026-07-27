@@ -2,14 +2,14 @@
 #define SCENELOADER_H
 
 #include <vector>
+#include "scene/scene.h"
 
 // variables
 extern std::vector<std::string> vsSavedScenes;
 
 // functions declarations
-void loadSelectedScene(int indexOfSelectedScene);
+void loadSelectedScene(Scene *scene, int indexOfSelectedScene);
 void giveSavedScenes(void);
-void saveSelectedScene(void);
-void loadSelectedScene(void);
+void saveSelectedScene(Scene *scene);
 
 #endif
