@@ -21,34 +21,7 @@ void drawUI()
     // Screen Transformations
     if (ImGui::CollapsingHeader("Screen Transformations"))
     {
-        ImGui::Checkbox("Grid", &gbShowGrid);
-        if (gbShowGrid)
-        {
-            gbShowAxis = true;
-        }
-        ImGui::Checkbox("Axis", &gbShowAxis);
-        ImGui::Separator();
-
-        // screen translation
-        DrawVec3Control("Screen Translations", &gfScreenXTranslation, &gfScreenYTranslation, &gfScreenZTranslation);
-        if (ImGui::Button("Reset Translation"))
-        {
-            gfScreenXTranslation = 2.0f;
-            gfScreenYTranslation = 0.0f;
-            gfScreenZTranslation = -10.0f;
-        }
-        ImGui::Separator();
-
-        // screen rotation
-        DrawVec3Control("Screen Rotation", &gfScreenXRotationAngle, &gfScreenYRotationAngle, &gfScreenZRotationAngle);
-        if (ImGui::Button("Reset Rotation Angles"))
-        {
-            gfScreenXRotationAngle = 25.0f;
-            gfScreenYRotationAngle = 0.0f;
-            gfScreenZRotationAngle = 0.0f;
-        }
-        ImGui::Separator();
-        addVerticalSpace(5.0f);
+        fScreenTransformations();
     }
 
     // Models control
@@ -131,9 +104,17 @@ void fSceneManagement(void)
         }
     }
 
-    if(ImGui::Button("Load selected Scene"))
+    if (ImGui::Button("Load selected Scene"))
     {
-          loadSelectedScene(sceneManager->currentScene, iSelectedScene);
+        loadSelectedScene(sceneManager->currentScene, iSelectedScene, true);
+    }
+    if (ImGui::Button("Append selected Scene"))
+    {
+        loadSelectedScene(sceneManager->currentScene, iSelectedScene, false);
+    }
+    if (ImGui::Button("Delete selected saved Scene"))
+    {
+        // deleteSelectedSavedScene(sceneManager->currentScene, iSelectedScene);
     }
 }
 
@@ -283,6 +264,38 @@ void fModelsControls(void)
 
     ImGui::Separator();
     addVerticalSpace(8.0f);
+}
+
+void fScreenTransformations(void)
+{
+    ImGui::Checkbox("Grid", &gbShowGrid);
+    if (gbShowGrid)
+    {
+        gbShowAxis = true;
+    }
+    ImGui::Checkbox("Axis", &gbShowAxis);
+    ImGui::Separator();
+
+    // screen translation
+    DrawVec3Control("Screen Translations", &gfScreenXTranslation, &gfScreenYTranslation, &gfScreenZTranslation);
+    if (ImGui::Button("Reset Translation"))
+    {
+        gfScreenXTranslation = 2.0f;
+        gfScreenYTranslation = 0.0f;
+        gfScreenZTranslation = -10.0f;
+    }
+    ImGui::Separator();
+
+    // screen rotation
+    DrawVec3Control("Screen Rotation", &gfScreenXRotationAngle, &gfScreenYRotationAngle, &gfScreenZRotationAngle);
+    if (ImGui::Button("Reset Rotation Angles"))
+    {
+        gfScreenXRotationAngle = 25.0f;
+        gfScreenYRotationAngle = 0.0f;
+        gfScreenZRotationAngle = 0.0f;
+    }
+    ImGui::Separator();
+    addVerticalSpace(5.0f);
 }
 
 void DrawVec3Control(const char *label, float *x, float *y, float *z)

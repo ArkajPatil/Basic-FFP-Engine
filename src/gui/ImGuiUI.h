@@ -10,8 +10,7 @@ void drawUI(void);
 void fmodelTransformations(void);
 void fSceneManagement(void);
 void fModelsControls(void);
-void screenRotationControls(void);
-void screenTranslationControls(void);
+void fScreenTransformations(void);
 void DrawVec3Control(const char *label, float *x, float *y, float *z);
 void addVerticalSpace(float size);
 

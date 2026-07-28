@@ -19,106 +19,6 @@ std::vector<std::string> vsSavedScenes;
 // local functions declarations
 void loadSceneV1(Scene *scene, json &sceneData);
 
-void loadSceneV1(Scene *scene, json &sceneData)
-{
-    // removing all models/nodes of current scene
-    removeAllNodesOfScene(scene);
-
-    // updating name of scene new name
-    scene->sceneName = sceneData["sceneName"];
-
-    // creating models
-    for (json &modelData : sceneData["models"])
-    {
-        string modelType = modelData["modelType"];
-
-        // transformations
-        Transform t;
-
-        // translation
-        auto translate = modelData["position"];
-        t.translate.x = translate[0];
-        t.translate.y = translate[1];
-        t.translate.z = translate[2];
-        // rotation
-        auto rotate = modelData["rotate"];
-        t.rotate.x = rotate[0];
-        t.rotate.y = rotate[1];
-        t.rotate.z = rotate[2];
-        // scale
-        auto scale = modelData["scale"];
-        t.scale.x = scale[0];
-        t.scale.y = scale[1];
-        t.scale.z = scale[2];
-
-        // uniform color
-        auto color = modelData["color"];
-        float uniformColor[3];
-        uniformColor[0] = color[0];
-        uniformColor[1] = color[1];
-        uniformColor[2] = color[2];
-
-        addModelToSceneWhileSceneLoading(scene, modelType, t.translate, t.rotate, t.scale, uniformColor);
-    }
-}
-
-void loadSelectedScene(Scene *scene, int indexOfSelectedScene)
-{
-    std::string path =
-        "assets/scenes/" +
-        vsSavedScenes[indexOfSelectedScene] +
-        ".json";
-
-    std::ifstream file(path); // ➡️ Open the JSON file.
-
-    if (!file.is_open())
-    {
-        return;
-    }
-
-    json sceneData; // ➡️ Create an empty JSON object in memory.
-
-    file >> sceneData; // ➡️ Read the contents of the file, parse the JSON text, and store it in sceneData
-
-    string version = sceneData["version"];
-    if (version == "1")
-    {
-        loadSceneV1(scene, sceneData);
-    }
-    PlaySound(TEXT("assets/sounds/yoooo.wav"),
-              NULL,
-              SND_FILENAME | SND_ASYNC);
-}
-
-void giveSavedScenes(void)
-{
-    WIN32_FIND_DATA findData;
-
-    HANDLE hFind = FindFirstFile(TEXT("assets/scenes/*.json"), &findData);
-    if (hFind == INVALID_HANDLE_VALUE)
-    {
-        return;
-    }
-
-    vsSavedScenes.clear();
-
-    do
-    {
-        std::string name = findData.cFileName;
-
-        size_t pos = name.find(".json");
-
-        if (pos != std::string::npos)
-        {
-            name.erase(pos);
-        }
-
-        vsSavedScenes.push_back(name);
-    } while (FindNextFile(hFind, &findData));
-
-    FindClose(hFind);
-}
-
 void saveSelectedScene(Scene *scene)
 {
     if (!scene)
@@ -181,4 +81,109 @@ void saveSelectedScene(Scene *scene)
               NULL,
               SND_FILENAME | SND_ASYNC);
     MessageBox(NULL, TEXT("Scene saved successfully."), TEXT("Scene Management"), MB_OK);
+}
+
+void giveSavedScenes(void)
+{
+    WIN32_FIND_DATA findData;
+
+    HANDLE hFind = FindFirstFile(TEXT("assets/scenes/*.json"), &findData);
+    if (hFind == INVALID_HANDLE_VALUE)
+    {
+        return;
+    }
+
+    vsSavedScenes.clear();
+
+    do
+    {
+        std::string name = findData.cFileName;
+
+        size_t pos = name.find(".json");
+
+        if (pos != std::string::npos)
+        {
+            name.erase(pos);
+        }
+
+        vsSavedScenes.push_back(name);
+    } while (FindNextFile(hFind, &findData));
+
+    FindClose(hFind);
+}
+
+void loadSelectedScene(Scene *scene, int indexOfSelectedScene, bool bFlagClear)
+{
+    std::string path =
+        "assets/scenes/" +
+        vsSavedScenes[indexOfSelectedScene] +
+        ".json";
+
+    std::ifstream file(path); // ➡️ Open the JSON file.
+
+    if (!file.is_open())
+    {
+        return;
+    }
+
+    json sceneData; // ➡️ Create an empty JSON object in memory.
+
+    file >> sceneData; // ➡️ Read the contents of the file, parse the JSON text, and store it in sceneData
+
+    string version = sceneData["version"];
+
+    if (bFlagClear)
+    {
+        // removing all models/nodes of current scene
+        removeAllNodesOfScene(scene);
+    }
+
+    if (version == "1")
+    {
+        loadSceneV1(scene, sceneData);
+    }
+    PlaySound(TEXT("assets/sounds/yoooo.wav"),
+              NULL,
+              SND_FILENAME | SND_ASYNC);
+}
+
+void loadSceneV1(Scene *scene, json &sceneData)
+{
+    // creating models
+    for (json &modelData : sceneData["models"])
+    {
+        string modelType = modelData["modelType"];
+
+        // transformations
+        Transform t;
+
+        // translation
+        auto translate = modelData["position"];
+        t.translate.x = translate[0];
+        t.translate.y = translate[1];
+        t.translate.z = translate[2];
+        // rotation
+        auto rotate = modelData["rotate"];
+        t.rotate.x = rotate[0];
+        t.rotate.y = rotate[1];
+        t.rotate.z = rotate[2];
+        // scale
+        auto scale = modelData["scale"];
+        t.scale.x = scale[0];
+        t.scale.y = scale[1];
+        t.scale.z = scale[2];
+
+        // uniform color
+        auto color = modelData["color"];
+        float uniformColor[3];
+        uniformColor[0] = color[0];
+        uniformColor[1] = color[1];
+        uniformColor[2] = color[2];
+
+        addModelToSceneWhileSceneLoading(scene, modelType, t.translate, t.rotate, t.scale, uniformColor);
+    }
+}
+
+void deleteSelectedSavedScene()
+{
 }

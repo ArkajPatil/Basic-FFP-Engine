@@ -1,4 +1,10 @@
-33. scene loading feature bClear
+33. improve scene loading behavior
+    - added bFlagClear parameter to loadSelectedScene()
+    - added separate "Load Selected Scene" and "Append Selected Scene" buttons
+    - load operation now clears the current scene before loading
+    - append operation loads models without clearing the existing scene
+    - removed runtime scene name overwrite from loaded JSON
+    - scene name now remains unchanged during runtime after loading
 
 -----------------------------------------------------------------------------------------------------------------------------------------------
 
