@@ -35,12 +35,13 @@ typedef struct {
     Transform transform;
     Mesh mesh;    // pointer to shared geometry
     bool bHighlightModel;
+    bool isVisible;
 } Model;
 
 //  char *modelType ==> [ TRIANGLE, QUAD, PYRAMID, CUBE ]
 
 // functions
-Model *createModel(string modelName, string modelType, bool bHighlightModel, vec3 translate, vec3 rotate, vec3 scale,
+Model *createModel(string modelName, string modelType, bool bHighlightModel, bool isVisible, vec3 translate, vec3 rotate, vec3 scale,
                    GLenum drawMode, GLint vertexCount, GLfloat *vertices,
                    GLfloat *perVertexColors, GLfloat *uniformColor, GLfloat *texcoords, GLfloat *normals);
 void applyTransform(Transform *transform);

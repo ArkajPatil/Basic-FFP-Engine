@@ -2,7 +2,7 @@
 
 // fucntions body
 Model *createModel(
-    string modelName, string modelType, bool bHighlightModel, vec3 translate, vec3 rotate, vec3 scale,
+    string modelName, string modelType, bool bHighlightModel, bool isVisible, vec3 translate, vec3 rotate, vec3 scale,
     GLenum drawMode, GLint vertexCount, GLfloat *vertices,
     GLfloat *perVertexColors, GLfloat *uniformColor,
     GLfloat *texcoords, GLfloat *normals)
@@ -19,6 +19,7 @@ Model *createModel(
     model->modelName = modelName;
     model->modelType = modelType;
     model->bHighlightModel = bHighlightModel;
+    model->isVisible = isVisible;
 
     // transformations
     model->transform.translate = translate;

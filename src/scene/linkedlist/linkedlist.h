@@ -25,6 +25,7 @@ void selectPreviousNode(Scene *scene);
 
 void renderNode(Node *node);
 void renderAllNodes(Scene *scene);
+void renderAllVisibleNodes(Scene *scene);
 void removeAllNodesOfScene(Scene *scene);
 
 void addSphereToScene(Scene *scene);

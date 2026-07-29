@@ -20,8 +20,8 @@
 bool gbShowGrid = false;
 bool gbShowAxis = false;
 // global screen rotation angles
-float gfScreenXRotationAngle = 20.0f;
-float gfScreenYRotationAngle = -160.0f;
+float gfScreenXRotationAngle = 15.0f;
+float gfScreenYRotationAngle = 0.0f;
 float gfScreenZRotationAngle = 0.0f;
 // global float var for scrren translation
 float gfScreenXTranslation = 2.0f;
@@ -30,6 +30,7 @@ float gfScreenZTranslation = -10.0f;
 // displaying models
 bool gbDisplaySelectedModel = true;
 bool gbDisplayAllModels = false;
+bool gbDisplayAllVisibleModels = false;
 bool gbHighlightSelectedModel = false;
 
 void display(void)
@@ -73,6 +74,10 @@ void display(void)
     if (gbDisplayAllModels)
     {
         renderAllNodes(sceneManager->currentScene);
+    }
+    else if (gbDisplayAllVisibleModels)
+    {
+        renderAllVisibleNodes(sceneManager->currentScene);
     }
     else if (gbDisplaySelectedModel)
     {

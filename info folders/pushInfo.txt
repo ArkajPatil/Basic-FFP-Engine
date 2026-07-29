@@ -1,3 +1,13 @@
+35. improve model visibility controls
+    - added visibility toggle for the currently selected model
+    - void renderAllVisibleNodes(Scene *scene) added this function in linkedlist
+    - imporved display mode options for model rendering
+        - only currently selected model
+        - all visible models
+        - all models in the scene
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
 34. implement deletion of saved scene
     - added Roboto-Regular font loading (20px) in ImGuiLayer.cpp
     - added Assets/Fonts directory for editor fonts

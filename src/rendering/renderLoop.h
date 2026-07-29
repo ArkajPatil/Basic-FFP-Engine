@@ -12,6 +12,7 @@ extern float gfScreenYTranslation ;
 extern float gfScreenZTranslation ;
 extern bool gbDisplaySelectedModel ;
 extern bool gbDisplayAllModels ;
+extern bool gbDisplayAllVisibleModels ;
 extern bool gbHighlightSelectedModel ;
 
 // functions declarations

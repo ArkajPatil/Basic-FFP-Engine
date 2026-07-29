@@ -238,7 +238,7 @@ void fModelsControls(void)
         removeSelectedNode(sceneManager->currentScene);
     }
     ImGui::Separator();
-    addVerticalSpace(8.0f);
+    addVerticalSpace(6.0f);
 
     ImGui::Text("Select Model: ");
     if (ImGui::Button("Previous Model"))
@@ -254,20 +254,40 @@ void fModelsControls(void)
     ImGui::Text("Highlight selected model: ");
     ImGui::SameLine();
     ImGui::Checkbox("Highlight", &gbHighlightSelectedModel);
-
+    ImGui::Text("Visibility of currently selected model: ");
+    
+    if (sceneManager->currentScene->selectedNode)
+    {
+        ImGui::SameLine();
+        ImGui::Checkbox("Visible", &sceneManager->currentScene->selectedNode->currentModel->isVisible);
+    }
+    addVerticalSpace(3.0f);
+    ImGui::Separator();
+    addVerticalSpace(6.0f);
+    
     // models displaying
     ImGui::Text("Display models: ");
-    ImGui::SameLine();
-    ImGui::Checkbox("Only selected", &gbDisplaySelectedModel);
-    ImGui::SameLine();
+    // ImGui::SameLine();
+
+    ImGui::Checkbox("Only currently selected", &gbDisplaySelectedModel);
     if (gbDisplaySelectedModel)
     {
         gbDisplayAllModels = false;
+        gbDisplayAllVisibleModels = false;
     }
-    ImGui::Checkbox("All", &gbDisplayAllModels);
+
+    ImGui::Checkbox("All visible models", &gbDisplayAllVisibleModels);
+    if (gbDisplayAllVisibleModels)
+    {
+        gbDisplaySelectedModel = false;
+        gbDisplayAllModels = false;
+    }
+
+    ImGui::Checkbox("All models in scene", &gbDisplayAllModels);
     if (gbDisplayAllModels)
     {
         gbDisplaySelectedModel = false;
+        gbDisplayAllVisibleModels = false;
     }
     ImGui::Separator();
     addVerticalSpace(8.0f);

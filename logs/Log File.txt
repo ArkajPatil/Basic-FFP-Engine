@@ -1,17 +1,19 @@
-[2026-07-29 16:43:30] >>>>> SUCCESS <<<<< :: Log File created
-[2026-07-29 16:43:30] >>>>> SUCCESS <<<<< :: Window creation done Successfully
-[2026-07-29 16:43:30] OpenGL Information :
-[2026-07-29 16:43:30] ********************
-[2026-07-29 16:43:30] OpenGL Vendor : NVIDIA Corporation
-[2026-07-29 16:43:30] OpenGL Renderer : NVIDIA GeForce GTX 1050/PCIe/SSE2
-[2026-07-29 16:43:30] OpenGL Version : 4.6.0 NVIDIA 576.02
-[2026-07-29 16:43:30] ********************
+[2026-07-29 18:10:26] >>>>> SUCCESS <<<<< :: Log File created
+[2026-07-29 18:10:26] >>>>> SUCCESS <<<<< :: Window creation done Successfully
+[2026-07-29 18:10:26] OpenGL Information :
+[2026-07-29 18:10:26] ********************
+[2026-07-29 18:10:26] OpenGL Vendor : NVIDIA Corporation
+[2026-07-29 18:10:26] OpenGL Renderer : NVIDIA GeForce GTX 1050/PCIe/SSE2
+[2026-07-29 18:10:26] OpenGL Version : 4.6.0 NVIDIA 576.02
+[2026-07-29 18:10:26] ********************
 
-[2026-07-29 16:43:30] >>>>> SUCCESS <<<<< :: initializeOpenGL() completed successfully, OpenGL setup is done.
-[2026-07-29 16:43:30] >>>>> SUCCESS <<<<< :: ImGui Initialization is done.
-[2026-07-29 16:43:30] >>>>> SUCCESS <<<<< :: SceneManager allocation successfull.
-[2026-07-29 16:43:30] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
-[2026-07-29 16:43:42] >>>>>EXITING<<<<< Escape Key pressed
-[2026-07-29 16:43:42] Cleaning ImGui is done.
-[2026-07-29 16:43:42] Program terminated successfully
+[2026-07-29 18:10:26] >>>>> SUCCESS <<<<< :: initializeOpenGL() completed successfully, OpenGL setup is done.
+[2026-07-29 18:10:26] >>>>> SUCCESS <<<<< :: ImGui Initialization is done.
+[2026-07-29 18:10:26] >>>>> SUCCESS <<<<< :: SceneManager allocation successfull.
+[2026-07-29 18:10:26] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
+[2026-07-29 18:10:32] Model: TRIANGLE was created.
+[2026-07-29 18:10:32] Model: TRIANGLE has been inserted as head node in scene 'demo'.
+[2026-07-29 18:10:41] >>>>>EXITING<<<<< Escape Key pressed
+[2026-07-29 18:10:41] Cleaning ImGui is done.
+[2026-07-29 18:10:42] Program terminated successfully
 

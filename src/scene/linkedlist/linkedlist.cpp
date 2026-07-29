@@ -205,6 +205,22 @@ void renderAllNodes(Scene *scene)
     }
 }
 
+void renderAllVisibleNodes(Scene *scene)
+{
+    Node *tempNode = scene->head;
+
+    while(tempNode)
+    {
+        if(tempNode->currentModel->isVisible)
+        {
+            drawModel(tempNode->currentModel);
+        }
+
+        tempNode = tempNode->nextNode;
+    }
+}
+
+
 void addSphereToScene(Scene *scene)
 {
     // creating sphere model
@@ -215,7 +231,6 @@ void addSphereToScene(Scene *scene)
 
 void addModelToScene(Scene *scene, string modelType)
 {
-
     Model *model;
     float uniformColor[] = {0.55f, 0.75f, 0.75f};
 
@@ -223,7 +238,6 @@ void addModelToScene(Scene *scene, string modelType)
     GLint vertexCount;
     float *position;
 
-    
     if (modelType == "TRIANGLE")
     {
         drawMode = GL_TRIANGLES;
@@ -257,6 +271,7 @@ void addModelToScene(Scene *scene, string modelType)
         modelType,              // name
         modelType,              // MODEL TYPE
         false,                  // highlight model
+        false,                  // isVisible
         vec3{0.0f, 0.0f, 0.0f}, // translate
         vec3{0.0f, 0.0f, 0.0f}, // rotate
         vec3{1.0f, 1.0f, 1.0f}, // scale
@@ -281,7 +296,7 @@ void addModelToSceneWhileSceneLoading(Scene *scene, string modelType, vec3 trans
     GLenum drawMode;
     GLint vertexCount;
     float *position;
-    
+
     if (modelType == "TRIANGLE")
     {
         drawMode = GL_TRIANGLES;
@@ -312,22 +327,22 @@ void addModelToSceneWhileSceneLoading(Scene *scene, string modelType, vec3 trans
     }
 
     model = createModel(
-        modelType,              // name
-        modelType,              // MODEL TYPE
-        false,                  // highlight model
-        translate, // translate
-        rotate, // rotate
-        scale, // scale
-        drawMode,               // drawMode
-        vertexCount,            // vertexCount
-        position,               // position
-        NULL,                   // per vertex colors
-        uniformColor,           // uniform color
-        NULL,                   // texcoords
-        NULL                    // normals
+        modelType,    // name
+        modelType,    // MODEL TYPE
+        false,        // highlight model
+        false,        // isVisible
+        translate,    // translate
+        rotate,       // rotate
+        scale,        // scale
+        drawMode,     // drawMode
+        vertexCount,  // vertexCount
+        position,     // position
+        NULL,         // per vertex colors
+        uniformColor, // uniform color
+        NULL,         // texcoords
+        NULL          // normals
     );
 
     // inserting into linkedlist(scene)
     insertNode(scene, model);
 }
-
