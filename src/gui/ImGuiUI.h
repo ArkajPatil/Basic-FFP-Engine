@@ -9,8 +9,9 @@
 void drawUI(void);
 
 // local function declarations
-void fmodelTransformations(void);
 void fSceneManagement(void);
+void fModelTransformations(void);
+void fModelsColoring(void);
 void fModelsControls(void);
 void fScreenTransformations(void);
 void DrawVec3Control(const char *label, float *x, float *y, float *z);

@@ -2,12 +2,12 @@
 
 // fucntions body
 Model *createModel(
-    string modelName, string modelType, bool bHighlightModel, bool isVisible, vec3 translate, vec3 rotate, vec3 scale,
+    string modelName, string modelType, bool bHighlightModel, bool isVisible, 
+    vec3 translate, vec3 rotate, vec3 scale,
     GLenum drawMode, GLint vertexCount, GLfloat *vertices,
-    GLfloat *perVertexColors, GLfloat *uniformColor,
+    GLfloat *perVertexColors, GLfloat *uniformColor, bool bUniformColoring,
     GLfloat *texcoords, GLfloat *normals)
 {
-
     // Model *model = (Model *)malloc(sizeof(Model));
     Model *model = new Model;
 
@@ -20,6 +20,7 @@ Model *createModel(
     model->modelType = modelType;
     model->bHighlightModel = bHighlightModel;
     model->isVisible = isVisible;
+    model->bUniformColoring = bUniformColoring;
 
     // transformations
     model->transform.translate = translate;
@@ -31,16 +32,7 @@ Model *createModel(
     model->mesh.vertexCount = vertexCount;
 
     // vertices
-    if (vertices)
-    {
-        int size = vertexCount * 3 * sizeof(GLfloat);
-        model->mesh.vertices = (GLfloat *)malloc(size);
-        memcpy(model->mesh.vertices, vertices, size);
-    }
-    else
-    {
-        model->mesh.vertices = NULL;
-    }
+    model->mesh.vertices = vertices;
 
     // per vertex colors
     if (perVertexColors)
@@ -160,7 +152,7 @@ void drawModel(Model *model)
     glBegin(model->mesh.drawMode);
 
     // checking for uniform color
-    if (model->mesh.uniformColor)
+    if (model->bUniformColoring)
     {
         glColor3f(model->mesh.uniformColor[0], model->mesh.uniformColor[1], model->mesh.uniformColor[2]);
     }
@@ -178,8 +170,8 @@ void drawModel(Model *model)
             glTexCoord2f(model->mesh.texcoords[i * 2], model->mesh.texcoords[i * 2 + 1]);
         }
         // colors
-        // if not uniform color, then checking for per vertex colors
-        if (model->mesh.perVertexColors)
+        // if bUniformColoring = NULL, then color according to per vertex colors
+        if (!model->bUniformColoring)
         {
             glColor3f(model->mesh.perVertexColors[i * 3], model->mesh.perVertexColors[i * 3 + 1], model->mesh.perVertexColors[i * 3 + 2]);
         }

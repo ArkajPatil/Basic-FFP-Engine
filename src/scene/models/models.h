@@ -36,15 +36,18 @@ typedef struct {
     Mesh mesh;    // pointer to shared geometry
     bool bHighlightModel;
     bool isVisible;
+    bool bUniformColoring;
 } Model;
 
 //  char *modelType ==> [ TRIANGLE, QUAD, PYRAMID, CUBE ]
 
 // functions
-Model *createModel(string modelName, string modelType, bool bHighlightModel, bool isVisible, vec3 translate, vec3 rotate, vec3 scale,
+Model *createModel(string modelName, string modelType, bool bHighlightModel, bool isVisible,
+                   vec3 translate, vec3 rotate, vec3 scale,
                    GLenum drawMode, GLint vertexCount, GLfloat *vertices,
-                   GLfloat *perVertexColors, GLfloat *uniformColor, GLfloat *texcoords, GLfloat *normals);
-void applyTransform(Transform *transform);
+                   GLfloat *perVertexColors, GLfloat *uniformColor, bool bUniformColoring,
+                   GLfloat *texcoords, GLfloat *normals);
+void applyTransform(Transform *transform); 
 void drawModel(Model *model);
 void destroyModel(Model *&model);
 

@@ -209,9 +209,9 @@ void renderAllVisibleNodes(Scene *scene)
 {
     Node *tempNode = scene->head;
 
-    while(tempNode)
+    while (tempNode)
     {
-        if(tempNode->currentModel->isVisible)
+        if (tempNode->currentModel->isVisible)
         {
             drawModel(tempNode->currentModel);
         }
@@ -219,7 +219,6 @@ void renderAllVisibleNodes(Scene *scene)
         tempNode = tempNode->nextNode;
     }
 }
-
 
 void addSphereToScene(Scene *scene)
 {
@@ -280,6 +279,7 @@ void addModelToScene(Scene *scene, string modelType)
         position,               // position
         NULL,                   // per vertex colors
         uniformColor,           // uniform color
+        true,                   // uniform coloring toggle(bool)
         NULL,                   // texcoords
         NULL                    // normals
     );
@@ -339,6 +339,7 @@ void addModelToSceneWhileSceneLoading(Scene *scene, string modelType, vec3 trans
         position,     // position
         NULL,         // per vertex colors
         uniformColor, // uniform color
+        true,         // uniform coloring toggle(bool)
         NULL,         // texcoords
         NULL          // normals
     );

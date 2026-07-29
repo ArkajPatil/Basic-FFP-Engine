@@ -1,3 +1,11 @@
+36. add per vertex coloring support
+    - added dedicated model coloring panel for the currently selected model in the editor
+    - added uniform and per-vertex coloring modes using radio buttons
+    - implemented automatic allocation of per-vertex color data
+    - added ImGui ColorEdit3 support for color editing
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
 35. improve model visibility controls
     - added visibility toggle for the currently selected model
     - void renderAllVisibleNodes(Scene *scene) added this function in linkedlist

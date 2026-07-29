@@ -25,7 +25,6 @@ HWND ghwnd;
 
 TCHAR szAppName[] = TEXT("Arkaj Patil");
 
-// Entry point function
 void createWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLine, int iCmdShow, HWND hwnd)
 {
     // local functions declarations
@@ -131,6 +130,10 @@ void cleanupWindow(void)
         toggleFullScreen();
         gbFullScreen = FALSE;
     }
+
+        PlaySound(TEXT("assets/sounds/Mario.wav"),
+              NULL,
+              SND_FILENAME | SND_SYNC);
 }
 
 

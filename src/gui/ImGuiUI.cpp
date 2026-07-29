@@ -32,11 +32,18 @@ void drawUI()
         fModelsControls();
     }
 
+    // models coloring
+    if (ImGui::CollapsingHeader("Models Coloring"))
+    {
+        fModelsColoring();
+    }
+
     // models transformations
     if (ImGui::CollapsingHeader("Model Transformations"))
     {
-        fmodelTransformations();
+        fModelTransformations();
     }
+
     // Scenes Management
     if (ImGui::CollapsingHeader("Scenes Management"))
     {
@@ -145,11 +152,26 @@ void fSceneManagement(void)
     }
 }
 
-void fmodelTransformations(void)
+void fModelTransformations(void)
 {
     if (sceneManager->currentScene->selectedNode)
     {
+        ImGui::PushID("ModelsColoring");
         Model *model = sceneManager->currentScene->selectedNode->currentModel;
+
+        // model selection
+        ImGui::Text("Select Model: ");
+        if (ImGui::Button("Previous Model"))
+        {
+            selectPreviousNode(sceneManager->currentScene);
+        }
+        ImGui::SameLine();
+        if (ImGui::Button("Next Model"))
+        {
+            selectNextNode(sceneManager->currentScene);
+        }
+        ImGui::Separator();
+        addVerticalSpace(1.0f);
 
         // model position controls
         DrawVec3Control("Position", &model->transform.translate.x, &model->transform.translate.y, &model->transform.translate.z);
@@ -193,6 +215,74 @@ void fmodelTransformations(void)
         }
         ImGui::Separator();
         addVerticalSpace(7.0f);
+
+        ImGui::PopID();
+    }
+}
+
+void fModelsColoring(void)
+{
+    if (sceneManager->currentScene->selectedNode)
+    {
+        ImGui::PushID("ModelsColoring");
+        addVerticalSpace(2.0f);
+        // model selection
+        ImGui::Text("Select Model: ");
+        if (ImGui::Button("Previous Model"))
+        {
+            selectPreviousNode(sceneManager->currentScene);
+        }
+        ImGui::SameLine();
+        if (ImGui::Button("Next Model"))
+        {
+            selectNextNode(sceneManager->currentScene);
+        }
+        ImGui::Separator();
+        addVerticalSpace(3.0f);
+
+        Model *model = sceneManager->currentScene->selectedNode->currentModel;
+        // coloring models
+        ImGui::Text("Coloring Mode:");
+        ImGui::SameLine();
+        int mode = model->bUniformColoring ? 0 : 1;
+        ImGui::RadioButton("Uniform", &mode, 0);
+        ImGui::SameLine();
+        ImGui::RadioButton("Per Vertex", &mode, 1);
+
+        model->bUniformColoring = (mode == 0);
+        if (model->bUniformColoring == false && model->mesh.perVertexColors == NULL)
+        {
+            int size = model->mesh.vertexCount * 3 * sizeof(GLfloat);
+            model->mesh.perVertexColors = (GLfloat *)malloc(size);
+            for (int i = 0; i < model->mesh.vertexCount; i++)
+            {
+                model->mesh.perVertexColors[i * 3] = 0.9f;
+                model->mesh.perVertexColors[i * 3 + 1] = 0.75f;
+                model->mesh.perVertexColors[i * 3 + 2] = 0.75f;
+            }
+        }
+
+        addVerticalSpace(5.0f);
+        ImGui::Text("Color the selected model");
+
+        if (model->bUniformColoring == true)
+        {
+            ImGui::ColorEdit3("Color", model->mesh.uniformColor);
+        }
+
+        else if (model->bUniformColoring == false)
+        {
+            for (int i = 0; i < model->mesh.vertexCount; i++)
+            {
+                ImGui::PushID(i);
+                ImGui::ColorEdit3("Color", &model->mesh.perVertexColors[i*3]);
+                ImGui::PopID();
+            }
+        }
+
+        ImGui::PopID();
+        ImGui::Separator();
+        addVerticalSpace(5.0f);
     }
 }
 
@@ -255,7 +345,7 @@ void fModelsControls(void)
     ImGui::SameLine();
     ImGui::Checkbox("Highlight", &gbHighlightSelectedModel);
     ImGui::Text("Visibility of currently selected model: ");
-    
+
     if (sceneManager->currentScene->selectedNode)
     {
         ImGui::SameLine();
@@ -264,7 +354,7 @@ void fModelsControls(void)
     addVerticalSpace(3.0f);
     ImGui::Separator();
     addVerticalSpace(6.0f);
-    
+
     // models displaying
     ImGui::Text("Display models: ");
     // ImGui::SameLine();
@@ -288,25 +378,6 @@ void fModelsControls(void)
     {
         gbDisplaySelectedModel = false;
         gbDisplayAllVisibleModels = false;
-    }
-    ImGui::Separator();
-    addVerticalSpace(8.0f);
-
-    // coloring models
-    ImGui::Text("Color the selected model");
-    if (sceneManager->currentScene->selectedNode && sceneManager->currentScene->selectedNode->currentModel->mesh.uniformColor)
-    {
-        modelColorR = sceneManager->currentScene->selectedNode->currentModel->mesh.uniformColor[0] * 255;
-        modelColorG = sceneManager->currentScene->selectedNode->currentModel->mesh.uniformColor[1] * 255;
-        modelColorB = sceneManager->currentScene->selectedNode->currentModel->mesh.uniformColor[2] * 255;
-
-        ImGui::SliderInt(" R ", &modelColorR, 0, 255, "%d");
-        ImGui::SliderInt(" G ", &modelColorG, 0, 255, "%d");
-        ImGui::SliderInt(" B ", &modelColorB, 0, 255, "%d");
-
-        sceneManager->currentScene->selectedNode->currentModel->mesh.uniformColor[0] = (float)modelColorR / 255;
-        sceneManager->currentScene->selectedNode->currentModel->mesh.uniformColor[1] = (float)modelColorG / 255;
-        sceneManager->currentScene->selectedNode->currentModel->mesh.uniformColor[2] = (float)modelColorB / 255;
     }
 
     ImGui::Separator();
