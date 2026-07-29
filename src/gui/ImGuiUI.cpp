@@ -13,6 +13,8 @@
 // model uniform color
 int modelColorR = 0, modelColorG = 0, modelColorB = 0;
 float uniformModelScale = 1.0f;
+// fonts
+ImFont *gLargeFont = nullptr; // global large font
 
 void drawUI()
 {
@@ -112,9 +114,34 @@ void fSceneManagement(void)
     {
         loadSelectedScene(sceneManager->currentScene, iSelectedScene, false);
     }
+    // saved scene deletion logic
     if (ImGui::Button("Delete selected saved Scene"))
     {
-        // deleteSelectedSavedScene(sceneManager->currentScene, iSelectedScene);
+        ImGui::OpenPopup("Delete Scene ?");
+    }
+    if (ImGui::BeginPopupModal("Delete Scene ?", NULL, ImGuiWindowFlags_AlwaysAutoResize))
+    {
+        ImGui::TextColored(ImVec4(1, 0.7f, 0.7f, 1), "Are you sure you want to delete this scene '%s' ?", vsSavedScenes[iSelectedScene].c_str());
+        ImGui::Separator();
+
+        ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.8f, 0.2f, 0.2f, 1.0f));
+        ImGui::Text("This action cannot be undone.");
+        if (ImGui::Button("Delete", ImVec2(120, 0)))
+        {
+            deleteSelectedSavedScene(iSelectedScene);
+            giveSavedScenes();
+            ImGui::CloseCurrentPopup();
+        }
+        ImGui::PopStyleColor();
+
+        ImGui::SameLine();
+
+        if (ImGui::Button("Cancel", ImVec2(120, 0)))
+        {
+            ImGui::CloseCurrentPopup();
+        }
+
+        ImGui::EndPopup();
     }
 }
 

@@ -11,7 +11,7 @@ extern std::vector<std::string> vsSavedScenes;
 void saveSelectedScene(Scene *scene);
 void giveSavedScenes(void);
 void loadSelectedScene(Scene *scene, int indexOfSelectedScene, bool bFlagClear);
-void deleteSelectedSavedScene();
+void deleteSelectedSavedScene(short iSelectedScene);
 
 
 #endif

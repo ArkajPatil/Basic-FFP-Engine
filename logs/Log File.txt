@@ -1,25 +1,17 @@
-[2026-07-28 21:11:50] >>>>> SUCCESS <<<<< :: Log File created
-[2026-07-28 21:11:50] >>>>> SUCCESS <<<<< :: Window creation done Successfully
-[2026-07-28 21:11:50] OpenGL Information :
-[2026-07-28 21:11:50] ********************
-[2026-07-28 21:11:50] OpenGL Vendor : NVIDIA Corporation
-[2026-07-28 21:11:50] OpenGL Renderer : NVIDIA GeForce GTX 1050/PCIe/SSE2
-[2026-07-28 21:11:50] OpenGL Version : 4.6.0 NVIDIA 576.02
-[2026-07-28 21:11:50] ********************
+[2026-07-29 16:43:30] >>>>> SUCCESS <<<<< :: Log File created
+[2026-07-29 16:43:30] >>>>> SUCCESS <<<<< :: Window creation done Successfully
+[2026-07-29 16:43:30] OpenGL Information :
+[2026-07-29 16:43:30] ********************
+[2026-07-29 16:43:30] OpenGL Vendor : NVIDIA Corporation
+[2026-07-29 16:43:30] OpenGL Renderer : NVIDIA GeForce GTX 1050/PCIe/SSE2
+[2026-07-29 16:43:30] OpenGL Version : 4.6.0 NVIDIA 576.02
+[2026-07-29 16:43:30] ********************
 
-[2026-07-28 21:11:50] >>>>> SUCCESS <<<<< :: initializeOpenGL() completed successfully, OpenGL setup is done.
-[2026-07-28 21:11:50] >>>>> SUCCESS <<<<< :: ImGui Initialization is done.
-[2026-07-28 21:11:50] >>>>> SUCCESS <<<<< :: SceneManager allocation successfull.
-[2026-07-28 21:11:50] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
-[2026-07-28 21:12:14] Model: CUBE was created.
-[2026-07-28 21:12:14] Model: CUBE has been inserted as head node in scene 'demo'.
-[2026-07-28 21:12:22] Model: TRIANGLE was created.
-[2026-07-28 21:12:22] Model: TRIANGLE has been appended to the linked list in scene 'demo'.
-[2026-07-28 21:12:35] >>>>> SUCCESS <<<<< :: Model: CUBE was destroyed.
-[2026-07-28 21:12:35] >>>>> SUCCESS <<<<< :: Model: TRIANGLE was destroyed.
-[2026-07-28 21:12:35] Model: TRIANGLE was created.
-[2026-07-28 21:12:35] Model: TRIANGLE has been inserted as head node in scene 'demo'.
-[2026-07-28 21:12:41] >>>>>EXITING<<<<< Escape Key pressed
-[2026-07-28 21:12:41] Cleaning ImGui is done.
-[2026-07-28 21:12:41] Program terminated successfully
+[2026-07-29 16:43:30] >>>>> SUCCESS <<<<< :: initializeOpenGL() completed successfully, OpenGL setup is done.
+[2026-07-29 16:43:30] >>>>> SUCCESS <<<<< :: ImGui Initialization is done.
+[2026-07-29 16:43:30] >>>>> SUCCESS <<<<< :: SceneManager allocation successfull.
+[2026-07-29 16:43:30] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
+[2026-07-29 16:43:42] >>>>>EXITING<<<<< Escape Key pressed
+[2026-07-29 16:43:42] Cleaning ImGui is done.
+[2026-07-29 16:43:42] Program terminated successfully
 

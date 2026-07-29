@@ -5,7 +5,6 @@
 
 #include "ImGuiUI.h"
 
-
 void initializeImGui()
 {
     IMGUI_CHECKVERSION();
@@ -14,6 +13,10 @@ void initializeImGui()
 
     ImGuiIO &io = ImGui::GetIO();
     (void)io;
+
+    io.Fonts->AddFontFromFileTTF(
+        "assets/fonts/Roboto-Regular.ttf",
+        20.0f);
 
     ImGui::StyleColorsDark();
 
@@ -49,5 +52,3 @@ void cleanupImGui()
 
     writeLog("Cleaning ImGui is done.");
 }
-
-

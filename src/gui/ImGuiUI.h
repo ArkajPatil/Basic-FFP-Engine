@@ -3,6 +3,8 @@
 
 #include <vector> // for giveSavedScenes()
 
+// variable declarations
+
 // functions declarations
 void drawUI(void);
 

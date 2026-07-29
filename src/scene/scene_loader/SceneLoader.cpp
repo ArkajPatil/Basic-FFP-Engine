@@ -184,6 +184,11 @@ void loadSceneV1(Scene *scene, json &sceneData)
     }
 }
 
-void deleteSelectedSavedScene()
+void deleteSelectedSavedScene(short iSelectedScene)
 {
+    string sceneName = vsSavedScenes[iSelectedScene] + ".json";
+    string path = "assets/scenes/" + sceneName;
+
+    DeleteFile(path.c_str());
 }
+
