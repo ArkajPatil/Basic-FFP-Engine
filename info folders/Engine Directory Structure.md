@@ -39,6 +39,8 @@
 |       |      +---> ImGuiLayer.h
 |       |      +---> ImGuiUI.cpp
 |       |      +---> ImGuiUI.h
+|       |      +---> fonts.cpp
+|       |      +---> fonts.h
 |       |
 |       +--->[ inputs ]
 |       |      |
@@ -90,6 +92,11 @@
 |       |      |      |
 |       |      |      +---> myMath.h
 |       |      |      +---> myMath.cpp
+|       |      |      
+|       |      +--->[ notification_manager ]
+|       |      |      |
+|       |      |      +---> NotificationManager.h
+|       |      |      +---> NotificationManager.cpp
 |       |
 |       +--->[ windows ]
 |       |      |

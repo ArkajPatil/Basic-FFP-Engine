@@ -3,6 +3,7 @@
 #include "windows/Window.h"
 #include "utils/logging_system/logger.h"
 
+#include "fonts.h"
 #include "ImGuiUI.h"
 
 void initializeImGui()
@@ -14,9 +15,16 @@ void initializeImGui()
     ImGuiIO &io = ImGui::GetIO();
     (void)io;
 
-    io.Fonts->AddFontFromFileTTF(
+    // fonts
+    boldFont = io.Fonts->AddFontFromFileTTF(
+    "assets/fonts/Roboto-Bold.ttf",
+    25.0f);
+
+    regularFont = io.Fonts->AddFontFromFileTTF(
         "assets/fonts/Roboto-Regular.ttf",
         20.0f);
+
+    io.FontDefault = regularFont;
 
     ImGui::StyleColorsDark();
 

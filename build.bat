@@ -37,7 +37,9 @@ src/scene/scene_loader/SceneLoader.cpp ^
 src/scene/basic_models_data/basicModelsData.cpp ^
 src/inputs/inputs.cpp ^
 src/gui/ImGuiLayer.cpp ^
-src/gui/ImGuiUI.cpp
+src/gui/ImGuiUI.cpp ^
+src/gui/fonts.cpp ^
+src/utils/notification_manager/NotificationManager.cpp
 
 echo.
 echo --- Compiling Resource Files ---
@@ -71,6 +73,8 @@ build/Dear_ImGui_build_Files/imgui_impl_opengl2.obj ^
 build/Dear_ImGui_build_Files/imgui_stdlib.obj ^
 build/ImGuiLayer.obj ^
 build/ImGuiUI.obj ^
+build/NotificationManager.obj ^
+build/fonts.obj ^
 User32.lib GDI32.lib /SUBSYSTEM:WINDOWS
 
 echo.

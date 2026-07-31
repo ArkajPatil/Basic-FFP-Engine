@@ -6,18 +6,20 @@
 #include "scene/linkedlist/linkedlist.h"
 #include "scene/sceneManager.h"
 #include "rendering/renderLoop.h"
-#include "windows/Window.h"
 #include "scene/scene_loader/SceneLoader.h"
+#include "utils/notification_manager/NotificationManager.h"
 
 // local variables
 // model uniform color
 int modelColorR = 0, modelColorG = 0, modelColorB = 0;
 float uniformModelScale = 1.0f;
 // fonts
-ImFont *gLargeFont = nullptr; // global large font
+// ImFont *regularFont = nullptr;
+// ImFont *boldFont = nullptr;
 
 void drawUI()
 {
+    ImGui::SetNextWindowPos(ImVec2(1, 1));
     ImGui::Begin("Engine Controls");
 
     // Screen Transformations
@@ -50,12 +52,29 @@ void drawUI()
         fSceneManagement();
     }
 
+    if (bShowNotification)
+    {
+        // if (!bStartDisappear)
+        // {
+        //     showNotification();
+        // }
+        // else
+        // {
+        //     for (){
+        //     ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.5, 1, 0.5, 1*i));
+        //     showNotification();
+        //     ImGui::PopStyleColor();
+        //     }
+        // }
+
+        showNotification();
+    }
+
     ImGui::End();
 }
 
 void fSceneManagement(void)
 {
-
     ImGui::Text("Create Scene: ");
 
     ImGui::InputText("Scene Name", &newSceneName);
@@ -85,6 +104,7 @@ void fSceneManagement(void)
     {
         saveSelectedScene(sceneManager->currentScene);
         giveSavedScenes();
+        createNotification("Scene Saved");
     }
 
     addVerticalSpace(5.0f);
@@ -93,6 +113,7 @@ void fSceneManagement(void)
     if (ImGui::Button("Delete Scene"))
     {
         deleteSelectedScene();
+        createNotification("Scene deleted.");
     }
     addVerticalSpace(1.0f);
     ImGui::Separator();
@@ -275,7 +296,7 @@ void fModelsColoring(void)
             for (int i = 0; i < model->mesh.vertexCount; i++)
             {
                 ImGui::PushID(i);
-                ImGui::ColorEdit3("Color", &model->mesh.perVertexColors[i*3]);
+                ImGui::ColorEdit3("Color", &model->mesh.perVertexColors[i * 3]);
                 ImGui::PopID();
             }
         }

@@ -1,4 +1,36 @@
+38. add notifications in code wherever needed
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+37. implement notification manager system
+
+    - added new 'notification_manager' folder inside 'src/utils/'
+    - created NotificationManager.h and NotificationManager.cpp for managing editor notifications
+    - created fonts.h and fonts.cpp inside 'src/gui/' to store globally accessible ImGui fonts
+    - added Roboto-Bold font in 'assets/fonts/' for notification rendering
+    - NotificationManager now accesses shared fonts through "../../gui/fonts.h"
+
+    - implemented createNotification(string msg) in NotificationManager.cpp to queue new notifications
+    - implemented notificationLoop() in NotificationManager.cpp to manage notification lifetime
+    - implemented showNotification() in NotificationManager.cpp to render notifications using ImGui
+
+    - added notification queue using std::deque for FIFO notification handling
+    - implemented automatic notification timeout after 3 seconds using std::chrono
+    - implemented automatic removal of expired notifications from the notification queue
+
+    - designed custom notification UI with: (all this custom notification UI is implemented inside showNotification() )
+        - bold font - green text - transparent background - borderless window 
+        - auto-resizing layout - fixed screen position
+
+    - notificationLoop() is added in the game loop inside main.cpp for per-frame notification updates
+      (it was necessary to add this funct in game loop for updating the time variables in notification_manager
+       for managing the lifetime of the notifications)
+    - integrated showNotification() into ImGuiUI.cpp (drawUI()) to render active notifications
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
 36. add per vertex coloring support
+
     - added dedicated model coloring panel for the currently selected model in the editor
     - added uniform and per-vertex coloring modes using radio buttons
     - implemented automatic allocation of per-vertex color data

@@ -7,6 +7,7 @@
 #include "gui/ImGuiLayer.h"
 #include "scene/sceneManager.h"
 #include "scene/scene_loader/SceneLoader.h"
+#include "utils/notification_manager/NotificationManager.h"
 
 // global functions declarations
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM); // HWND->HANDLE->UINT->Unsigned int
@@ -95,6 +96,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLi
                 update();
 
                 renderImGui();
+                // notification manager
+                notificationLoop();
 
                 // swap the buffers
                 SwapBuffers(ghdc);

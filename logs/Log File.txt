@@ -1,19 +1,25 @@
-[2026-07-29 20:09:12] >>>>> SUCCESS <<<<< :: Log File created
-[2026-07-29 20:09:12] >>>>> SUCCESS <<<<< :: Window creation done Successfully
-[2026-07-29 20:09:12] OpenGL Information :
-[2026-07-29 20:09:12] ********************
-[2026-07-29 20:09:12] OpenGL Vendor : NVIDIA Corporation
-[2026-07-29 20:09:12] OpenGL Renderer : NVIDIA GeForce GTX 1050/PCIe/SSE2
-[2026-07-29 20:09:12] OpenGL Version : 4.6.0 NVIDIA 576.02
-[2026-07-29 20:09:12] ********************
+[2026-08-01 00:25:27] >>>>> SUCCESS <<<<< :: Log File created
+[2026-08-01 00:25:27] >>>>> SUCCESS <<<<< :: Window creation done Successfully
+[2026-08-01 00:25:27] OpenGL Information :
+[2026-08-01 00:25:27] ********************
+[2026-08-01 00:25:27] OpenGL Vendor : Intel
+[2026-08-01 00:25:27] OpenGL Renderer : Intel(R) UHD Graphics 630
+[2026-08-01 00:25:27] OpenGL Version : 4.6.0 - Build 27.20.100.8729
+[2026-08-01 00:25:27] ********************
 
-[2026-07-29 20:09:12] >>>>> SUCCESS <<<<< :: initializeOpenGL() completed successfully, OpenGL setup is done.
-[2026-07-29 20:09:12] >>>>> SUCCESS <<<<< :: ImGui Initialization is done.
-[2026-07-29 20:09:12] >>>>> SUCCESS <<<<< :: SceneManager allocation successfull.
-[2026-07-29 20:09:12] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
-[2026-07-29 20:09:15] Model: TRIANGLE was created.
-[2026-07-29 20:09:15] Model: TRIANGLE has been inserted as head node in scene 'demo'.
-[2026-07-29 20:11:00] >>>>>EXITING<<<<< Escape Key pressed
-[2026-07-29 20:11:00] Cleaning ImGui is done.
-[2026-07-29 20:11:03] Program terminated successfully
+[2026-08-01 00:25:27] >>>>> SUCCESS <<<<< :: initializeOpenGL() completed successfully, OpenGL setup is done.
+[2026-08-01 00:25:27] >>>>> SUCCESS <<<<< :: ImGui Initialization is done.
+[2026-08-01 00:25:27] >>>>> SUCCESS <<<<< :: SceneManager allocation successfull.
+[2026-08-01 00:25:27] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
+[2026-08-01 00:25:30] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
+[2026-08-01 00:25:37] >>>>> SUCCESS <<<<< :: Scene 'demo' was saved to 'assets/scenes/' successfully.
+[2026-08-01 00:25:39] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
+[2026-08-01 00:25:48] >>>>> SUCCESS <<<<< :: Scene 'demo' was saved to 'assets/scenes/' successfully.
+[2026-08-01 00:25:51] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
+[2026-08-01 00:26:00] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
+[2026-08-01 00:26:01] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
+[2026-08-01 00:26:03] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
+[2026-08-01 00:26:33] >>>>>EXITING<<<<< Escape Key pressed
+[2026-08-01 00:26:33] Cleaning ImGui is done.
+[2026-08-01 00:26:36] Program terminated successfully
 

@@ -3,8 +3,12 @@
 
 #include <vector> // for giveSavedScenes()
 
-// variable declarations
 
+#include "fonts.h"
+
+// variable declarations
+extern ImFont *regularFont;
+extern ImFont *boldFont;
 // functions declarations
 void drawUI(void);
 
