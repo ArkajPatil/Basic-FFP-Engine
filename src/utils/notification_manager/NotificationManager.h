@@ -8,11 +8,10 @@ using namespace std;
 // variables
 extern bool bShowNotification;
 
-
 // functions declarations
+void createNotification(const string &msg, const string &notifySoundName = "");
 void notificationLoop(void);
-void createNotification(string msg);
-// void showNotification(string msg);
 void showNotification(void);
+void playNotifySound(const string &name = "default");
 
 #endif

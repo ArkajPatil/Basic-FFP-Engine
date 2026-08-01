@@ -88,6 +88,7 @@ void createWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLin
 
     writeLog(">>>>> SUCCESS <<<<< :: Window creation done Successfully");
 
+    toggleFullScreen();
 }
 
 void toggleFullScreen(void)
@@ -130,12 +131,7 @@ void cleanupWindow(void)
         toggleFullScreen();
         gbFullScreen = FALSE;
     }
-
-        PlaySound(TEXT("assets/sounds/Mario.wav"),
-              NULL,
-              SND_FILENAME | SND_SYNC);
 }
-
 
 std::string WideToUtf8(const wchar_t* wideString)
 {

@@ -7,6 +7,7 @@ using namespace std;
 #include <fstream>
 
 #include "SceneLoader.h"
+#include "utils/notification_manager/NotificationManager.h"
 
 // for scene loading fucntion
 #include "external/nlohmann/json.hpp"
@@ -76,11 +77,12 @@ void saveSelectedScene(Scene *scene)
     fprintf(pFile, "}");
     fclose(pFile);
 
+    // updating saved scenes list
+    giveSavedScenes();
+
     writeLog(">>>>> SUCCESS <<<<< :: Scene '%s' was saved to 'assets/scenes/' successfully.", scene->sceneName);
-    PlaySound(TEXT("assets/sounds/Silly.wav"),
-              NULL,
-              SND_FILENAME | SND_ASYNC);
-    MessageBox(NULL, TEXT("Scene saved successfully."), TEXT("Scene Management"), MB_OK);
+    string msg = "Scene '" + scene->sceneName + "' was saved";
+    createNotification(msg);
 }
 
 void giveSavedScenes(void)
@@ -142,9 +144,18 @@ void loadSelectedScene(Scene *scene, int indexOfSelectedScene, bool bFlagClear)
     {
         loadSceneV1(scene, sceneData);
     }
-    PlaySound(TEXT("assets/sounds/yoooo.wav"),
-              NULL,
-              SND_FILENAME | SND_ASYNC);
+
+    if (bFlagClear)
+    {
+        writeLog(">>>>> SUCCESS <<<<< :: Scene: '%s' loaded into Scene: '%s'.[cleared runtime scene first then loaded saved scene] ✅", vsSavedScenes[indexOfSelectedScene], scene->sceneName);
+        string msg = "Scene: '" + vsSavedScenes[indexOfSelectedScene] + "' loaded into Scene: '" + scene->sceneName + "'✅";
+        createNotification(msg);
+    }
+    else {
+                writeLog(">>>>> SUCCESS <<<<< :: Scene: '%s' appended into Scene: '%s'.[simply loaded(appended) saved scene in runtime scene] ✅", vsSavedScenes[indexOfSelectedScene], scene->sceneName);
+        string msg = "Scene: '" + vsSavedScenes[indexOfSelectedScene] + "' loaded into Scene: '" + scene->sceneName + "'✅";
+        createNotification(msg);
+    }
 }
 
 void loadSceneV1(Scene *scene, json &sceneData)
@@ -190,5 +201,8 @@ void deleteSelectedSavedScene(short iSelectedScene)
     string path = "assets/scenes/" + sceneName;
 
     DeleteFile(path.c_str());
-}
 
+    writeLog(">>>>> SUCCESS <<<<< :: Scene %s was deleted.", vsSavedScenes[iSelectedScene]);
+    string msg = "Scene '" + vsSavedScenes[iSelectedScene] + "' was deleted";
+    createNotification(msg, "delete");
+}

@@ -2,6 +2,7 @@
 
 #include "scene/sceneManager.h"
 #include <string>
+#include "utils/notification_manager/NotificationManager.h"
 
 // variables
 SceneManager *sceneManager;
@@ -58,6 +59,7 @@ void createScene(string sceneName)
     if (sceneManager->sceneCount >= MAX_SCENES)
     {
         writeLog(">>>>> ERROR <<<<< :: Maximum number of scenes reached.");
+        createNotification("Maximum number of scenes reached.", "error");
         free(scene);
         return;
     }
@@ -66,11 +68,14 @@ void createScene(string sceneName)
     sceneManager->currentScene = scene;
     sceneManager->sceneCount += 1;
     writeLog(">>>>> SUCCESS <<<<< :: Scene '%s' allocation successfull.", scene->sceneName);
+    string msg = "Scene: '" + scene->sceneName + "' created";
+    createNotification(msg);
 }
 
 void deleteSelectedScene(void)
 {
     Scene *scene = sceneManager->currentScene;
+    string msg = "Scene '" +  scene->sceneName + "' deleted";
 
     removeAllNodesOfScene(scene);
 
@@ -89,6 +94,8 @@ void deleteSelectedScene(void)
         }
     }
 
+    createNotification(msg, "delete");
+
     if (sceneManager->sceneCount > 0)
     {
         sceneManager->currentScene = sceneManager->scenesArray[0];
@@ -98,3 +105,4 @@ void deleteSelectedScene(void)
         createScene("demo");
     }
 }
+

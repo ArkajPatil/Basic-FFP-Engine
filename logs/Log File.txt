@@ -1,25 +1,17 @@
-[2026-08-01 00:25:27] >>>>> SUCCESS <<<<< :: Log File created
-[2026-08-01 00:25:27] >>>>> SUCCESS <<<<< :: Window creation done Successfully
-[2026-08-01 00:25:27] OpenGL Information :
-[2026-08-01 00:25:27] ********************
-[2026-08-01 00:25:27] OpenGL Vendor : Intel
-[2026-08-01 00:25:27] OpenGL Renderer : Intel(R) UHD Graphics 630
-[2026-08-01 00:25:27] OpenGL Version : 4.6.0 - Build 27.20.100.8729
-[2026-08-01 00:25:27] ********************
+[2026-08-01 23:08:03] >>>>> SUCCESS <<<<< :: Log File created
+[2026-08-01 23:08:03] >>>>> SUCCESS <<<<< :: Window creation done Successfully
+[2026-08-01 23:08:03] OpenGL Information :
+[2026-08-01 23:08:03] ********************
+[2026-08-01 23:08:03] OpenGL Vendor : Intel
+[2026-08-01 23:08:03] OpenGL Renderer : Intel(R) UHD Graphics 630
+[2026-08-01 23:08:03] OpenGL Version : 4.6.0 - Build 27.20.100.8729
+[2026-08-01 23:08:03] ********************
 
-[2026-08-01 00:25:27] >>>>> SUCCESS <<<<< :: initializeOpenGL() completed successfully, OpenGL setup is done.
-[2026-08-01 00:25:27] >>>>> SUCCESS <<<<< :: ImGui Initialization is done.
-[2026-08-01 00:25:27] >>>>> SUCCESS <<<<< :: SceneManager allocation successfull.
-[2026-08-01 00:25:27] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
-[2026-08-01 00:25:30] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
-[2026-08-01 00:25:37] >>>>> SUCCESS <<<<< :: Scene 'demo' was saved to 'assets/scenes/' successfully.
-[2026-08-01 00:25:39] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
-[2026-08-01 00:25:48] >>>>> SUCCESS <<<<< :: Scene 'demo' was saved to 'assets/scenes/' successfully.
-[2026-08-01 00:25:51] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
-[2026-08-01 00:26:00] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
-[2026-08-01 00:26:01] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
-[2026-08-01 00:26:03] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
-[2026-08-01 00:26:33] >>>>>EXITING<<<<< Escape Key pressed
-[2026-08-01 00:26:33] Cleaning ImGui is done.
-[2026-08-01 00:26:36] Program terminated successfully
+[2026-08-01 23:08:03] >>>>> SUCCESS <<<<< :: initializeOpenGL() completed successfully, OpenGL setup is done.
+[2026-08-01 23:08:03] >>>>> SUCCESS <<<<< :: ImGui Initialization is done.
+[2026-08-01 23:08:03] >>>>> SUCCESS <<<<< :: SceneManager allocation successfull.
+[2026-08-01 23:08:03] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
+[2026-08-01 23:08:06] >>>>>EXITING<<<<< Escape Key pressed
+[2026-08-01 23:08:06] Cleaning ImGui is done.
+[2026-08-01 23:08:06] Program terminated successfully
 

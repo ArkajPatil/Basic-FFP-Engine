@@ -1,4 +1,21 @@
-38. add notifications in code wherever needed
+38. integrate notifications across engine + improve notification system + auto fullscreen
+
+    - enabled fullscreen automatically on engine startup by calling toggleFullscreen() at the end of window creation
+
+    - integrated createNotification() into various engine operations to provide real-time editor feedback
+
+    - improved notification manager behaviour:
+        - current notification is removed after 4.5 seconds
+        - if a new notification is created while another is being displayed, the current notification is dismissed immediately
+
+    - updated NotificationManager function declarations in NotificationManager.h:
+        - createNotification(const string &msg, const string &notifySoundName = "")
+        - notificationLoop(void)
+        - showNotification(void)
+        - playNotifySound(const string &name = "default")
+
+    - refactored NotificationManager interfaces to use const string& parameters where applicable
+    - added default parameter values for notification sound selection
 
 -----------------------------------------------------------------------------------------------------------------------------------------------
 

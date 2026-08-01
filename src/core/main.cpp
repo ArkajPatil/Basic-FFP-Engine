@@ -60,6 +60,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLi
 
     // load the saved scenes from 'assets/scenes' in vector(dynamic list) which is located in SceneManager
     giveSavedScenes(); // this funct load dynamic list(std::vector<std::string> vsSavedScenes) of saved scenes which is located inside SceneLoader
+    
+    PlaySound(TEXT("assets/sounds/startup.wav"), NULL, SND_FILENAME | SND_ASYNC);
 
     // Game Loop
     while (bDone == FALSE)
@@ -96,6 +98,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLi
                 update();
 
                 renderImGui();
+
                 // notification manager
                 notificationLoop();
 
@@ -107,10 +110,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLi
     // uninitialize and cleanups
     uninitialize();
 
+    PlaySound(TEXT("assets/sounds/duck.wav"), NULL, SND_FILENAME | SND_SYNC);
+
     return ((int)msg.wParam);
 }
 
-// CAllback function
+// Callback function
 LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 {
     // functions declarations

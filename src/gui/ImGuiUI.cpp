@@ -54,19 +54,6 @@ void drawUI()
 
     if (bShowNotification)
     {
-        // if (!bStartDisappear)
-        // {
-        //     showNotification();
-        // }
-        // else
-        // {
-        //     for (){
-        //     ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.5, 1, 0.5, 1*i));
-        //     showNotification();
-        //     ImGui::PopStyleColor();
-        //     }
-        // }
-
         showNotification();
     }
 
@@ -103,8 +90,6 @@ void fSceneManagement(void)
     if (ImGui::Button("Save Scene"))
     {
         saveSelectedScene(sceneManager->currentScene);
-        giveSavedScenes();
-        createNotification("Scene Saved");
     }
 
     addVerticalSpace(5.0f);
@@ -113,7 +98,6 @@ void fSceneManagement(void)
     if (ImGui::Button("Delete Scene"))
     {
         deleteSelectedScene();
-        createNotification("Scene deleted.");
     }
     addVerticalSpace(1.0f);
     ImGui::Separator();
@@ -315,24 +299,28 @@ void fModelsControls(void)
     if (ImGui::Button("Triangle"))
     {
         addModelToScene(sceneManager->currentScene, "TRIANGLE");
+        playNotifySound("water_drop");
     }
     ImGui::SameLine();
 
     if (ImGui::Button("Square"))
     {
         addModelToScene(sceneManager->currentScene, "QUAD");
+        playNotifySound("water_drop");
     }
     ImGui::SameLine();
 
     if (ImGui::Button("Pyramid"))
     {
         addModelToScene(sceneManager->currentScene, "PYRAMID");
+        playNotifySound("water_drop");
     }
     ImGui::SameLine();
 
     if (ImGui::Button("Cube"))
     {
         addModelToScene(sceneManager->currentScene, "CUBE");
+        playNotifySound("water_drop");
     }
 
     if (ImGui::Button("Sphere"))
@@ -346,7 +334,10 @@ void fModelsControls(void)
     ImGui::SameLine();
     if (ImGui::Button("Delete"))
     {
-        removeSelectedNode(sceneManager->currentScene);
+        if (removeSelectedNode(sceneManager->currentScene))
+        {
+            playNotifySound("delete");
+        }
     }
     ImGui::Separator();
     addVerticalSpace(6.0f);

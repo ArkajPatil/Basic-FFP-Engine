@@ -102,12 +102,12 @@ void deleteNode(Scene *scene, Model *model)
     }
 }
 
-void removeSelectedNode(Scene *scene)
+bool removeSelectedNode(Scene *scene)
 {
     if (scene->head == NULL)
     {
         writeLog(">>>>> ERROR <<<<< :: You tried to delete node from scene '%s', but linked list is empty.", scene->sceneName);
-        return;
+        return false;
     }
 
     // deleting head node
@@ -126,7 +126,7 @@ void removeSelectedNode(Scene *scene)
             scene->head = NULL;
             scene->selectedNode = NULL;
         }
-        return;
+        return true;
     }
 
     // deleting tail node
@@ -136,7 +136,7 @@ void removeSelectedNode(Scene *scene)
         scene->tail->nextNode = NULL;
         free(scene->selectedNode);
         scene->selectedNode = scene->tail;
-        return;
+        return true;
     }
 
     // deleting middle nodes
@@ -146,7 +146,7 @@ void removeSelectedNode(Scene *scene)
     free(scene->selectedNode);
     scene->selectedNode = temp;
 
-    return;
+    return true;
 }
 
 void removeAllNodesOfScene(Scene *scene)

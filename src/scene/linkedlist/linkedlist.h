@@ -18,7 +18,7 @@ typedef struct Node {
 // functions declarations
 void insertNode(Scene *scene, Model *model);
 void deleteNode(Scene *scene, Model *model);
-void removeSelectedNode(Scene *scene);
+bool removeSelectedNode(Scene *scene);
 
 void selectNextNode(Scene *scene);
 void selectPreviousNode(Scene *scene);
