@@ -39,7 +39,8 @@ src/inputs/inputs.cpp ^
 src/gui/ImGuiLayer.cpp ^
 src/gui/ImGuiUI.cpp ^
 src/gui/fonts.cpp ^
-src/utils/notification_manager/NotificationManager.cpp
+src/utils/notification_manager/NotificationManager.cpp ^
+src/rendering/texture/texture.cpp
 
 echo.
 echo --- Compiling Resource Files ---
@@ -75,6 +76,7 @@ build/ImGuiLayer.obj ^
 build/ImGuiUI.obj ^
 build/NotificationManager.obj ^
 build/fonts.obj ^
+build/texture.obj ^
 User32.lib GDI32.lib /SUBSYSTEM:WINDOWS
 
 echo.

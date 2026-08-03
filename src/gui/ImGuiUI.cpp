@@ -40,6 +40,12 @@ void drawUI()
         fModelsColoring();
     }
 
+    // textures
+    if (ImGui::CollapsingHeader("Textures Control"))
+    {
+        fTexturesControl();
+    }
+
     // models transformations
     if (ImGui::CollapsingHeader("Model Transformations"))
     {
@@ -52,6 +58,7 @@ void drawUI()
         fSceneManagement();
     }
 
+    // for notifications
     if (bShowNotification)
     {
         showNotification();
@@ -161,7 +168,7 @@ void fModelTransformations(void)
 {
     if (sceneManager->currentScene->selectedNode)
     {
-        ImGui::PushID("ModelsColoring");
+        ImGui::PushID("ModelTransformations");
         Model *model = sceneManager->currentScene->selectedNode->currentModel;
 
         // model selection
@@ -223,6 +230,13 @@ void fModelTransformations(void)
 
         ImGui::PopID();
     }
+}
+
+void fTexturesControl(void)
+{
+    ImGui::Text("Texture:   ");
+    ImGui::SameLine();
+    (ImGui::Checkbox("Enable texture", &sceneManager->currentScene->selectedNode->currentModel->mesh.bApplyTexture));
 }
 
 void fModelsColoring(void)
@@ -315,13 +329,13 @@ void fModelsControls(void)
         addModelToScene(sceneManager->currentScene, "PYRAMID");
         playNotifySound("water_drop");
     }
-    ImGui::SameLine();
 
     if (ImGui::Button("Cube"))
     {
         addModelToScene(sceneManager->currentScene, "CUBE");
         playNotifySound("water_drop");
     }
+    ImGui::SameLine();
 
     if (ImGui::Button("Sphere"))
     {

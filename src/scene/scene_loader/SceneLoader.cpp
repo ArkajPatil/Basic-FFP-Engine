@@ -147,13 +147,14 @@ void loadSelectedScene(Scene *scene, int indexOfSelectedScene, bool bFlagClear)
 
     if (bFlagClear)
     {
-        writeLog(">>>>> SUCCESS <<<<< :: Scene: '%s' loaded into Scene: '%s'.[cleared runtime scene first then loaded saved scene] ✅", vsSavedScenes[indexOfSelectedScene], scene->sceneName);
-        string msg = "Scene: '" + vsSavedScenes[indexOfSelectedScene] + "' loaded into Scene: '" + scene->sceneName + "'✅";
+        writeLog(">>>>> SUCCESS <<<<< :: Scene: '%s' loaded into Scene: '%s'.[cleared runtime scene first then loaded saved scene]", vsSavedScenes[indexOfSelectedScene], scene->sceneName);
+        string msg = "Scene: '" + vsSavedScenes[indexOfSelectedScene] + "' loaded into Scene: '" + scene->sceneName + "'";
         createNotification(msg);
     }
-    else {
-                writeLog(">>>>> SUCCESS <<<<< :: Scene: '%s' appended into Scene: '%s'.[simply loaded(appended) saved scene in runtime scene] ✅", vsSavedScenes[indexOfSelectedScene], scene->sceneName);
-        string msg = "Scene: '" + vsSavedScenes[indexOfSelectedScene] + "' loaded into Scene: '" + scene->sceneName + "'✅";
+    else
+    {
+        writeLog(">>>>> SUCCESS <<<<< :: Scene: '%s' appended into Scene: '%s'.[simply loaded(appended) saved scene in runtime scene]", vsSavedScenes[indexOfSelectedScene], scene->sceneName);
+        string msg = "Scene: '" + vsSavedScenes[indexOfSelectedScene] + "' appended into Scene: '" + scene->sceneName + "'";
         createNotification(msg);
     }
 }

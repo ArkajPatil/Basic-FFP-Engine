@@ -24,13 +24,11 @@ if exist main.exe del main.exe
 @REM src/utils/my_math_library/myMath.cpp ^
 @REM src/rendering/OpenGLSetup.cpp ^
 @REM src/rendering/renderLoop.cpp ^
-@REM src/scene/models/models.cpp ^
-@REM src/scene/basic_models_data/basicModelsData.cpp ^
 @REM src/inputs/inputs.cpp ^
 @REM src/gui/ImGuiLayer.cpp ^
 @REM src/gui/fonts.cpp ^
 @REM src/scene/sceneManager.cpp ^
-@REM src/scene/linkedlist/linkedlist.cpp ^
+
 
 echo.
 echo --- Compiling Source Files ---
@@ -39,10 +37,13 @@ cl.exe /c /EHsc /Isrc /Iresources ^
 /Isrc/external/imgui ^
 /Isrc/external/imgui/backends ^
 /Fobuild\ ^
-src/scene/scene_loader/SceneLoader.cpp ^
 src/gui/ImGuiUI.cpp ^
-src/scene/sceneManager.cpp ^
-src/utils/notification_manager/NotificationManager.cpp
+src/scene/linkedlist/linkedlist.cpp ^
+src/rendering/texture/texture.cpp ^
+src/scene/basic_models_data/basicModelsData.cpp ^
+src/scene/models/models.cpp
+
+
 
 echo.
 echo --- Compiling Resource Files ---

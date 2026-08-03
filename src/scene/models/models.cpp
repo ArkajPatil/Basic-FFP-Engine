@@ -1,8 +1,10 @@
 #include "models.h"
 
+#include "utils/notification_manager/NotificationManager.h"
+
 // fucntions body
 Model *createModel(
-    string modelName, string modelType, bool bHighlightModel, bool isVisible, 
+    string modelName, string modelType, bool bHighlightModel, bool isVisible,
     vec3 translate, vec3 rotate, vec3 scale,
     GLenum drawMode, GLint vertexCount, GLfloat *vertices,
     GLfloat *perVertexColors, GLfloat *uniformColor, bool bUniformColoring,
@@ -30,6 +32,7 @@ Model *createModel(
     // mesh i.e. geometry
     model->mesh.drawMode = drawMode;
     model->mesh.vertexCount = vertexCount;
+    model->mesh.bApplyTexture = false;
 
     // vertices
     model->mesh.vertices = vertices;
@@ -59,16 +62,7 @@ Model *createModel(
     }
 
     // texcoords
-    if (texcoords)
-    {
-        int size = vertexCount * 2 * sizeof(GLfloat);
-        model->mesh.texcoords = (GLfloat *)malloc(size);
-        memcpy(model->mesh.texcoords, texcoords, size);
-    }
-    else
-    {
-        model->mesh.texcoords = NULL;
-    }
+    model->mesh.texcoords = texcoords;
 
     // normals
     if (normals)
@@ -80,11 +74,6 @@ Model *createModel(
     else
     {
         model->mesh.normals = NULL;
-    }
-
-    if (model->mesh.uniformColor && model->mesh.perVertexColors)
-    {
-        writeLog(">>>>> Warning <<<<< :: You tried to give per vertex as well as uniform color to the model: %s.", model->modelName);
     }
 
     writeLog("Model: %s was created.", model->modelName);
@@ -149,10 +138,16 @@ void drawModel(Model *model)
         }
     }
 
+    // model->mesh.bApplyTexture = true;
+    if(model->mesh.bApplyTexture)
+    {
+        bindTexture(model->mesh.texture);
+    }
+
     glBegin(model->mesh.drawMode);
 
     // checking for uniform color
-    if (model->bUniformColoring)
+    if (model->bUniformColoring && !model->mesh.bApplyTexture)
     {
         glColor3f(model->mesh.uniformColor[0], model->mesh.uniformColor[1], model->mesh.uniformColor[2]);
     }
@@ -164,14 +159,23 @@ void drawModel(Model *model)
         {
             glNormal3f(model->mesh.normals[i * 3], model->mesh.normals[i * 3 + 1], model->mesh.normals[i * 3 + 2]);
         }
+
         // texcoords
-        if (model->mesh.texcoords)
+        if (model->mesh.bApplyTexture)
         {
-            glTexCoord2f(model->mesh.texcoords[i * 2], model->mesh.texcoords[i * 2 + 1]);
+            if (model->mesh.texcoords)
+            {
+                glTexCoord2f(model->mesh.texcoords[i * 2], model->mesh.texcoords[i * 2 + 1]);
+            }
+            else
+            {
+                createNotification("Texcoords are not provided for this model");
+            }
         }
+
         // colors
         // if bUniformColoring = NULL, then color according to per vertex colors
-        if (!model->bUniformColoring)
+        if (!model->bUniformColoring && !model->mesh.bApplyTexture)
         {
             glColor3f(model->mesh.perVertexColors[i * 3], model->mesh.perVertexColors[i * 3 + 1], model->mesh.perVertexColors[i * 3 + 2]);
         }
@@ -181,5 +185,11 @@ void drawModel(Model *model)
     }
 
     glEnd();
+
+    if(model->mesh.bApplyTexture)
+    {
+        unbindTexture();
+    }
+
     glPopMatrix();
 }

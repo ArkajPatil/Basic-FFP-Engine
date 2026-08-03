@@ -1,17 +1,17 @@
-[2026-08-01 23:08:03] >>>>> SUCCESS <<<<< :: Log File created
-[2026-08-01 23:08:03] >>>>> SUCCESS <<<<< :: Window creation done Successfully
-[2026-08-01 23:08:03] OpenGL Information :
-[2026-08-01 23:08:03] ********************
-[2026-08-01 23:08:03] OpenGL Vendor : Intel
-[2026-08-01 23:08:03] OpenGL Renderer : Intel(R) UHD Graphics 630
-[2026-08-01 23:08:03] OpenGL Version : 4.6.0 - Build 27.20.100.8729
-[2026-08-01 23:08:03] ********************
+[2026-08-03 16:59:36] >>>>> SUCCESS <<<<< :: Log File created
+[2026-08-03 16:59:36] >>>>> SUCCESS <<<<< :: Window creation done Successfully
+[2026-08-03 16:59:36] OpenGL Information :
+[2026-08-03 16:59:36] ********************
+[2026-08-03 16:59:36] OpenGL Vendor : NVIDIA Corporation
+[2026-08-03 16:59:36] OpenGL Renderer : NVIDIA GeForce GTX 1050/PCIe/SSE2
+[2026-08-03 16:59:36] OpenGL Version : 4.6.0 NVIDIA 582.66
+[2026-08-03 16:59:36] ********************
 
-[2026-08-01 23:08:03] >>>>> SUCCESS <<<<< :: initializeOpenGL() completed successfully, OpenGL setup is done.
-[2026-08-01 23:08:03] >>>>> SUCCESS <<<<< :: ImGui Initialization is done.
-[2026-08-01 23:08:03] >>>>> SUCCESS <<<<< :: SceneManager allocation successfull.
-[2026-08-01 23:08:03] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
-[2026-08-01 23:08:06] >>>>>EXITING<<<<< Escape Key pressed
-[2026-08-01 23:08:06] Cleaning ImGui is done.
-[2026-08-01 23:08:06] Program terminated successfully
+[2026-08-03 16:59:36] >>>>> SUCCESS <<<<< :: initializeOpenGL() completed successfully, OpenGL setup is done.
+[2026-08-03 16:59:36] >>>>> SUCCESS <<<<< :: ImGui Initialization is done.
+[2026-08-03 16:59:36] >>>>> SUCCESS <<<<< :: SceneManager allocation successfull.
+[2026-08-03 16:59:36] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
+[2026-08-03 17:00:15] >>>>>EXITING<<<<< Escape Key pressed
+[2026-08-03 17:00:15] Cleaning ImGui is done.
+[2026-08-03 17:00:15] Program terminated successfully
 

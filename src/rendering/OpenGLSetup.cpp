@@ -33,7 +33,6 @@ int initializeOpenGL(void)
     // function declaration
     void printGLInfo(void);
     void resize(int, int);
-    void modelsCreation(void);
 
     // variables declarations
     PIXELFORMATDESCRIPTOR pfd;
@@ -106,6 +105,9 @@ int initializeOpenGL(void)
     // from here onwards OpenGL code starts
     // tell OpenGL to chose the color to clear the screen
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // background
+
+    // enable texturing
+    glEnable(GL_TEXTURE_2D);
 
     // warm up resize
     resize(WIN_WIDTH, WIN_HEIGHT);
@@ -190,22 +192,6 @@ void destroyModels(void)
     void destroyModel(Model *model);
 
     // destroying nodes of linkedlist
-    if(triangle1)
-    {
-        deleteNode(sceneManager->currentScene, triangle1); 
-    }
-    if(square1)
-    {
-        deleteNode(sceneManager->currentScene, square1); 
-    }
-    if(cube1)
-    {
-        deleteNode(sceneManager->currentScene, cube1); 
-    }
-    if(pyramid1)
-    {
-        deleteNode(sceneManager->currentScene, pyramid1); 
-    }
 
 }
 

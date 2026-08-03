@@ -1,3 +1,71 @@
+39. add simple texture module
+
+    Texture Module
+    --------------
+    - created new module: src/rendering/texture
+    - created Texture struct to represent a texture resource
+    - implemented loadTexture(const std::string &path)
+        -> loads an image from disk using stb_image
+        -> creates an OpenGL texture object
+        -> uploads image data to GPU memory
+        -> generates mipmaps
+        -> returns a Texture object
+    - implemented bindTexture(const Texture *texture)
+        -> binds the specified texture for rendering
+    - implemented unbindTexture()
+        -> unbinds the currently active texture
+    - implemented destroyTexture(Texture *texture)
+        -> releases GPU texture memory
+        -> deletes the Texture object from CPU memory
+
+    Basic Model Data
+    ----------------
+    - added texture coordinate arrays:
+        - triangleTexcoords[]
+        - squareTexcoords[]
+        - pyramidTexcoords[]
+        - cubeTexcoords[]
+    - associated texture coordinates with basic engine models
+
+    Mesh System
+    -----------
+    - added Texture *texture to Mesh
+    - added bool bApplyTexture to enable/disable texture rendering per model
+
+    Rendering
+    ---------
+    - updated drawModel() to support textured rendering
+    - texture coordinates are submitted using glTexCoord2f()
+    - texture binding/unbinding handled automatically during model rendering
+    - retained support for both:
+        - uniform coloring
+        - per-vertex coloring
+      when texturing is disabled
+
+    OpenGL
+    ------
+    - enabled GL_TEXTURE_2D during OpenGL initialization
+    - fixed viewport displacement caused by calling
+      toggleFullScreen() before OpenGL and ImGui initialization
+    - moved toggleFullScreen() after successful context initialization
+
+    ImGui
+    -----
+    - added "Enable Texture" checkbox
+    - allows enabling/disabling texture rendering
+      for the currently selected model
+
+    Scene / Linked List
+    -------------------
+    - currently assigns a default texture during
+      addModelToScene()
+    - default texture:
+        assets/textures/ninja.png
+    - serves as temporary implementation until
+      texture selection/loading is added
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
 38. integrate notifications across engine + improve notification system + auto fullscreen
 
     - enabled fullscreen automatically on engine startup by calling toggleFullscreen() at the end of window creation
@@ -290,7 +358,7 @@
     - add first runtime debug window using Dear ImGui
     - implement interactive model selection buttons for scene navigation
       using existing selectPreviousNode() and selectNextNode() logic
-    - establish foundation for future engine tooling and editor systems
+    - establish foundation for future engine tooling and editor systems 
 
 -----------------------------------------------------------------------------------------------------------------------------------------------
 

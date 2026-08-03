@@ -109,11 +109,67 @@ float pyramidPosition[] = {
     -1.0f, -1.0f, 1.0f
 };
 
-// colors arrays
-float triangleColor[] = {
-    1.0f, 0.0f, 0.0f, 
-    0.0f, 1.0f, 0.0f, 
-    0.0f, 0.0f, 1.0f
+// texture coordinates arrays
+float triangleTexcoords[] = {
+    0.5f, 1.0f, 
+    0.0f, 0.0f, 
+    1.0f, 0.0f
 };
 
+float squareTexcoords[] = {
+    1.0f, 1.0f,
+    0.0f, 1.0f,
+    0.0f, 0.0f,
+    1.0f, 0.0f
+};
+
+float cubeTexcoords[] = {
+    1.0f, 1.0f,
+    0.0f, 1.0f,
+    0.0f, 0.0f,
+    1.0f, 0.0f,
+    
+    1.0f, 1.0f,
+    0.0f, 1.0f,
+    0.0f, 0.0f,
+    1.0f, 0.0f,
+    
+    1.0f, 1.0f,
+    0.0f, 1.0f,
+    0.0f, 0.0f,
+    1.0f, 0.0f,
+    
+    1.0f, 1.0f,
+    0.0f, 1.0f,
+    0.0f, 0.0f,
+    1.0f, 0.0f,
+    
+    1.0f, 1.0f,
+    0.0f, 1.0f,
+    0.0f, 0.0f,
+    1.0f, 0.0f,
+    
+    1.0f, 1.0f,
+    0.0f, 1.0f,
+    0.0f, 0.0f,
+    1.0f, 0.0f
+};
+
+float pyramidTexcoords[] = {
+    0.5f, 1.0f, 
+    0.0f, 0.0f, 
+    1.0f, 0.0f,
+
+    0.5f, 1.0f, 
+    0.0f, 0.0f, 
+    1.0f, 0.0f,
+
+    0.5f, 1.0f, 
+    0.0f, 0.0f, 
+    1.0f, 0.0f,
+
+    0.5f, 1.0f, 
+    0.0f, 0.0f, 
+    1.0f, 0.0f
+};
 

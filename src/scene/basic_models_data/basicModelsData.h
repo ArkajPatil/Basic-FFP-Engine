@@ -7,7 +7,10 @@ extern float squarePosition[];
 extern float cubePosition[];
 extern float pyramidPosition[];
 
-// color arrays
-extern float triangleColor[];
+// texcoords arrays
+extern float triangleTexcoords[] ;
+extern float squareTexcoords[] ;
+extern float cubeTexcoords[] ;
+extern float pyramidTexcoords[] ;
 
 #endif

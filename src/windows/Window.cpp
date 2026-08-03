@@ -87,8 +87,6 @@ void createWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLin
     SetFocus(ghwnd);
 
     writeLog(">>>>> SUCCESS <<<<< :: Window creation done Successfully");
-
-    toggleFullScreen();
 }
 
 void toggleFullScreen(void)

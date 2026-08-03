@@ -49,6 +49,11 @@
 |       |
 |       +--->[ rendering ]
 |       |      |
+|       |      +--->[ texture ]
+|       |      |      |
+|       |      |      +---> texture.h
+|       |      |      +---> texture.cpp
+|       |      | 
 |       |      +---> OpenGLSetup.cpp
 |       |      +---> OpenGLSetup.h
 |       |      +---> renderLoop.cpp

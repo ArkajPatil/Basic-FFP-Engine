@@ -15,6 +15,7 @@ void drawUI(void);
 // local function declarations
 void fSceneManagement(void);
 void fModelTransformations(void);
+void fTexturesControl(void);
 void fModelsColoring(void);
 void fModelsControls(void);
 void fScreenTransformations(void);

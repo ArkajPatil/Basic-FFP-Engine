@@ -236,30 +236,35 @@ void addModelToScene(Scene *scene, string modelType)
     GLenum drawMode;
     GLint vertexCount;
     float *position;
+    float *texcoords;
 
     if (modelType == "TRIANGLE")
     {
         drawMode = GL_TRIANGLES;
         vertexCount = 3;
         position = trianglePosition;
+        texcoords = triangleTexcoords;
     }
     else if (modelType == "QUAD")
     {
         drawMode = GL_QUADS;
         vertexCount = 4;
         position = squarePosition;
+        texcoords = squareTexcoords;
     }
     else if (modelType == "PYRAMID")
     {
         drawMode = GL_TRIANGLES;
         vertexCount = 12;
         position = pyramidPosition;
+        texcoords = pyramidTexcoords;
     }
     else if (modelType == "CUBE")
     {
         drawMode = GL_QUADS;
         vertexCount = 24;
         position = cubePosition;
+        texcoords = cubeTexcoords;
     }
     else
     {
@@ -280,9 +285,11 @@ void addModelToScene(Scene *scene, string modelType)
         NULL,                   // per vertex colors
         uniformColor,           // uniform color
         true,                   // uniform coloring toggle(bool)
-        NULL,                   // texcoords
+        texcoords,              // texcoords
         NULL                    // normals
     );
+
+    model->mesh.texture = loadTexture("assets/textures/ninja.png");
 
     // inserting into linkedlist(scene)
     insertNode(scene, model);

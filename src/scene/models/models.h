@@ -9,16 +9,20 @@ using namespace std;
 
 #include "utils/logging_system/logger.h"
 #include "utils/my_math_library/myMath.h"
+#include "rendering/texture/texture.h"
 
 typedef struct {
     GLenum drawMode;
     GLint vertexCount;
+    bool bApplyTexture;
 
     GLfloat *vertices;
     GLfloat *perVertexColors;
     GLfloat *uniformColor;
     GLfloat *texcoords;
     GLfloat *normals;
+
+    Texture *texture;
 } Mesh;  // geometry
 
 // creating transform structure
