@@ -33,6 +33,7 @@ Model *createModel(
     model->mesh.drawMode = drawMode;
     model->mesh.vertexCount = vertexCount;
     model->mesh.bApplyTexture = false;
+    model->mesh.texture = NULL;   // by default we will set it as null later we initialize it, if wants to add texture to this model
 
     // vertices
     model->mesh.vertices = vertices;

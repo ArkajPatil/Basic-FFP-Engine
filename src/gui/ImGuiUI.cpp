@@ -234,9 +234,27 @@ void fModelTransformations(void)
 
 void fTexturesControl(void)
 {
-    ImGui::Text("Texture:   ");
-    ImGui::SameLine();
-    (ImGui::Checkbox("Enable texture", &sceneManager->currentScene->selectedNode->currentModel->mesh.bApplyTexture));
+    addVerticalSpace(3.0f);
+
+    ImGui::Text("Saved Textures :");
+    // (ImGui::Checkbox("Enable texture", &sceneManager->currentScene->selectedNode->currentModel->mesh.bApplyTexture));
+
+    static short int iSelectedTexture = 0;
+    for(int i =0; i<vsSavedTextures.size(); i++)
+    {
+        bool isSelected = (i == iSelectedTexture);
+        if(ImGui::Selectable(vsSavedTextures[i].c_str() , isSelected))
+        {
+            iSelectedTexture = i;
+        }
+    }
+
+    if(ImGui::Button("Apply selected texture to current model"))
+    {
+        sceneManager->currentScene->selectedNode->currentModel->mesh.bApplyTexture = true;
+        std::string path = "assets/textures/" + vsSavedTextures[iSelectedTexture];
+        sceneManager->currentScene->selectedNode->currentModel->mesh.texture = loadTexture(path) ;
+    }
 }
 
 void fModelsColoring(void)

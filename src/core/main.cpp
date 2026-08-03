@@ -60,7 +60,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLi
 
     // load the saved scenes from 'assets/scenes' in vector(dynamic list) which is located in SceneManager
     giveSavedScenes(); // this funct load dynamic list(std::vector<std::string> vsSavedScenes) of saved scenes which is located inside SceneLoader
-    
+    scanTextureDirectory();
+
     toggleFullScreen();
     PlaySound(TEXT("assets/sounds/startup.wav"), NULL, SND_FILENAME | SND_ASYNC);
 

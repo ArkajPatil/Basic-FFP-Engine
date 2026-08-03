@@ -1,11 +1,15 @@
 #include "texture.h"
 
-#include <windows.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
+#include <mmsystem.h>
+#pragma comment(lib, "winmm.lib")
 
 #define STB_IMAGE_IMPLEMENTATION // aded this to include the implementation part of stb_image.h
 #include "external/stb/stb_image.h"
+
+#include "utils/notification_manager/NotificationManager.h"
+
+// variables
+std::vector<std::string> vsSavedTextures; // string vector to store textures names
 
 //==================================================================================
 // Function : loadTexture()
@@ -19,112 +23,112 @@
 //      Texture*  -> Successfully created texture.
 //      nullptr   -> Image loading failed.
 //==================================================================================
-Texture* loadTexture(const std::string& path)
+Texture *loadTexture(const std::string &path)
 {
-    Texture* texture = new Texture;      // Allocate a Texture object on the heap.
-                                         // It will store texture ID, width,
-                                         // height, channels and file path.
+    Texture *texture = new Texture; // Allocate a Texture object on the heap.
+                                    // It will store texture ID, width,
+                                    // height, channels and file path.
 
-    texture->path = path;                // Save image path.
-                                         // Useful for debugging or reloading.
+    texture->path = path; // Save image path.
+    // Useful for debugging or reloading.
 
-                                         stbi_set_flip_vertically_on_load(true);    // Flip images while loading.
+    stbi_set_flip_vertically_on_load(true); // Flip images while loading.
 
-    stbi_uc* pixels = stbi_load(          // Load image into RAM.
-        path.c_str(),                    // Convert std::string to const char*
-                                         // because stb_image is a C library.
+    stbi_uc *pixels = stbi_load( // Load image into RAM.
+        path.c_str(),            // Convert std::string to const char*
+                                 // because stb_image is a C library.
 
-        &texture->width,                 // stb_image writes image width here.
+        &texture->width, // stb_image writes image width here.
 
-        &texture->height,                // stb_image writes image height here.
+        &texture->height, // stb_image writes image height here.
 
-        &texture->channels,              // Stores ORIGINAL channel count
-                                         // (1 = Gray, 3 = RGB, 4 = RGBA).
+        &texture->channels, // Stores ORIGINAL channel count
+                            // (1 = Gray, 3 = RGB, 4 = RGBA).
 
-        STBI_rgb_alpha);                 // Force returned pixels to RGBA.
-                                         // Even if image is RGB,
-                                         // stb_image adds Alpha = 255.
+        STBI_rgb_alpha); // Force returned pixels to RGBA.
+                         // Even if image is RGB,
+                         // stb_image adds Alpha = 255.
 
-    if (!pixels)                         // If image loading failed...
+    if (!pixels) // If image loading failed...
     {
-        delete texture;                  // Prevent memory leak.
+        delete texture; // Prevent memory leak.
 
-        return nullptr;                  // Notify caller about failure.
+        return nullptr; // Notify caller about failure.
     }
 
-    glGenTextures(                        // Create OpenGL texture object.
-        1,                               // Number of texture objects to create.
-                                         // Here we need only one.
+    glGenTextures( // Create OpenGL texture object.
+        1,         // Number of texture objects to create.
+                   // Here we need only one.
 
-        &texture->id);                   // OpenGL stores generated texture ID here.
-                                         // Example: id may become 5.
+        &texture->id); // OpenGL stores generated texture ID here.
+                       // Example: id may become 5.
 
-    glBindTexture(                       // Make texture active.
-        GL_TEXTURE_2D,                   // Target texture type.
-                                         // Means we are working with a
-                                         // standard 2D texture.
+    glBindTexture(     // Make texture active.
+        GL_TEXTURE_2D, // Target texture type.
+                       // Means we are working with a
+                       // standard 2D texture.
 
-        texture->id);                    // Make this the CURRENT active texture.
-                                         // Every texture operation after this
-                                         // line affects this texture until
-                                         // another texture is bound.
+        texture->id); // Make this the CURRENT active texture.
+                      // Every texture operation after this
+                      // line affects this texture until
+                      // another texture is bound.
 
-    glPixelStorei(                        // Configure pixel layout.
-        GL_UNPACK_ALIGNMENT,             // Specifies how pixel rows are arranged
-                                         // in CPU memory before uploading.
+    glPixelStorei(           // Configure pixel layout.
+        GL_UNPACK_ALIGNMENT, // Specifies how pixel rows are arranged
+                             // in CPU memory before uploading.
 
-        1);                             // stb_image stores rows tightly packed.
-                                         // So OpenGL should NOT expect padding.
+        1); // stb_image stores rows tightly packed.
+            // So OpenGL should NOT expect padding.
 
-    glTexParameteri(                     // Set texture property.
-        GL_TEXTURE_2D,                   // Apply this parameter to current 2D texture.
+    glTexParameteri(   // Set texture property.
+        GL_TEXTURE_2D, // Apply this parameter to current 2D texture.
 
-        GL_TEXTURE_MAG_FILTER,           // Filter used when texture becomes
-                                         // larger than its original resolution.
+        GL_TEXTURE_MAG_FILTER, // Filter used when texture becomes
+                               // larger than its original resolution.
 
-        GL_LINEAR);                      // Blend neighbouring texels to produce
-                                         // a smoother enlarged image.
+        GL_LINEAR); // Blend neighbouring texels to produce
+                    // a smoother enlarged image.
 
-    glTexParameteri(                     // Set texture property.
-        GL_TEXTURE_2D,                   // Apply this parameter to current texture.
+    glTexParameteri(   // Set texture property.
+        GL_TEXTURE_2D, // Apply this parameter to current texture.
 
-        GL_TEXTURE_MIN_FILTER,           // Filter used when texture becomes
-                                         // smaller than its original resolution.
+        GL_TEXTURE_MIN_FILTER, // Filter used when texture becomes
+                               // smaller than its original resolution.
 
-        GL_LINEAR_MIPMAP_LINEAR);        // Trilinear filtering.
-                                         // Uses mipmaps + linear interpolation
-                                         // for best visual quality.
+        GL_LINEAR_MIPMAP_LINEAR); // Trilinear filtering.
+                                  // Uses mipmaps + linear interpolation
+                                  // for best visual quality.
 
-    gluBuild2DMipmaps(                   // Upload texture & generate mipmaps.
-        GL_TEXTURE_2D,                   // Upload as a 2D texture.
+    gluBuild2DMipmaps( // Upload texture & generate mipmaps.
+        GL_TEXTURE_2D, // Upload as a 2D texture.
 
-        GL_RGBA,                         // Store texture inside GPU in RGBA format.
+        GL_RGBA, // Store texture inside GPU in RGBA format.
 
-        texture->width,                  // Image width.
+        texture->width, // Image width.
 
-        texture->height,                 // Image height.
+        texture->height, // Image height.
 
-        GL_RGBA,                         // Incoming pixel format is RGBA.
+        GL_RGBA, // Incoming pixel format is RGBA.
 
-        GL_UNSIGNED_BYTE,                // Each color component occupies
-                                         // one unsigned byte (0–255).
+        GL_UNSIGNED_BYTE, // Each color component occupies
+                          // one unsigned byte (0–255).
 
-        pixels);                         // Address of image pixels stored in RAM.
-                                         // OpenGL copies these pixels to GPU and
-                                         // automatically generates mipmaps.
+        pixels); // Address of image pixels stored in RAM.
+                 // OpenGL copies these pixels to GPU and
+                 // automatically generates mipmaps.
 
-    glBindTexture(                        // Unbind current texture.
-        GL_TEXTURE_2D,                   // Texture target.
+    glBindTexture(     // Unbind current texture.
+        GL_TEXTURE_2D, // Texture target.
 
-        0);                             // Unbind texture.
-                                         // Prevents accidental modification by
-                                         // later texture-related OpenGL calls.
+        0); // Unbind texture.
+            // Prevents accidental modification by
+            // later texture-related OpenGL calls.
 
-    stbi_image_free(                        // Free CPU image memory.
-        pixels);                         // Free CPU-side image memory.
-                                         // Image now exists inside GPU memory.
+    stbi_image_free( // Free CPU image memory.
+        pixels);     // Free CPU-side image memory.
+                     // Image now exists inside GPU memory.
 
-    return texture;                      // Return pointer to the created texture.
+    return texture; // Return pointer to the created texture.
 }
 
 //==============================================================================
@@ -141,11 +145,11 @@ Texture* loadTexture(const std::string& path)
 //==============================================================================
 void bindTexture(const Texture *texture)
 {
-    glBindTexture(                       // Make a texture active.
-        GL_TEXTURE_2D,                  // Target: 2D texture.
-        texture->id);                   // Texture ID to bind.
-                                        // All following texture operations
-                                        // affect this texture.
+    glBindTexture(     // Make a texture active.
+        GL_TEXTURE_2D, // Target: 2D texture.
+        texture->id);  // Texture ID to bind.
+                       // All following texture operations
+                       // affect this texture.
 }
 
 //==============================================================================
@@ -159,10 +163,10 @@ void bindTexture(const Texture *texture)
 //==============================================================================
 void unbindTexture(void)
 {
-    glBindTexture(                       // Change active texture.
-        GL_TEXTURE_2D,                  // Target: 2D texture.
-        0);                             // Texture ID 0 means "no texture bound".
-                                        // Helps prevent accidental modification.
+    glBindTexture(     // Change active texture.
+        GL_TEXTURE_2D, // Target: 2D texture.
+        0);            // Texture ID 0 means "no texture bound".
+                       // Helps prevent accidental modification.
 }
 
 //==============================================================================
@@ -180,15 +184,54 @@ void unbindTexture(void)
 //==============================================================================
 void destroyTexture(Texture *texture)
 {
-    if (!texture)                       // Check for nullptr.
+    if (!texture) // Check for nullptr.
     {
-        return;                         // Nothing to destroy.
+        return; // Nothing to destroy.
     }
 
-    glDeleteTextures(                   // Delete OpenGL texture object.
-        1,                              // Delete one texture.
-        &texture->id);                  // Texture ID to delete from GPU memory.
+    glDeleteTextures(  // Delete OpenGL texture object.
+        1,             // Delete one texture.
+        &texture->id); // Texture ID to delete from GPU memory.
 
-    delete texture;                     // Free Texture object from heap.
+    delete texture; // Free Texture object from heap.
 }
 
+void scanTextureDirectory(void)
+{
+    WIN32_FIND_DATA findData;
+
+    HANDLE hFind = FindFirstFile(TEXT("assets/textures/*"), &findData);
+    if (hFind == INVALID_HANDLE_VALUE)
+    {
+        createNotification("ERROR: giveSavedTextures() INVALID_HANDLE_VALUE");
+        return;
+    }
+
+    vsSavedTextures.clear();
+
+    std::string extensionList[] = {".bmp", ".png", ".jpg", ".jpeg", ".tga"};
+
+    do
+    {
+        std::string name = findData.cFileName;
+        for (std::string &extension : extensionList)
+        {
+            size_t pos = name.rfind(extension);  // find extension from right side instead of left
+            if (pos != std::string::npos)
+            {
+                if (name.length() - pos == extension.length())
+                {
+                    vsSavedTextures.push_back(name);
+                    break;
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+
+    } while (FindNextFile(hFind, &findData));
+
+    FindClose(hFind);
+}
