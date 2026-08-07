@@ -1,15 +1,10 @@
 #include "texture.h"
 
-#include <mmsystem.h>
-#pragma comment(lib, "winmm.lib")
-
 #define STB_IMAGE_IMPLEMENTATION // aded this to include the implementation part of stb_image.h
 #include "external/stb/stb_image.h"
 
 #include "utils/notification_manager/NotificationManager.h"
 
-// variables
-std::vector<std::string> vsSavedTextures; // string vector to store textures names
 
 //==================================================================================
 // Function : loadTexture()
@@ -23,7 +18,7 @@ std::vector<std::string> vsSavedTextures; // string vector to store textures nam
 //      Texture*  -> Successfully created texture.
 //      nullptr   -> Image loading failed.
 //==================================================================================
-Texture *loadTexture(const std::string &path)
+Texture* createTexture(const std::string &path)
 {
     Texture *texture = new Texture; // Allocate a Texture object on the heap.
                                     // It will store texture ID, width,
@@ -34,7 +29,7 @@ Texture *loadTexture(const std::string &path)
 
     stbi_set_flip_vertically_on_load(true); // Flip images while loading.
 
-    stbi_uc *pixels = stbi_load( // Load image into RAM.
+    stbi_uc *pixels = stbi_load( // Load image into RAM.  // stbi_uc is unsigned char 'stb' lib for 'i'mage
         path.c_str(),            // Convert std::string to const char*
                                  // because stb_image is a C library.
 
@@ -196,42 +191,3 @@ void destroyTexture(Texture *texture)
     delete texture; // Free Texture object from heap.
 }
 
-void scanTextureDirectory(void)
-{
-    WIN32_FIND_DATA findData;
-
-    HANDLE hFind = FindFirstFile(TEXT("assets/textures/*"), &findData);
-    if (hFind == INVALID_HANDLE_VALUE)
-    {
-        createNotification("ERROR: giveSavedTextures() INVALID_HANDLE_VALUE");
-        return;
-    }
-
-    vsSavedTextures.clear();
-
-    std::string extensionList[] = {".bmp", ".png", ".jpg", ".jpeg", ".tga"};
-
-    do
-    {
-        std::string name = findData.cFileName;
-        for (std::string &extension : extensionList)
-        {
-            size_t pos = name.rfind(extension);  // find extension from right side instead of left
-            if (pos != std::string::npos)
-            {
-                if (name.length() - pos == extension.length())
-                {
-                    vsSavedTextures.push_back(name);
-                    break;
-                }
-                else
-                {
-                    break;
-                }
-            }
-        }
-
-    } while (FindNextFile(hFind, &findData));
-
-    FindClose(hFind);
-}

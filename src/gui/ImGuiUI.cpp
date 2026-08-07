@@ -8,6 +8,7 @@
 #include "rendering/renderLoop.h"
 #include "scene/scene_loader/SceneLoader.h"
 #include "utils/notification_manager/NotificationManager.h"
+#include "rendering/texture/TextureManager.h"
 
 // local variables
 // model uniform color
@@ -234,27 +235,70 @@ void fModelTransformations(void)
 
 void fTexturesControl(void)
 {
+    ImGui::PushID("TextureControl");
     addVerticalSpace(3.0f);
 
-    ImGui::Text("Saved Textures :");
-    // (ImGui::Checkbox("Enable texture", &sceneManager->currentScene->selectedNode->currentModel->mesh.bApplyTexture));
+    // display available textures list
+    ImGui::PushID("Available Textures");
+    ImGui::Text("Available Textures :");
 
-    static short int iSelectedTexture = 0;
-    for(int i =0; i<vsSavedTextures.size(); i++)
+    static short int iSelectedAvailableTexture = 0;
+    size_t numOfAvailableTextures = textureManager->vsAvailableTextures.size();
+    for (int i = 0; i < numOfAvailableTextures; i++)
     {
-        bool isSelected = (i == iSelectedTexture);
-        if(ImGui::Selectable(vsSavedTextures[i].c_str() , isSelected))
+        bool isSelected = (i == iSelectedAvailableTexture);
+        if (ImGui::Selectable(textureManager->vsAvailableTextures[i].c_str(), isSelected))
         {
-            iSelectedTexture = i;
+            iSelectedAvailableTexture = i;
         }
     }
 
-    if(ImGui::Button("Apply selected texture to current model"))
+    if (ImGui::Button("Load selected texture "))
+    {
+        bool status = createAndRegisterTexture(textureManager->vsAvailableTextures[iSelectedAvailableTexture]);
+        if(status)
+        {
+            std::string msg = "Texture: '%s' loaded" + textureManager->vsAvailableTextures[iSelectedAvailableTexture];
+            createNotification(msg);
+        }
+        else 
+        {
+            createNotification("createAndRegisterTexture() failed" , "error");
+        }
+    }
+
+    ImGui::Separator();
+    addVerticalSpace(4.0f);
+    ImGui::PopID();
+
+    // display loaded textures list
+    ImGui::PushID("Loaded Textures");
+    ImGui::Text("Loaded Textures :");
+
+    static short int iSelectedLoadedTexture = 0;
+    size_t numOfLoadedTextures = textureManager->vtLoadedTextures.size();
+    for (int i = 0; i < numOfLoadedTextures; i++)
+    {
+        bool isSelected = (i == iSelectedLoadedTexture);
+        if (ImGui::Selectable(textureManager->vtLoadedTextures[i]->fileName.c_str(), isSelected))
+        {
+            iSelectedLoadedTexture = i;
+        }
+    }
+
+    if (ImGui::Button("Bind selected texture to current model"))
     {
         sceneManager->currentScene->selectedNode->currentModel->mesh.bApplyTexture = true;
-        std::string path = "assets/textures/" + vsSavedTextures[iSelectedTexture];
-        sceneManager->currentScene->selectedNode->currentModel->mesh.texture = loadTexture(path) ;
+        sceneManager->currentScene->selectedNode->currentModel->mesh.texture = textureManager->vtLoadedTextures[iSelectedLoadedTexture];
+        std::string msg = "'" + textureManager->vtLoadedTextures[iSelectedLoadedTexture]->fileName + 
+        ("' is bind to model: '") + sceneManager->currentScene->selectedNode->currentModel->modelName + "'";
+        createNotification(msg);
     }
+    ImGui::PopID();
+
+    
+
+    ImGui::PopID();
 }
 
 void fModelsColoring(void)

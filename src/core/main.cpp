@@ -8,6 +8,8 @@
 #include "scene/sceneManager.h"
 #include "scene/scene_loader/SceneLoader.h"
 #include "utils/notification_manager/NotificationManager.h"
+#include "rendering/texture/TextureManager.h"
+
 
 // global functions declarations
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM); // HWND->HANDLE->UINT->Unsigned int
@@ -38,32 +40,36 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLi
     createWindow(hInstance, hPrevInstance, lpszCmdLine, iCmdShow, hwnd);
 
     // initializing
-    // initializing OpenGL context
-    int result = initializeOpenGL();
-    if (result != 0)
     {
-        writeLog(">>>>> ERROR <<<<< ::: initializeOpenGL() failed");
-        DestroyWindow(hwnd);
-        hwnd = NULL;
+        // initializing OpenGL context
+        int result = initializeOpenGL();
+        if (result != 0)
+        {
+            writeLog(">>>>> ERROR <<<<< ::: initializeOpenGL() failed");
+            DestroyWindow(hwnd);
+            hwnd = NULL;
+        }
+        else
+        {
+            writeLog(">>>>> SUCCESS <<<<< :: initializeOpenGL() completed successfully, OpenGL setup is done.");
+        }
+
+        // initializing ImGui
+        initializeImGui();
+
+        // initializing Scene Manager
+        initSceneManager();
+        initDemoScene();
+        // load the saved scenes from 'assets/scenes' in vector(dynamic list) which is located in SceneManager
+        giveSavedScenes(); // this funct load dynamic list(std::vector<std::string> vsSavedScenes) of saved scenes which is located inside SceneLoader
+
+       
+        initTextureManager(); 
+        scanTextureDirectory(); // scan texture directory to get available textures
+
+        toggleFullScreen();
+        PlaySound(TEXT("assets/sounds/startup.wav"), NULL, SND_FILENAME | SND_ASYNC);
     }
-    else
-    {
-        writeLog(">>>>> SUCCESS <<<<< :: initializeOpenGL() completed successfully, OpenGL setup is done.");
-    }
-
-    // initializing ImGui
-    initializeImGui();
-
-    // initializing Scene Manager
-    initSceneManager();
-    initDemoScene();
-
-    // load the saved scenes from 'assets/scenes' in vector(dynamic list) which is located in SceneManager
-    giveSavedScenes(); // this funct load dynamic list(std::vector<std::string> vsSavedScenes) of saved scenes which is located inside SceneLoader
-    scanTextureDirectory();
-
-    toggleFullScreen();
-    PlaySound(TEXT("assets/sounds/startup.wav"), NULL, SND_FILENAME | SND_ASYNC);
 
     // Game Loop
     while (bDone == FALSE)
@@ -208,6 +214,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 
 void uninitialize(void)
 {
+    cleanupTextureManager();
+
     cleanupImGui();
 
     cleanupOpenGL();

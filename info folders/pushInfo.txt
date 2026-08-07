@@ -1,4 +1,126 @@
-40. 
+41. implement Texture Manager and optimize texture loading workflow
+
+    Build System
+    ------------
+    - enabled /MP compiler option in cl.exe
+        -> allows MSVC to compile multiple source files in parallel
+        -> significantly reduces compilation time on multi-core CPUs
+
+    Texture Manager
+    ---------------
+    - introduced dedicated TextureManager system
+    - implemented:
+        - initTextureManager()
+            -> allocates and initializes TextureManager
+        - scanTextureDirectory()
+            -> scans assets/textures and stores available texture names
+        - createAndRegisterTexture(const std::string &name)
+            -> creates a texture using the Texture module
+            -> prevents duplicate texture loading
+            -> registers successfully loaded textures
+        - applyTextureToModel(Model*, Texture*)
+            -> assigns a loaded texture to a model
+            -> enables texture rendering for that model
+        - cleanupTextureManager()
+            -> destroys every registered texture
+            -> releases TextureManager resources during engine shutdown
+
+        - unloadTexture(const std::string &name) 
+            -> removes a registered texture from the manager
+            -> destroys associated GPU and CPU resources
+	    -> ->implement this function, but it is not usable, since it can remove a texture which is currently binded to some model
+            -> so this is just a raw logic for texture unloading[not workable]
+
+    TextureManager Data
+    -------------------
+    - introduced TextureManager structure:
+        - std::vector<std::string> vsAvailableTextures
+            -> stores names of textures available inside assets/textures
+        - std::vector<Texture*> vtLoadedTextures
+            -> stores Texture objects currently loaded into memory
+    - separated:
+        - available textures on disk
+        - loaded textures currently managed by the engine
+
+    ImGui
+    -----
+    - redesigned Texture Control panel
+    - added "Available Textures" list
+        -> displays textures discovered in assets/textures
+        -> allows selecting a texture to load into the engine
+    - added "Load selected texture" button
+        -> registers the selected texture through TextureManager
+        -> prevents duplicate loading
+        -> displays success/error notifications
+    - added "Loaded Textures" list
+        -> displays textures currently loaded by the engine
+    - added "Bind selected texture to current model" button
+        -> assigns the selected loaded texture to the currently selected model
+        -> displays binding confirmation notification
+
+    Work pending for improvement 
+    ----------------------------
+    - unloadTexture(const std::string &name) = plans to work on this function during engine version 2 development
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+40. implement runtime texture assignment
+
+    Texture Module
+    --------------
+    - implemented scanTextureDirectory() in:
+        src/rendering/texture/texture.cpp
+        -> scans assets/textures directory at startup
+        -> discovers supported image files
+        -> stores available texture filenames in vsSavedTextures
+    - currently supports:
+        - .bmp
+        - .png
+        - .jpg
+        - .jpeg
+        - .tga
+    - ignores unsupported file formats automatically
+    - scanTextureDirectory() is called once from main.cpp
+      after engine initialization
+
+    ImGui
+    -----
+    - implemented fTexturesControl() in:
+        src/gui/ImGuiUI.cpp
+        -> displays all discovered textures
+        -> allows selecting a texture using ImGui::Selectable()
+        -> added "Apply selected texture to current model" button
+        -> assigns the selected texture to the currently selected model
+        -> automatically enables texture rendering for that model
+
+    Runtime Texture Assignment
+    --------------------------
+    - implemented runtime texture loading from the editor(ImGui)
+    - selected texture path is generated automatically as:
+        assets/textures/<selected texture>
+    - selected texture is loaded using loadTexture()
+    - assigned to:
+        currentModel->mesh.texture
+
+    Current Limitations
+    -------------------
+    - texture assignment is currently inefficient
+    - every texture change calls loadTexture()
+      which:
+        -> allocates new CPU memory
+        -> creates a new OpenGL texture object
+        -> uploads image data to GPU again
+    - previously loaded textures are not reused
+    - this is a temporary implementation
+
+    Notes
+    -----
+    - added the foundation for an editor-side texture browser
+    - textures can now be selected and applied to models at runtime
+    - next major improvement:
+        implement texture caching so textures are loaded
+        only once and shared between multiple models
 
 -----------------------------------------------------------------------------------------------------------------------------------------------
 

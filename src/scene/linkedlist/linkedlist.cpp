@@ -289,8 +289,6 @@ void addModelToScene(Scene *scene, string modelType)
         NULL                    // normals
     );
 
-    model->mesh.texture = loadTexture("assets/textures/ninja.png");
-
     // inserting into linkedlist(scene)
     insertNode(scene, model);
 }

@@ -20,7 +20,7 @@ if exist main.exe del main.exe
 echo.
 echo --- Compiling Source Files ---
 echo.
-cl.exe /c /EHsc /Isrc /Iresources ^
+cl.exe /MP /c /EHsc /Isrc /Iresources ^
 /Isrc/external/imgui ^
 /Isrc/external/imgui/backends ^
 /Fobuild\ ^
@@ -40,7 +40,8 @@ src/gui/ImGuiLayer.cpp ^
 src/gui/ImGuiUI.cpp ^
 src/gui/fonts.cpp ^
 src/utils/notification_manager/NotificationManager.cpp ^
-src/rendering/texture/texture.cpp
+src/rendering/texture/texture.cpp ^
+src/rendering/texture/TextureManager.cpp
 
 echo.
 echo --- Compiling Resource Files ---
@@ -77,6 +78,7 @@ build/ImGuiUI.obj ^
 build/NotificationManager.obj ^
 build/fonts.obj ^
 build/texture.obj ^
+build/TextureManager.obj ^
 User32.lib GDI32.lib /SUBSYSTEM:WINDOWS
 
 echo.

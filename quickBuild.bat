@@ -33,7 +33,7 @@ if exist main.exe del main.exe
 echo.
 echo --- Compiling Source Files ---
 echo.
-cl.exe /c /EHsc /Isrc /Iresources ^
+cl.exe /MP /c /EHsc /Isrc /Iresources ^
 /Isrc/external/imgui ^
 /Isrc/external/imgui/backends ^
 /Fobuild\ ^

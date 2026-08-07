@@ -12,6 +12,7 @@
 struct Texture // in cpp no need of typedef for struct
 {
     GLuint id;
+    std::string fileName;
 
     int width;
     int height;
@@ -20,14 +21,11 @@ struct Texture // in cpp no need of typedef for struct
     std::string path;
 };
 
-// variables
-extern std::vector<std::string> vsSavedTextures;
-
 // functions declarations
-Texture* loadTexture(const std::string &path);
+Texture* createTexture(const std::string &path);
 void bindTexture(const Texture *texture);
 void unbindTexture(void);
 void destroyTexture(Texture *texture);
-void scanTextureDirectory(void);
+
 
 #endif

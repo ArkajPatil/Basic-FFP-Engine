@@ -139,6 +139,12 @@ void drawModel(Model *model)
         }
     }
 
+    // check if valid texture data exist
+    if(model->mesh.bApplyTexture && model->mesh.texture == NULL)
+    {
+        model->mesh.bApplyTexture = false;
+    }
+
     // model->mesh.bApplyTexture = true;
     if(model->mesh.bApplyTexture)
     {
