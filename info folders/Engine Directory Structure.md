@@ -9,11 +9,15 @@
 |       |
 |       +---> .obj files
 | 
++---> [ Implementation - Screen recordings ]
+| 
 +---> [ assets ]
 |       |
-|       +--->[ models ]
+|       +--->[ fonts ]
 |       |
 |       +--->[ scenes ]   -> this folder contains scenes saved at runtime
+|       |
+|       +--->[ sounds ]
 |       |
 |       +--->[ textures ]
 |       
@@ -53,6 +57,8 @@
 |       |      |      |
 |       |      |      +---> texture.h
 |       |      |      +---> texture.cpp
+|       |      |      +---> TextureManager.h
+|       |      |      +---> TextureManager.cpp
 |       |      | 
 |       |      +---> OpenGLSetup.cpp
 |       |      +---> OpenGLSetup.h

@@ -1,29 +1,19 @@
-[2026-08-07 19:38:22] >>>>> SUCCESS <<<<< :: Log File created
-[2026-08-07 19:38:22] >>>>> SUCCESS <<<<< :: Window creation done Successfully
-[2026-08-07 19:38:22] OpenGL Information :
-[2026-08-07 19:38:22] ********************
-[2026-08-07 19:38:22] OpenGL Vendor : NVIDIA Corporation
-[2026-08-07 19:38:22] OpenGL Renderer : NVIDIA GeForce GTX 1050/PCIe/SSE2
-[2026-08-07 19:38:22] OpenGL Version : 4.6.0 NVIDIA 582.66
-[2026-08-07 19:38:22] ********************
+[2026-08-14 08:15:29] >>>>> SUCCESS <<<<< :: Log File created
+[2026-08-14 08:15:29] >>>>> SUCCESS <<<<< :: Window creation done Successfully
+[2026-08-14 08:15:29] OpenGL Information :
+[2026-08-14 08:15:29] ********************
+[2026-08-14 08:15:29] OpenGL Vendor : NVIDIA Corporation
+[2026-08-14 08:15:29] OpenGL Renderer : NVIDIA GeForce GTX 1050/PCIe/SSE2
+[2026-08-14 08:15:29] OpenGL Version : 4.6.0 NVIDIA 582.66
+[2026-08-14 08:15:29] ********************
 
-[2026-08-07 19:38:22] >>>>> SUCCESS <<<<< :: initializeOpenGL() completed successfully, OpenGL setup is done.
-[2026-08-07 19:38:22] >>>>> SUCCESS <<<<< :: ImGui Initialization is done.
-[2026-08-07 19:38:22] >>>>> SUCCESS <<<<< :: SceneManager allocation successfull.
-[2026-08-07 19:38:22] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
-[2026-08-07 19:38:22] >>>>> SUCCESS <<<<< :: TextureManager allocation successful.
-[2026-08-07 19:38:25] Model: TRIANGLE was created.
-[2026-08-07 19:38:25] Model: TRIANGLE has been inserted as head node in scene 'demo'.
-[2026-08-07 19:38:35] >>>>> SUCCESS <<<<< :: Texture: 'mountain.jpg' loaded successfully.
-[2026-08-07 19:38:39] >>>>> SUCCESS <<<<< :: Texture: 'Smiley.bmp' loaded successfully.
-[2026-08-07 19:38:51] >>>>> SUCCESS <<<<< :: Texture: 'ninja.png' loaded successfully.
-[2026-08-07 19:38:54] >>>>> ERROR <<<<< :: Tried to load texture 'mountain.jpg' but it was already loaded.
-[2026-08-07 19:38:57] >>>>> ERROR <<<<< :: Tried to load texture 'mountain.jpg' but it was already loaded.
-[2026-08-07 19:39:00] >>>>> ERROR <<<<< :: Tried to load texture 'mountain.jpg' but it was already loaded.
-[2026-08-07 19:39:03] >>>>> ERROR <<<<< :: Tried to load texture 'ninja.png' but it was already loaded.
-[2026-08-07 19:39:05] >>>>> ERROR <<<<< :: Tried to load texture 'Smiley.bmp' but it was already loaded.
-[2026-08-07 19:39:20] >>>>>EXITING<<<<< Escape Key pressed
-[2026-08-07 19:39:20] >>>>> SUCCESS <<<<< :: destroyTextureManager() done.
-[2026-08-07 19:39:20] Cleaning ImGui is done.
-[2026-08-07 19:39:20] Program terminated successfully
+[2026-08-14 08:15:29] >>>>> SUCCESS <<<<< :: initializeOpenGL() completed successfully, OpenGL setup is done.
+[2026-08-14 08:15:29] >>>>> SUCCESS <<<<< :: ImGui Initialization is done.
+[2026-08-14 08:15:29] >>>>> SUCCESS <<<<< :: SceneManager allocation successfull.
+[2026-08-14 08:15:29] >>>>> SUCCESS <<<<< :: Scene 'demo' allocation successfull.
+[2026-08-14 08:15:29] >>>>> SUCCESS <<<<< :: TextureManager allocation successful.
+[2026-08-14 08:15:33] >>>>>EXITING<<<<< Escape Key pressed
+[2026-08-14 08:15:33] >>>>> SUCCESS <<<<< :: destroyTextureManager() done.
+[2026-08-14 08:15:33] Cleaning ImGui is done.
+[2026-08-14 08:15:33] Program terminated successfully
 

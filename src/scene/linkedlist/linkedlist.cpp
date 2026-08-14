@@ -237,6 +237,7 @@ void addModelToScene(Scene *scene, string modelType)
     GLint vertexCount;
     float *position;
     float *texcoords;
+    float *normals;
 
     if (modelType == "TRIANGLE")
     {
@@ -244,6 +245,7 @@ void addModelToScene(Scene *scene, string modelType)
         vertexCount = 3;
         position = trianglePosition;
         texcoords = triangleTexcoords;
+        normals = triangleNormals;
     }
     else if (modelType == "QUAD")
     {
@@ -251,6 +253,7 @@ void addModelToScene(Scene *scene, string modelType)
         vertexCount = 4;
         position = squarePosition;
         texcoords = squareTexcoords;
+        normals = squareNormals;
     }
     else if (modelType == "PYRAMID")
     {
@@ -258,6 +261,7 @@ void addModelToScene(Scene *scene, string modelType)
         vertexCount = 12;
         position = pyramidPosition;
         texcoords = pyramidTexcoords;
+        normals = pyramidNormals;
     }
     else if (modelType == "CUBE")
     {
@@ -265,6 +269,7 @@ void addModelToScene(Scene *scene, string modelType)
         vertexCount = 24;
         position = cubePosition;
         texcoords = cubeTexcoords;
+        normals = cubeNormals;
     }
     else
     {
@@ -286,7 +291,7 @@ void addModelToScene(Scene *scene, string modelType)
         uniformColor,           // uniform color
         true,                   // uniform coloring toggle(bool)
         texcoords,              // texcoords
-        NULL                    // normals
+        normals                    // normals
     );
 
     // inserting into linkedlist(scene)

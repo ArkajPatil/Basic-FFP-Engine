@@ -103,7 +103,7 @@ bool createAndRegisterTexture(const std::string &name)
     {
         if (textureManager->vtLoadedTextures[i]->fileName == name)
         {
-            writeLog(">>>>> ERROR <<<<< :: Tried to load texture '%s' but it was already loaded.", name);
+            writeLog(">>>>> WARNING <<<<< :: Tried to load texture '%s' but it was already loaded.", name);
             return false;
         }
     }
@@ -112,7 +112,7 @@ bool createAndRegisterTexture(const std::string &name)
 
     if (!texture)
     {
-        writeLog(">>>>> ERROR <<<<< :: addTexture() failed for Texture: '%s'.", name);
+        writeLog(">>>>> ERROR <<<<< :: createTexture() failed for Texture: '%s'.", name);
         return false;
     }
 
